@@ -26,8 +26,8 @@ return array(
 	*/
 
 	'mailgun' => array(
-		'secret' => '',
-		'domain' => ''
+		'secret' => 'key-45efed5ca74f14fd6f80638bd70db170',
+		'domain' => 'https://api.mailgun.net/v3/quizer.pw'
 	),
 
 	/*
@@ -68,8 +68,8 @@ return array(
 	*/
 
 	'google' => array(
-		'id' => '481872325644-g3duei7pplim6a4lr677hluh21677p6t.apps.googleusercontent.com',
-		'secret' => 'MUm8OGbEEMEYe00OqMqNEo82'
+		'id' => '409611339644-8q7abcn8g66b0fcrvkfr18e0chbibgtt.apps.googleusercontent.com',
+		'secret' => 'JJ4J2yjrFLjdbMxbp0oXdKbt'
 	),
 
 	/*

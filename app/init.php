@@ -97,9 +97,9 @@ $app->instance('config', new Config($loader));
 |
 */
 
-$app->register('Hazzard\Database\DatabaseServiceProvider');
-$loader->setConnection($app['db']);
-$app->instance('config', new Config($loader));
+// $app->register('Hazzard\Database\DatabaseServiceProvider');
+// $loader->setConnection($app['db']);
+// $app->instance('config', new Config($loader));
 
 /*
 |--------------------------------------------------------------------------
