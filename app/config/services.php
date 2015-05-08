@@ -27,7 +27,7 @@ return array(
 
 	'mailgun' => array(
 		'secret' => 'key-45efed5ca74f14fd6f80638bd70db170',
-		'domain' => 'https://api.mailgun.net/v3/quizer.pw'
+		'domain' => 'quizer.pw'
 	),
 
 	/*

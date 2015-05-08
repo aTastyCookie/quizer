@@ -9,7 +9,7 @@ return array(
 	| Whether the moderators have to approve all comments.
 	|
 	*/
-	'moderation' => true,
+	'moderation' => false,
 
 	/*
 	|--------------------------------------------------------------------------

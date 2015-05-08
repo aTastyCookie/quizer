@@ -8,4 +8,6 @@ $baseDir = dirname($vendorDir);
 return array(
     'OAuth\\UserData\\' => array($baseDir . '/src/OAuth/UserData'),
     'Hazzard\\' => array($baseDir . '/src/Hazzard'),
+    'GuzzleHttp\\Stream\\' => array($vendorDir . '/guzzlehttp/streams/src'),
+    'GuzzleHttp\\' => array($vendorDir . '/guzzlehttp/guzzle/src'),
 );

@@ -7,11 +7,6 @@ if (isset($_GET['logout'])) {
 	redirect_to( App::url('admin.php') );
 }
 
-if (Auth::guest()) { 
-	echo View::make('admin.login')->render();
-	exit; 
-}
-
 if (!Auth::userCan('dashboard')) {
 	echo View::make('admin.restricted')->render();
 	exit;

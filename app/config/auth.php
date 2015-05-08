@@ -46,7 +46,7 @@ return array(
 	|
 	*/
 
-	'email_activation' => false,
+	'email_activation' => true,
 
 	/*
 	|--------------------------------------------------------------------------
@@ -100,10 +100,10 @@ return array(
 		'linkedin' => 'LinkedIn',
 		// 'microsoft' => 'Microsoft',
 		'instagram' => 'Instagram',
-		'github' => 'GitHub',
+		// 'github' => 'GitHub',
 		// 'yammer' => 'Yammer',
 		'foursquare' => 'Foursquare',
-		'soundcloud' => 'SoundCloud',
+		// 'soundcloud' => 'SoundCloud',
 		'vkontakte' => 'VK'
 	),
 );
