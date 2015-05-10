@@ -64,6 +64,7 @@ return array(
 
 	'locales' => array(
 		'en' => 'English',
+		'ru' => 'Русский',
 	),
 
 	/*

@@ -56,7 +56,7 @@ if (!empty($parentUrl)) {
 		<ul class="dropdown-menu">
 			<li><a href="javascript:void(0)" data-sort="1"><?php _e('comments.newest') ?> <span class="glyphicon glyphicon-ok"></span></a></li>
 			<li><a href="javascript:void(0)" data-sort="2"><?php _e('comments.oldest') ?> <span class="glyphicon glyphicon-ok"></span></a></li>
-			<!--<li><a href="javascript:void(0)" data-sort="3"><?php _e('comments.best') ?> <span class="glyphicon glyphicon-ok"></span></a></li>-->
+			<li><a href="javascript:void(0)" data-sort="3"><?php _e('comments.best') ?> <span class="glyphicon glyphicon-ok"></span></a></li>
 		</ul>
 	</div>
 	<ul class="comment-list"></ul>
@@ -145,7 +145,6 @@ if (!empty($parentUrl)) {
 				<% } %>
 
 				<div class="comment-footer">
-					<!--
 					<div class="comment-votes" data-comment="<%= id %>">
 						<?php if (Auth::check()): ?>
 							
@@ -164,7 +163,6 @@ if (!empty($parentUrl)) {
 						<?php endif ?>
 					</div>
 					<span class="comment-bullet">&bull;</span>
-					-->
 
 					<?php if (Auth::check()): ?>
 					<% if (status == 1 && auth.reply) { %>

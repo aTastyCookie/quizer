@@ -2,23 +2,13 @@
 
 return array(
 
-	'first_name' => array(
+	'first_last_name' => array(
 		'type' => 'text',
 		'attributes' => array('class' => 'form-control'),
 		'content_before' => '<div class="form-group">',
 		'content_after'  => '</div>',
 		'assignment' => array('admin', 'user')
 	),
-
-
-	'last_name' => array(
-		'type' => 'text',
-		'attributes' => array('class' => 'form-control'),
-		'content_before' => '<div class="form-group">',
-		'content_after'  => '</div>',
-		'assignment' => array('admin', 'user')
-	),
-
 
 	'gender' => array(
 		'type' => 'select',
@@ -42,11 +32,11 @@ return array(
 		'validation' => 'date_format:Y-m-d',
 		'attributes' => array('class' => 'form-control'),
 		'content_before' => '<div class="form-group">',
-		'content_after'  => '</div>',
-		//'content_after'  => '</div>
-		//	<link href="'.asset_url('css/vendor/datepicker.css').'" rel="stylesheet">
-		//	<script src="'.asset_url('js/vendor/bootstrap-datepicker.js').'"></script>
-		//	<script>$(function(){$("#usermeta-birthday").datepicker({"format": "yyyy-mm-dd"})});</script>',
+		//'content_after'  => '</div>',
+		'content_after'  => '</div>
+			<link href="'.asset_url('css/vendor/datepicker.css').'" rel="stylesheet">
+			<script src="'.asset_url('js/vendor/bootstrap-datepicker.js').'"></script>
+			<script>$(function(){$("#usermeta-birthday").datepicker({"format": "yyyy-mm-dd"})});</script>',
 		'assignment' => array('admin', 'user')
 	),
 
@@ -87,6 +77,14 @@ return array(
 		'assignment' => array('admin', 'user')
 	),
 
+	'searchwork' => array(
+		'type' => 'checkbox',
+		'validation' => 'in:1',
+		'attributes' => array('value' => '1'),
+		'content_before' => '<div class="checkbox">',
+		'content_after'  => '</div>',
+		'assignment' => array('admin', 'user')
+	),
 
 	'verified' => array(
 		'type' => 'checkbox',

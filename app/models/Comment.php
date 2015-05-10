@@ -99,7 +99,7 @@ class Comment extends Model {
 			'auth' => array(
 				'edit'  => Comments::canEdit($this),
 				'reply' => Comments::canReply($this),
-				//'vote'  => (int) $this->voted,
+				'vote'  => (int) $this->voted,
 				'moderate' => Auth::check() ? Auth::userCan('moderate') : false,
 			),
 			'replies' => array(),

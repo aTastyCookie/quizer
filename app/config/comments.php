@@ -72,7 +72,7 @@ return array(
 	| being published. Set to null to disable.
 	|
 	*/
-	'max_links' => null,
+	'max_links' => 1,
 
 	/*
 	|--------------------------------------------------------------------------

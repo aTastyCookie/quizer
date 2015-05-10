@@ -2,8 +2,7 @@
 
 return array(
 	'url' => 'Website',
-	'first_name' => 'First name',
-	'last_name' => 'Last name',
+	'first_last_name' => 'First & Last name',
 	'about' => 'About me',
 	'gender' => 'Gender',      
 		'gender_1' => 'Unspecified',
@@ -12,5 +11,6 @@ return array(
 	'birthday' => 'Birthday',
 	'location' => 'Location',
 	'verified' => 'Verified Account',
+	'searchwork' => 'I search work',
 	'phone' => 'Phone',
 );
