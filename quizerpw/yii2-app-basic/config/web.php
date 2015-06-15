@@ -32,6 +32,16 @@ $config = [
 					'/user/admin/index'=>'/user/admin/index'
 			),
         ],
+		'authClientCollection' => [
+				'class'   => \yii\authclient\Collection::className(),
+				'clients' => [
+					'facebook' => [
+						'class'        => 'dektrium\user\clients\Facebook',
+						'clientId'     => '854797341254242',
+						'clientSecret' => '27d3441ec4de787bcaf0c2ab577b803c',
+					]
+				],
+			],
 		
 
         'request' => [

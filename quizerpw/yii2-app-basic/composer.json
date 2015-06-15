@@ -19,7 +19,8 @@
         "yiisoft/yii2-bootstrap": "*",
         "yiisoft/yii2-swiftmailer": "*",
         "dektrium/yii2-user": "0.9.*@dev",
-        "katanyoo/yii2-mailgun-mailer": "dev-master"
+        "katanyoo/yii2-mailgun-mailer": "dev-master",
+        "sjaakp/yii2-illustrated-behavior": "dev-master"
     },
     "require-dev": {
         "yiisoft/yii2-codeception": "*",
