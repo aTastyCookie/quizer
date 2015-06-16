@@ -1,0 +1,5 @@
+{
+    "require": {
+        "yurkinx/yii2-image": "dev-master"
+    }
+}

@@ -7,6 +7,10 @@ $config = [
     'basePath' => dirname(__DIR__),
     'bootstrap' => ['log'],
     'components' => [
+		 'image' => array(
+                'class' => 'yii\image\ImageDriver',
+                'driver' => 'GD',  //GD or Imagick
+                ),
 		'urlManager' => [
 			'class' => 'yii\web\UrlManager',
 			// Disable index.php
@@ -39,7 +43,32 @@ $config = [
 						'class'        => 'dektrium\user\clients\Facebook',
 						'clientId'     => '854797341254242',
 						'clientSecret' => '27d3441ec4de787bcaf0c2ab577b803c',
-					]
+					],
+					'vkontakte' => [
+						'class'        => 'dektrium\user\clients\VKontakte',
+						'clientId'     => '4865600',
+						'clientSecret' => '6FuSKlnQvCdejonvKlgM',
+					],
+					'twitter' => [
+						'class'          => 'dektrium\user\clients\Twitter',
+						'consumerKey'    => 'lMwrTQD2joDP77acOxBAyrHC1',
+						'consumerSecret' => 'f6dlOubQExmaJOAMKoU1jQ15EjnvPW8pFdoGJgZPRyiILfoxx0',
+					],
+					'google' => [
+						'class'        => 'dektrium\user\clients\Google',
+						'clientId'     => '409611339644-8q7abcn8g66b0fcrvkfr18e0chbibgtt.apps.googleusercontent.com',
+						'clientSecret' => 'JJ4J2yjrFLjdbMxbp0oXdKbt',
+					],
+					'github' => [
+						'class'        => 'dektrium\user\clients\GitHub',
+						'clientId'     => 'ec6505862adfd8c7be12',
+						'clientSecret' => '43203d465035b2767af1c53ce7b30bc85af64bb7',
+					],
+					'yandex' => [
+						'class'        => 'dektrium\user\clients\Yandex',
+						'clientId'     => '22cc1e1e4e6543e3b6b6e371b9a86795',
+						'clientSecret' => 'a85b3081b5bd44e9accbcaa645934345'
+					],
 				],
 			],
 		

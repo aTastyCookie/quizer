@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "e997eb486add04d828a54faa74386d1c",
+    "hash": "269115a728d3a6699dbcd35929bb0910",
     "packages": [
         {
             "name": "bower-asset/bootstrap",
@@ -649,7 +649,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sjaakp/yii2-illustrated-behavior/zipball/0e91e3e1bc596713685442329709974165f20cd7",
+                "url": "https://api.github.com/repos/sjaakp/yii2-illustrated-behavior/zipball/fa1ba40754f10459eb812d233913f79803020b65",
                 "reference": "0e91e3e1bc596713685442329709974165f20cd7",
                 "shasum": ""
             },
@@ -1177,6 +1177,49 @@
                 "yii2"
             ],
             "time": "2015-05-10 22:12:32"
+        },
+        {
+            "name": "yurkinx/yii2-image",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/yurkinx/yii2-image.git",
+                "reference": "a99384b9f856798c731d76ce78db0674b8ad7414"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/yurkinx/yii2-image/zipball/a99384b9f856798c731d76ce78db0674b8ad7414",
+                "reference": "a99384b9f856798c731d76ce78db0674b8ad7414",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.4.0",
+                "yiisoft/yii2": "*"
+            },
+            "type": "yii2-extension",
+            "autoload": {
+                "psr-0": {
+                    "yii\\image\\": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD-3-Clause"
+            ],
+            "authors": [
+                {
+                    "name": "Yuri Kileev",
+                    "email": "kileev@gmail.com"
+                }
+            ],
+            "description": "Yii2 extension for image manipulating using Kohana Image Library.",
+            "homepage": "https://github.com/yurkinx/yii2-image",
+            "keywords": [
+                "extension",
+                "image",
+                "yii2"
+            ],
+            "time": "2015-05-19 19:10:47"
         }
     ],
     "packages-dev": [
@@ -1487,7 +1530,8 @@
     "stability-flags": {
         "dektrium/yii2-user": 20,
         "katanyoo/yii2-mailgun-mailer": 20,
-        "sjaakp/yii2-illustrated-behavior": 20
+        "sjaakp/yii2-illustrated-behavior": 20,
+        "yurkinx/yii2-image": 20
     },
     "prefer-stable": false,
     "prefer-lowest": false,
