@@ -21,7 +21,9 @@
         "dektrium/yii2-user": "0.9.*@dev",
         "katanyoo/yii2-mailgun-mailer": "dev-master",
         "sjaakp/yii2-illustrated-behavior": "dev-master",
-        "yurkinx/yii2-image": "dev-master"
+        "yurkinx/yii2-image": "dev-master",
+        "kartik-v/yii2-widget-datepicker": "*",
+        "yiisoft/yii2-jui": "^2.0"
     },
     "require-dev": {
         "yiisoft/yii2-codeception": "*",
