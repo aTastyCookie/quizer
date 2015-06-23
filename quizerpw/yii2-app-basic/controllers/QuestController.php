@@ -44,6 +44,25 @@ class QuestController extends Controller
         ]);
     }
 
+	/**
+     * Lists all Quest models.
+     * @return mixed
+     */
+    public function actionVisual()
+    {
+		$query = Quest::find();
+		
+	    $dataProvider = new ActiveDataProvider([
+            'query' => $query,
+        ]);
+		
+		$nodes = $dataProvider->getModels();
+
+        return $this->render('visual', [
+            'nodes' => $nodes,
+        ]);
+    }
+
     /**
      * Displays a single Quest model.
      * @param integer $id
