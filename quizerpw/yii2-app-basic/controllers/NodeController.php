@@ -33,6 +33,9 @@ class NodeController extends Controller
     public function actionIndex()
     {
         $searchModel = new NodeSearch();
+		if (!isset(Yii::$app->request->queryParams['quest_id'])) {
+			Yii::$app->getResponse()->redirect('/quest/');
+		}
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
         return $this->render('index', [

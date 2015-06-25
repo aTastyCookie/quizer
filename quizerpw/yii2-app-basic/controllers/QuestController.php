@@ -9,6 +9,8 @@ use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 use yii\web\UploadedFile;
+use app\models\Node;
+use app\models\NodeSearch;
 
 /**
  * QuestController implements the CRUD actions for Quest model.
@@ -50,8 +52,11 @@ class QuestController extends Controller
      */
     public function actionVisual()
     {
-		$query = Quest::find();
-		
+		if (!Yii::$app->request->get('quest_id')) {
+			return false;
+		}
+		$query = Node::find()->where(array('quest_id'=>Yii::$app->request->get('quest_id')));		
+
 	    $dataProvider = new ActiveDataProvider([
             'query' => $query,
         ]);
@@ -62,6 +67,13 @@ class QuestController extends Controller
             'nodes' => $nodes,
         ]);
     }
+	
+	/*
+	save connection from visual admin
+	*/
+	public function actionSave() {
+		var_dump(Yii::$app->request->post()); die();
+	}
 
     /**
      * Displays a single Quest model.

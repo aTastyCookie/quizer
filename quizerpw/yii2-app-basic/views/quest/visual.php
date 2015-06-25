@@ -8,20 +8,45 @@
 
 <script src="/js/jquery.jsPlumb-1.7.5-min.js"></script>
 
+<input type="submit" onclick="saveConnections(); return false;" value="get">
  <div id="main">
             <!-- demo -->
             <div class="demo flowchart-demo" id="flowchart-demo">
-			<?php foreach ($nodes as $key => $node) {?>
-                <div class="window" id="flowchartWindow<?=$key?>"><strong><?=$node->name?></strong><br/><br/></div>
-            <?php } ?>
+			<?php 
+			$top = 10;
+			$left = 10;
+			foreach ($nodes as $key => $node) {?>
+                <div class="window" id="flowchartWindow<?=$node->id?>" style="top: <?=$top?>px; left: <?=$left;?>px"><strong><?=$node->name?></strong><br/><br/></div>
+            <?php 
+				$left = $left + 200;
+			} ?>
             </div>
             <!-- /demo -->
         </div>
 
 <script>
+
+var instance;
+
+function saveConnections() {
+	var connects = 'c=1';
+	$.each(instance.getAllConnections(), function (idx, connection) {
+		 console.log(connection.sourceId, connection.targetId); 
+		 connects += '&connects[' + idx +'][src]=' + connection.sourceId;
+		 connects += '&connects[' + idx +'][trg]=' + connection.targetId;
+	});
+	console.log(connects);
+	$.ajax({
+        type: "post",
+        dataType: 'json',
+        url: '/quest/save/',
+        data: connects
+    });
+}
+
 jsPlumb.ready(function () {
 
-    var instance = jsPlumb.getInstance({
+    instance = jsPlumb.getInstance({
         // default drag options
         DragOptions: { cursor: 'pointer', zIndex: 2000 },
         // the overlays to decorate each connection with.  note that the label overlay uses a function to generate the label text; in this
@@ -122,7 +147,7 @@ jsPlumb.ready(function () {
     instance.batch(function () {
 		
 		<?php foreach ($nodes as $key => $node) {?>
-		 _addEndpoints("Window<?=$key?>", ["RightMiddle"], ["LeftMiddle"]);
+		 _addEndpoints("Window<?=$node->id?>", ["RightMiddle", "TopCenter"], ["LeftMiddle"]);
         <?php } ?>
         
         // listen for new connections; initialise them the same way we initialise the connections at startup.

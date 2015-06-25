@@ -42,6 +42,8 @@ $this->params['breadcrumbs'][] = $this->title;
 								if ($count > 0) {
 									$html .= '<a href="/node/?quest_id=' . $model->id . '"'
 										  . '>' . $count . ' nodes</a><br/>';  
+									$html .= '<a href="/quest/visual/?quest_id=' . $model->id . '"'
+										  . '>Visual</a><br/>';  
 								}
 								$html .= '<a href="/node/create?quest_id=' 
 										. $model->id . '">Create node</a></div>';

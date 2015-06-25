@@ -15,7 +15,7 @@
     filter: alpha(opacity=80);
     width: 80px;
     height: 80px;
-    line-height: 80px;
+    line-height: 9px;
     cursor: pointer;
     text-align: center;
     z-index: 20;
