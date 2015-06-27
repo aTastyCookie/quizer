@@ -65,6 +65,7 @@ class QuestController extends Controller
 
         return $this->render('visual', [
             'nodes' => $nodes,
+			'quest_id' => Yii::$app->request->get('quest_id')
         ]);
     }
 	
@@ -72,7 +73,51 @@ class QuestController extends Controller
 	save connection from visual admin
 	*/
 	public function actionSave() {
-		var_dump(Yii::$app->request->post()); die();
+		Node::cleanConnections(Yii::$app->request->post('quest_id')); 
+		$connects = Yii::$app->request->post('connects');
+		if ($connects) {
+			foreach ($connects as $key => $connect) {
+				$srcId = (int)str_replace('flowchartWindow', '', $connect['src']);
+				$trgId = (int)str_replace('flowchartWindow', '', $connect['trg']);
+				
+				$node = Node::findOne($srcId);
+				if ($node) {
+					if ($connect['uuid'] == 'Window1RightMiddle') {
+						$node->next = $trgId;
+						//connect to next
+					}else {
+						//Window2TopCenter
+						//connect to back
+						$node->prev = $trgId;
+					}
+					$node->save();
+				}
+			}
+		}
+		return true;
+	}
+
+	public function getConnections( $quest_id )
+	{
+		$query = Node::find()->where(array('quest_id' => $quest_id ));		
+
+	    $dataProvider = new ActiveDataProvider([
+            'query' => $query,
+        ]);
+		
+		$nodes = $dataProvider->getModels();	
+		$connections = array();
+		if ($nodes) {
+			foreach ($nodes as $node) {
+				if ($node->next) {
+					$connections[] = array('src' => $node->id, 'trg' => $node->next, 'type' => 'next');
+				}elseif ($node->prev) {
+					$connections[] = array('src' => $node->id, 'trg' => $node->prev, 'type' => 'prev');
+				}
+				
+			}
+		}
+		return $connections;
 	}
 
     /**

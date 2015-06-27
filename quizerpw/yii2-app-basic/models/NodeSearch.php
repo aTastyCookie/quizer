@@ -32,6 +32,7 @@ class NodeSearch extends Node
         return Model::scenarios();
     }
 
+	
     /**
      * Creates data provider instance with search query applied
      *

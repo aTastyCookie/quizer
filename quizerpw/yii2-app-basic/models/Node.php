@@ -1,7 +1,7 @@
 <?php
 
 namespace app\models;
-
+use yii\data\ActiveDataProvider;
 use Yii;
 
 /**
@@ -30,7 +30,7 @@ class Node extends \yii\db\ActiveRecord
     {
         return [
             [['name', 'quest_id'], 'required'],
-            [['quest_id'], 'integer'],
+            [['quest_id', 'next', 'prev'], 'integer'],
             [['name'], 'string', 'max' => 500]
         ];
     }
@@ -54,4 +54,22 @@ class Node extends \yii\db\ActiveRecord
     {
         return $this->hasOne(Quest::className(), ['id' => 'quest_id']);
     }
+
+	public static function cleanConnections( $questId ) 
+	{
+		 $query = Node::find();
+		 $query->andFilterWhere([
+				'quest_id' => $questId
+		  ]);
+		 $dataProvider = new ActiveDataProvider([
+            'query' => $query,
+         ]);
+		 $nodes = $dataProvider->getModels();
+		 foreach ($nodes as $node) {
+				$node->prev = null;
+				$node->next = null;
+				$node->save();
+		 }
+		 return true;
+	}
 }

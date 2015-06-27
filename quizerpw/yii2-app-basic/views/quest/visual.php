@@ -9,6 +9,7 @@
 <script src="/js/jquery.jsPlumb-1.7.5-min.js"></script>
 
 <input type="submit" onclick="saveConnections(); return false;" value="get">
+<input type="hidden" id="quest_id" value="<?=$quest_id?>">
  <div id="main">
             <!-- demo -->
             <div class="demo flowchart-demo" id="flowchart-demo">
@@ -29,11 +30,12 @@
 var instance;
 
 function saveConnections() {
-	var connects = 'c=1';
+	var connects = 'quest_id=' + $("#quest_id").val();
 	$.each(instance.getAllConnections(), function (idx, connection) {
-		 console.log(connection.sourceId, connection.targetId); 
+		 var uuids = connection.getUuids();
 		 connects += '&connects[' + idx +'][src]=' + connection.sourceId;
 		 connects += '&connects[' + idx +'][trg]=' + connection.targetId;
+		 connects += '&connects[' + idx +'][uuid]=' + uuids[0];
 	});
 	console.log(connects);
 	$.ajax({
