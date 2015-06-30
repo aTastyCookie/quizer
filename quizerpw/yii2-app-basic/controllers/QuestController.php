@@ -62,9 +62,11 @@ class QuestController extends Controller
         ]);
 		
 		$nodes = $dataProvider->getModels();
+		$chain = Quest::getChain(Yii::$app->request->get('quest_id'));
 
         return $this->render('visual', [
             'nodes' => $nodes,
+			'chain' => $chain,
 			'quest_id' => Yii::$app->request->get('quest_id')
         ]);
     }
@@ -76,22 +78,34 @@ class QuestController extends Controller
 		Node::cleanConnections(Yii::$app->request->post('quest_id')); 
 		$connects = Yii::$app->request->post('connects');
 		if ($connects) {
+			//var_dump($connects);
 			foreach ($connects as $key => $connect) {
 				$srcId = (int)str_replace('flowchartWindow', '', $connect['src']);
 				$trgId = (int)str_replace('flowchartWindow', '', $connect['trg']);
 				
-				$node = Node::findOne($srcId);
-				if ($node) {
-					if ($connect['uuid'] == 'Window1RightMiddle') {
-						$node->next = $trgId;
+				$nodeSrc = Node::findOne($srcId);
+				$nodeTrg = Node::findOne($trgId);
+
+				if ($nodeSrc) {
+					if (strpos($connect['uuid'], 'RightMiddle') !== false) {
+						$nodeSrc->next = $trgId;
 						//connect to next
 					}else {
 						//Window2TopCenter
 						//connect to back
-						$node->prev = $trgId;
+						$nodeSrc->prev2 = $trgId;
 					}
-					$node->save();
+					$nodeSrc->save();
 				}
+
+				if ($nodeTrg) {
+					if (strpos($connect['uuid'], 'RightMiddle') !== false) {
+						$nodeTrg->prev = $srcId;
+						//connect to next
+					}
+					$nodeTrg->save();
+				}
+
 			}
 		}
 		return true;

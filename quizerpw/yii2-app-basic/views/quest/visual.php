@@ -164,8 +164,24 @@ jsPlumb.ready(function () {
         //jsPlumb.draggable(document.querySelectorAll(".window"), { grid: [20, 20] });
 
         // connect a few up
-       /* instance.connect({uuids: ["Window2BottomCenter", "Window3TopCenter"], editable: true});
-        instance.connect({uuids: ["Window2LeftMiddle", "Window4LeftMiddle"], editable: true});
+		<?php
+		if ($chain) {
+			foreach ($chain as $item) {
+				if  ($item['type'] == 'next') {
+					 ?> 
+						 instance.connect({uuids: ["Window<?=$item['src']?>RightMiddle", "Window<?=$item['trg']?>LeftMiddle"], editable: true});
+					 <?php
+				}elseif  ($item['type'] == 'prev') {
+					 ?> 
+						 instance.connect({uuids: ["Window<?=$item['src']?>TopCenter", "Window<?=$item['trg']?>LeftMiddle"], editable: true});
+					 <?php
+				}
+			}
+		}
+		?>
+        //instance.connect({uuids: ["Window1RightMiddle", "Window2LeftMiddle"], editable: true});
+        /*
+		instance.connect({uuids: ["Window2LeftMiddle", "Window4LeftMiddle"], editable: true});
         instance.connect({uuids: ["Window4TopCenter", "Window4RightMiddle"], editable: true});
         instance.connect({uuids: ["Window3RightMiddle", "Window2RightMiddle"], editable: true});
         instance.connect({uuids: ["Window4BottomCenter", "Window1TopCenter"], editable: true});

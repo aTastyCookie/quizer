@@ -30,7 +30,7 @@ class Node extends \yii\db\ActiveRecord
     {
         return [
             [['name', 'quest_id'], 'required'],
-            [['quest_id', 'next', 'prev'], 'integer'],
+            [['quest_id', 'next', 'prev', 'prev2'], 'integer'],
             [['name'], 'string', 'max' => 500]
         ];
     }

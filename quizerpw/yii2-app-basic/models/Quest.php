@@ -45,6 +45,42 @@ class Quest extends \yii\db\ActiveRecord
         ];
     }
 
+	public static function getChain( $questId )
+	{
+		$chain = array();
+		$current = Node::find()
+			->where(['quest_id' => $questId])
+			->andFilterWhere(['prev' => 0])
+			->andWhere(['>', 'next', '0'])
+			->one();
+		if (!$current) {
+			return $chain;
+		}
+		//$chain[] = $current;
+		
+		while (true) {
+			if ($current->next) {
+				$next = Node::findOne( $current->next );
+				if ($next) {
+					$chain[] = array('src' => $current->id, 'trg' => $next->id, 'type' => 'next');
+					if ($current->prev2) {
+						$chain[] = array('src' => $current->id, 'trg' => $current->prev2, 'type' => 'prev');
+					}
+					$current = $next;
+					
+				}else {
+					//break;
+				}
+			}elseif ($current->prev2) {
+				$chain[] = array('src' => $current->id, 'trg' => $current->prev2, 'type' => 'prev');
+				break;
+			}else {
+				break;
+			}
+		}
+		return $chain;
+	}
+
 	/** 
 		return count of child nodes
 	*/
