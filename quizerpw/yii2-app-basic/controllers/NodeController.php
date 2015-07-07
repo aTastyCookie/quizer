@@ -39,6 +39,7 @@ class NodeController extends Controller
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
         return $this->render('index', [
+			'quest_id' => Yii::$app->request->queryParams['quest_id'],
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
         ]);

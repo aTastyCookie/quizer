@@ -16,8 +16,9 @@ $this->params['breadcrumbs'][] = $this->title;
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
 
     <p>
-        <?= Html::a(Yii::t('app', 'Create Node'), ['create'], ['class' => 'btn btn-success']) ?>
-    </p>
+        <a class="btn btn-success" href="/node/create?quest_id=<?=$quest_id?>">Создать ноду</a>    
+	</p>
+	
 
     <?= GridView::widget([
         'dataProvider' => $dataProvider,

@@ -76,6 +76,19 @@ class QuestController extends Controller
 	*/
 	public function actionSave() {
 		Node::cleanConnections(Yii::$app->request->post('quest_id')); 
+		
+		
+		$pos = Yii::$app->request->post('pos');
+		if ($pos) {
+			foreach ($pos as $id => $data) {
+				$id = (int)str_replace('flowchartWindow', '', $id);
+				$node = Node::findOne($id);
+				$node->left = (int)str_replace('px', '', $data['left']);
+				$node->top = (int)str_replace('px', '', $data['top']);
+				$node->save();
+			}
+		}
+
 		$connects = Yii::$app->request->post('connects');
 		if ($connects) {
 			//var_dump($connects);

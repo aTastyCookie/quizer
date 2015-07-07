@@ -8,22 +8,37 @@
 
 <script src="/js/jquery.jsPlumb-1.7.5-min.js"></script>
 
-<input type="submit" onclick="saveConnections(); return false;" value="get">
+<a href="https://quizer.pw/quest/">Квесты</a>
+<br/><br>
+<input type="submit" onclick="saveConnections(); return false;" value="Сохранить">
+
 <input type="hidden" id="quest_id" value="<?=$quest_id?>">
  <div id="main">
             <!-- demo -->
             <div class="demo flowchart-demo" id="flowchart-demo">
-			<?php 
-			$top = 10;
-			$left = 10;
-			foreach ($nodes as $key => $node) {?>
-                <div class="window" id="flowchartWindow<?=$node->id?>" style="top: <?=$top?>px; left: <?=$left;?>px"><strong><?=$node->name?></strong><br/><br/></div>
-            <?php 
-				$left = $left + 200;
-			} ?>
-            </div>
-            <!-- /demo -->
-        </div>
+				<?php 
+				$top = 0;
+				$left = 0;
+				$leftDef = 100;
+				foreach ($nodes as $key => $node) { 
+					if ($node->top > 0) { 
+						$top = $node->top;
+					}else {
+						$top = 10;
+					}
+					if ($node->left > 0) {
+						$left = $node->left;
+					}else {
+						$left = $leftDef + 150;
+						$leftDef = $left;
+					}
+					?>
+					<div class="window" id="flowchartWindow<?=$node->id?>" style="top: <?=$top?>px; left: <?=$left;?>px"><strong><?=$node->name?></strong><br/><br/></div>
+				<?php 
+				} ?>
+				</div>
+				<!-- /demo -->
+			</div>
 
 <script>
 
@@ -31,6 +46,20 @@ var instance;
 
 function saveConnections() {
 	var connects = 'quest_id=' + $("#quest_id").val();
+	
+	/*instance.selectEndpoints().each(function(endpoint) {
+
+        console.log("**", endpoint);
+
+	})*/
+
+	$('.window').each(function(index){
+		if ($(this).attr('id')){
+			connects += '&pos[' + $(this).attr('id') + '][left]=' + $(this).css('left');
+			connects += '&pos[' + $(this).attr('id') + '][top]=' + $(this).css('top');
+		}
+	});
+
 	$.each(instance.getAllConnections(), function (idx, connection) {
 		 var uuids = connection.getUuids();
 		 connects += '&connects[' + idx +'][src]=' + connection.sourceId;

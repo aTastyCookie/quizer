@@ -30,7 +30,7 @@ class Node extends \yii\db\ActiveRecord
     {
         return [
             [['name', 'quest_id'], 'required'],
-            [['quest_id', 'next', 'prev', 'prev2'], 'integer'],
+            [['quest_id', 'next', 'prev', 'prev2', 'top', 'left'], 'integer'],
             [['name'], 'string', 'max' => 500]
         ];
     }
@@ -66,6 +66,7 @@ class Node extends \yii\db\ActiveRecord
          ]);
 		 $nodes = $dataProvider->getModels();
 		 foreach ($nodes as $node) {
+				$node->prev2 = null;
 				$node->prev = null;
 				$node->next = null;
 				$node->save();

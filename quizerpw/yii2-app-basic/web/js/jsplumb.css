@@ -118,12 +118,12 @@ body {
 }
 
  #main {  
-  margin-top: 106px;  
+  margin-top: 0px;  
   font-size: 80%;    
-  width: 80%;
+  width: 100%;
   margin-left:auto;
   margin-right: auto;  
-  height: 600px;
+  height: 1600px;
   text-align: center;
   position: relative;
   max-width: 1200px;
@@ -135,7 +135,7 @@ body {
   width:100%;
   background-color:white;    
   overflow:auto;  
-  margin-top: 53px;
+  margin-top: 5px;
   margin-bottom:25px;
   height: 600px;
 }
