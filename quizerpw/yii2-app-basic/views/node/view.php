@@ -7,12 +7,13 @@ use yii\widgets\DetailView;
 /* @var $model app\models\Node */
 
 $this->title = $model->name;
+
 $this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Nodes'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="node-view">
 
-    <h1><?= Html::encode($this->title) ?></h1>
+    <h1>Ноды</h1>
 
     <p>
         <?= Html::a(Yii::t('app', 'Update'), ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>

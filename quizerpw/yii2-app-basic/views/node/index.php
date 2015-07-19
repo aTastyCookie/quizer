@@ -8,6 +8,9 @@ use yii\grid\GridView;
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
 $this->title = Yii::t('app', 'Nodes');
+
+$this->params['breadcrumbs'][] = ['label' => 'Квесты', 'url' => '/quest'];
+
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="node-index">

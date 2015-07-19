@@ -30,8 +30,10 @@ class Node extends \yii\db\ActiveRecord
     {
         return [
             [['name', 'quest_id'], 'required'],
-            [['quest_id', 'next', 'prev', 'prev2', 'top', 'left'], 'integer'],
-            [['name'], 'string', 'max' => 500]
+            [['quest_id', 'next', 'prev', 'prev2', 'top', 'left', 'case_depend'], 'integer'],
+            [['name'], 'string', 'max' => 500],
+            [['question'], 'string', 'max' => 500],
+            [['answer'], 'string', 'max' => 500]
         ];
     }
 
@@ -42,8 +44,11 @@ class Node extends \yii\db\ActiveRecord
     {
         return [
             'id' => Yii::t('app', 'ID'),
-            'name' => Yii::t('app', 'Name'),
+            'name' => 'Заголовок',
             'quest_id' => Yii::t('app', 'Quest ID'),
+			'question' => 'Вопрос',
+			'answer' => 'Ответ',
+			'case_depend' => 'Регистро-зависимый ответ'
         ];
     }
 
