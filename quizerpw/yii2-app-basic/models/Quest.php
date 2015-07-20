@@ -45,14 +45,20 @@ class Quest extends \yii\db\ActiveRecord
         ];
     }
 
-	public static function getChain( $questId )
-	{
-		$chain = array();
+	public static function getFirstNode( $questId ) {
 		$current = Node::find()
 			->where(['quest_id' => $questId])
 			->andFilterWhere(['prev' => 0])
 			->andWhere(['>', 'next', '0'])
 			->one();
+		return $current;
+	}
+
+	public static function getChain( $questId )
+	{
+		$chain = array();
+		$current = self::getFirstNode( $questId );
+
 		if (!$current) {
 			return $chain;
 		}

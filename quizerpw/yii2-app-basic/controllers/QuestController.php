@@ -230,6 +230,32 @@ class QuestController extends Controller
         return $this->redirect(['index']);
     }
 
+	public function actionRun( $id ) {
+		
+		$runInfo = Yii::$app->session->get('run_' . $id);
+		
+		if ($runInfo['current']) {
+			$currentId = (int)$runInfo['current'];
+			$currentNode = Node::findModel( $currentId );
+		}else {
+			$currentNode = Quest::getFirstNode( $id );
+			$currentId = $currentNode->id;
+		}
+		
+		$quest = $this->findModel( $currentNode->quest_id );
+		
+		
+		return $this->render('run', [
+					'node' => $currentNode,
+					'quest' => $quest
+				]);
+	}
+
+	public function actionCheck( $nodeId, $answer = null ) {
+		$node = Node::findModel( $nodeId );
+
+	}
+
     /**
      * Finds the Quest model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.

@@ -32,8 +32,7 @@ class Node extends \yii\db\ActiveRecord
             [['name', 'quest_id'], 'required'],
             [['quest_id', 'next', 'prev', 'prev2', 'top', 'left', 'case_depend'], 'integer'],
             [['name'], 'string', 'max' => 500],
-            [['question'], 'string', 'max' => 500],
-            [['answer'], 'string', 'max' => 500]
+            [['answer'], 'string']
         ];
     }
 
@@ -78,4 +77,13 @@ class Node extends \yii\db\ActiveRecord
 		 }
 		 return true;
 	}
+
+	public static function findModel($id)
+    {
+        if (($model = Node::findOne($id)) !== null) {
+            return $model;
+        } else {
+            return false;
+        }
+    }
 }

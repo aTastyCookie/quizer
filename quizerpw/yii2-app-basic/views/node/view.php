@@ -8,7 +8,10 @@ use yii\widgets\DetailView;
 
 $this->title = $model->name;
 
-$this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Nodes'), 'url' => ['index']];
+
+$this->params['breadcrumbs'][] = ['label' => 'Квесты', 'url' => '/quest'];
+$this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Ноды'), 'url' => ['/node?quest_id=' . $model->quest_id]];
+
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="node-view">
