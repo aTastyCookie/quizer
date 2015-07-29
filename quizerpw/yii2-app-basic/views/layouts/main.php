@@ -20,6 +20,9 @@ AppAsset::register($this);
     <title><?= Html::encode($this->title) ?></title>
 
 	  <?php $this->head() ?>
+
+	<script type="text/javascript" src="/js/run.js"></script>
+
 </head>
 <body>
 
