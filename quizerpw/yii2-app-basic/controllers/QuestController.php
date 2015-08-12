@@ -7,9 +7,13 @@ use app\models\Quest;
 use yii\data\ActiveDataProvider;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
+use yii\web\BadRequestHttpException;
+use yii\filters\AccessControl;
 use yii\filters\VerbFilter;
 use yii\web\UploadedFile;
+use yii\helpers\Html;
 use app\models\Node;
+use app\models\QuestTag;
 use app\models\NodeSearch;
 
 /**
@@ -17,15 +21,25 @@ use app\models\NodeSearch;
  */
 class QuestController extends Controller
 {
-    public function behaviors()
-    {
+    public function behaviors() {
+        //var_dump(Yii::$app->getAuthManager()); exit;
         return [
+            'access' => [
+                'class' => AccessControl::className(),
+                'rules' => [
+                    ['allow' => true, 'actions' => ['index', 'run'], 'roles' => ['@']],
+                    //['allow' => false, 'actions' => ['visual'], 'roles' => ['user']],
+                    ['allow' => true, 'actions' => [
+                        'visual', 'create', 'save', 'update', 'view', 'delete', 'run', 'preload'
+                    ], 'roles' => ['admin']],
+                ],
+            ],
             'verbs' => [
                 'class' => VerbFilter::className(),
                 'actions' => [
                     'delete' => ['post'],
                 ],
-            ],
+            ]
         ];
     }
 
@@ -33,228 +47,292 @@ class QuestController extends Controller
      * Lists all Quest models.
      * @return mixed
      */
-    public function actionIndex()
-    {
-		$query = Quest::find();
-		
-	    $dataProvider = new ActiveDataProvider([
-            'query' => $query,
-        ]);
-
+    public function actionIndex() {
         return $this->render('index', [
-            'dataProvider' => $dataProvider,
+            'dataProvider' => new ActiveDataProvider([
+                'query' => Quest::find(),
+            ])
         ]);
     }
-
-	/**
-     * Lists all Quest models.
-     * @return mixed
-     */
-    public function actionVisual()
-    {
-		if (!Yii::$app->request->get('quest_id')) {
-			return false;
-		}
-		$query = Node::find()->where(array('quest_id'=>Yii::$app->request->get('quest_id')));		
-
-	    $dataProvider = new ActiveDataProvider([
-            'query' => $query,
-        ]);
-		
-		$nodes = $dataProvider->getModels();
-		$chain = Quest::getChain(Yii::$app->request->get('quest_id'));
-
-        return $this->render('visual', [
-            'nodes' => $nodes,
-			'chain' => $chain,
-			'quest_id' => Yii::$app->request->get('quest_id')
-        ]);
-    }
-	
-	/*
-	save connection from visual admin
-	*/
-	public function actionSave() {
-		Node::cleanConnections(Yii::$app->request->post('quest_id')); 
-		
-		
-		$pos = Yii::$app->request->post('pos');
-		if ($pos) {
-			foreach ($pos as $id => $data) {
-				$id = (int)str_replace('flowchartWindow', '', $id);
-				$node = Node::findOne($id);
-				$node->left = (int)str_replace('px', '', $data['left']);
-				$node->top = (int)str_replace('px', '', $data['top']);
-				$node->save();
-			}
-		}
-
-		$connects = Yii::$app->request->post('connects');
-		if ($connects) {
-			//var_dump($connects);
-			foreach ($connects as $key => $connect) {
-				$srcId = (int)str_replace('flowchartWindow', '', $connect['src']);
-				$trgId = (int)str_replace('flowchartWindow', '', $connect['trg']);
-				
-				$nodeSrc = Node::findOne($srcId);
-				$nodeTrg = Node::findOne($trgId);
-
-				if ($nodeSrc) {
-					if (strpos($connect['uuid'], 'RightMiddle') !== false) {
-						$nodeSrc->next = $trgId;
-						//connect to next
-					}else {
-						//Window2TopCenter
-						//connect to back
-						$nodeSrc->prev2 = $trgId;
-					}
-					$nodeSrc->save();
-				}
-
-				if ($nodeTrg) {
-					if (strpos($connect['uuid'], 'RightMiddle') !== false) {
-						$nodeTrg->prev = $srcId;
-						//connect to next
-					}
-					$nodeTrg->save();
-				}
-
-			}
-		}
-		return true;
-	}
-
-	public function getConnections( $quest_id )
-	{
-		$query = Node::find()->where(array('quest_id' => $quest_id ));		
-
-	    $dataProvider = new ActiveDataProvider([
-            'query' => $query,
-        ]);
-		
-		$nodes = $dataProvider->getModels();	
-		$connections = array();
-		if ($nodes) {
-			foreach ($nodes as $node) {
-				if ($node->next) {
-					$connections[] = array('src' => $node->id, 'trg' => $node->next, 'type' => 'next');
-				}elseif ($node->prev) {
-					$connections[] = array('src' => $node->id, 'trg' => $node->prev, 'type' => 'prev');
-				}
-				
-			}
-		}
-		return $connections;
-	}
 
     /**
-     * Displays a single Quest model.
-     * @param integer $id
+     * Lists all Quest models.
+     * @throws BadRequestHttpException
      * @return mixed
      */
-    public function actionView($id)
-    {
+    public function actionVisual() {
+        if(!Yii::$app->request->get('quest_id'))
+            throw new BadRequestHttpException('Неверный запрос');
+
+        $dataProvider = new ActiveDataProvider([
+            'query' => Node::find()->where(array('quest_id'=>Yii::$app->request->get('quest_id')))
+        ]);
+
+        return $this->render('visual', [
+            'nodes' => $dataProvider->getModels(),
+            'chain' => Quest::getChain(Yii::$app->request->get('quest_id')),
+            'quest_id' => Yii::$app->request->get('quest_id')
+        ]);
+    }
+
+    /**
+     * Save connection from visual admin
+     * @return mixed
+     */
+    public function actionSave() {
+        Node::cleanConnections(Yii::$app->request->post('quest_id'));
+
+        if($pos = Yii::$app->request->post('pos'))
+            foreach($pos as $id => $data) {
+                $id = intval(str_replace('flowchartWindow', '', $id));
+                $node = Node::findOne($id);
+                $node->left = (int)str_replace('px', '', $data['left']);
+                $node->top = (int)str_replace('px', '', $data['top']);
+                $node->save();
+            }
+
+
+        if($connects = Yii::$app->request->post('connects'))
+            foreach($connects as $key => $connect) {
+                $srcId = (int)str_replace('flowchartWindow', '', $connect['src']);
+                $trgId = (int)str_replace('flowchartWindow', '', $connect['trg']);
+
+                $nodeSrc = Node::findOne($srcId);
+                $nodeTrg = Node::findOne($trgId);
+
+                if ($nodeSrc) {
+                    if (strpos($connect['uuid'], 'RightMiddle') !== false) {
+                        $nodeSrc->next = $trgId;
+                        //connect to next
+                    } else {
+                        //Window2TopCenter
+                        //connect to back
+                        $nodeSrc->prev2 = $trgId;
+                    }
+
+                    $nodeSrc->save();
+                }
+
+                if ($nodeTrg) {
+                    if (strpos($connect['uuid'], 'RightMiddle') !== false) {
+                        $nodeTrg->prev = $srcId;
+                        //connect to next
+                    }
+
+                    $nodeTrg->save();
+                }
+
+            }
+
+        return true;
+    }
+
+    public function getConnections($quest_id) {
+        $dataProvider = new ActiveDataProvider([
+            'query' => Node::find()->where(array('quest_id' => $quest_id)),
+        ]);
+
+        $connections = [];
+
+        if ($nodes = $dataProvider->getModels()) {
+            foreach ($nodes as $node) {
+                if ($node->next)
+                    $connections[] = ['src' => $node->id, 'trg' => $node->next, 'type' => 'next'];
+                elseif ($node->prev)
+                    $connections[] = ['src' => $node->id, 'trg' => $node->prev, 'type' => 'prev'];
+            }
+        }
+
+        return $connections;
+    }
+
+    /**
+     * Displays a single Quest model
+     * @throws BadRequestHttpException
+     * @return mixed
+     */
+    public function actionView() {
+        if(!($id = Yii::$app->request->get('id')))
+            throw new BadRequestHttpException('Неверный запрос');
+
         return $this->render('view', [
             'model' => $this->findModel($id),
         ]);
     }
 
-	/**
-	* process uploading of logo
-	*/
+    /**
+     * Process uploading of logo
+     * @param object $model
+     * @return bool
+     */
+    protected function _logoUpload(&$model, $upload_dir = null, $file_name = null, $no_validate = false) {
+        if ($model->logoFile = UploadedFile::getInstance($model, 'logo')) {
+            if($model->upload($upload_dir, $file_name, $no_validate)) {
+                $model->logo = $model->logoFile->name;
+                $model->logoFile = null;
 
-	protected function _logoUpload( &$model )
-	{
-		$model->logoFile = UploadedFile::getInstance($model, 'logo');
-		if ($model->logoFile) {
-			if ($model->upload()) {
-				$model->logo = $model->logoFile->name;
-				$model->logoFile = null;
-				return true;
-			}
-		}
-		return false;
-	}
+                return true;
+            }
+        }
+
+        return false;
+    }
 
     /**
      * Creates a new Quest model.
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
      */
-    public function actionCreate()
-    {
+    public function actionCreate() {
         $model = new Quest();
 
-        if ($model->load(Yii::$app->request->post())) {
-			$this->_logoUpload( $model );
-			$model->save();
-            return $this->redirect(['view', 'id' => $model->id]);
-        } else {
-            return $this->render('create', [
-                'model' => $model,
-            ]);
+        if($model->load(Yii::$app->request->post())) {
+            $this->_logoUpload($model);
+
+            if($model->validate()) {
+                $model->date_start = date('Y-m-d', strtotime($model->date_start));
+                $model->date_finish = date('Y-m-d', strtotime($model->date_finish));
+                $model->save(false);
+
+                if($tags = Yii::$app->getRequest()->post('HashTags')) {
+                    $values = [];
+
+                    foreach($tags as $tag) {
+                        if(!empty($tag))
+                            $values[] = '(NULL, ' . $model->id . ', \'' . Html::encode($tag) . '\', \'' . QuestTag::translit(Html::encode($tag)) . '\')';
+                    }
+
+                    if(count($values) > 0) {
+                        Yii::$app->db->createCommand('DELETE FROM quests_tags WHERE quest_id = :quest_id', [
+                            ':quest_id' => $model->id
+                        ])->execute();
+                        Yii::$app->db->createCommand('REPLACE INTO quests_tags VALUES ' . implode(', ', $values))->execute();
+                    }
+                }
+
+                return $this->redirect(['view', 'id' => $model->id]);
+            }
         }
+
+        return $this->render('create', [
+            'model' => $model,
+        ]);
+    }
+
+    public function actionPreload() {
+        if(!Yii::$app->getRequest()->getIsAjax() || !isset($_FILES['Quest']))
+            throw new BadRequestHttpException('Неверный запрос');
+
+        if(!file_exists($_SERVER['DOCUMENT_ROOT'].DIRECTORY_SEPARATOR.'assets'))
+            mkdir($_SERVER['DOCUMENT_ROOT'].DIRECTORY_SEPARATOR.'assets');
+
+        if(!file_exists($upload_dir = $_SERVER['DOCUMENT_ROOT'].DIRECTORY_SEPARATOR.'assets'.DIRECTORY_SEPARATOR.'tmp'))
+            mkdir($_SERVER['DOCUMENT_ROOT'].DIRECTORY_SEPARATOR.'assets'.DIRECTORY_SEPARATOR.'tmp');
+
+        $quest = new Quest();
+
+        if($this->_logoUpload($quest, $upload_dir, 'cq-'.Yii::$app->getUser()->getId(), true)) {
+            return json_encode([
+                'type' => 'success',
+                'resource' => '/assets/tmp/'.$quest->logo.'?'.rand(0, 1000)
+            ]);
+        } else
+            return json_encode([
+                'type' => 'error',
+                'resource' => 'Не удалось загрузить изобоажение'
+            ]);
     }
 
     /**
      * Updates an existing Quest model.
      * If update is successful, the browser will be redirected to the 'view' page.
-     * @param integer $id
+     * @throws BadRequestHttpException
      * @return mixed
      */
-    public function actionUpdate($id)
-    {
-        $model = $this->findModel($id);
+    public function actionUpdate() {
+        if(!($id = Yii::$app->request->get('id')))
+            throw new BadRequestHttpException('Неверный запрос');
 
-        if ($model->load(Yii::$app->request->post()) ) {
-			$this->_logoUpload( $model );
-            $model->save();
-			return $this->redirect(['view', 'id' => $model->id]);
-        } else {
-            return $this->render('update', [
-                'model' => $model,
-            ]);
+        $model = $this->findModel((int)$id);
+        $model->date_start = date('d.m.Y', strtotime($model->date_start));
+        $model->date_finish = date('d.m.Y', strtotime($model->date_finish));
+        $tmp_logo = $model->logo;
+
+        if($model->load(Yii::$app->request->post())) {
+            $this->_logoUpload( $model );
+            $model->logo = $model->logo ? : $tmp_logo;
+
+            if($model->validate()) {
+                $model->date_start = date('Y-m-d', strtotime($model->date_start));
+                $model->date_finish = date('Y-m-d', strtotime($model->date_finish));
+                $model->save(false);
+
+                if($tags = Yii::$app->getRequest()->post('HashTags')) {
+                    $values = [];
+
+                    foreach($tags as $tag) {
+                        if(!empty($tag))
+                            $values[] = '(NULL, ' . $model->id . ', \'' . Html::encode($tag) . '\', \'' . QuestTag::translit(Html::encode($tag)) . '\')';
+                    }
+
+                    if(count($values) > 0) {
+                        Yii::$app->db->createCommand('DELETE FROM quests_tags WHERE quest_id = :quest_id', [
+                            ':quest_id' => $model->id
+                        ])->execute();
+                        Yii::$app->db->createCommand('REPLACE INTO quests_tags VALUES ' . implode(', ', $values))->execute();
+                    }
+                }
+
+                return $this->redirect(['view', 'id' => $model->id]);
+            }
         }
+
+        return $this->render('update', [
+            'model' => $model,
+            'tags' => QuestTag::find()->where('quest_id = :quest_id', [':quest_id' => $model->id])->all()
+        ]);
     }
 
     /**
      * Deletes an existing Quest model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
-     * @param integer $id
+     * @throws BadRequestHttpException
      * @return mixed
      */
-    public function actionDelete($id)
-    {
+    public function actionDelete() {
+        if(!($id = Yii::$app->request->get('id')))
+            throw new BadRequestHttpException('Неверный запрос');
+
         $this->findModel($id)->delete();
 
         return $this->redirect(['index']);
     }
 
-	public function actionRun( $id ) {
-		
-		$runInfo = Yii::$app->session->get('run_' . $id);
-		
-		if ($runInfo['current']) {
-			$currentId = (int)$runInfo['current'];
-			$currentNode = Node::findModel( $currentId );
-		}else {
-			$currentNode = Quest::getFirstNode( $id );
-			$currentId = $currentNode->id;
-		}
-		
-		$quest = $this->findModel( $currentNode->quest_id );
-		
-		
-		return $this->render('run', [
-					'node' => $currentNode,
-					'quest' => $quest
-				]);
-	}
+    /**
+     * Run quest
+     * @throws BadRequestHttpException
+     * @return mixed
+     */
+    public function actionRun() {
+        if(!($id = Yii::$app->request->get('id')))
+            throw new BadRequestHttpException('Неверный запрос');
 
-	public function actionCheck( $nodeId, $answer = null ) {
-		$node = Node::findModel( $nodeId );
+        $runInfo = Yii::$app->session->get('run_'.(int)$id);
 
-	}
+        if ($runInfo['current'])
+            $currentNode = Node::findModel((int)$runInfo['current']);
+        else
+            $currentNode = Quest::getFirstNode((int)$id);
+
+        return $this->render('run', [
+            'node' => $currentNode,
+            'quest' => $this->findModel($currentNode->quest_id)
+        ]);
+    }
+
+    public function actionCheck($nodeId, $answer = null) {
+        $node = Node::findModel($nodeId);
+    }
 
     /**
      * Finds the Quest model based on its primary key value.
@@ -263,12 +341,10 @@ class QuestController extends Controller
      * @return Quest the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
-    protected function findModel($id)
-    {
-        if (($model = Quest::findOne($id)) !== null) {
+    protected function findModel($id) {
+        if (($model = Quest::findOne($id)) !== null)
             return $model;
-        } else {
-            throw new NotFoundHttpException('The requested page does not exist.');
-        }
+        else
+            throw new NotFoundHttpException('Запрошенная страница не найдена');
     }
 }
