@@ -174,11 +174,19 @@ use yii\bootstrap\ActiveForm;
     <?= $form->field($model, 'descr')->textarea(['rows' => 6]) ?>
 
     <div class="form-group">
-        <?= Html::submitButton($model->isNewRecord ? Yii::t('app', 'Create') : Yii::t('app', 'Update'), ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
+        <?= Html::submitButton($model->isNewRecord ? Yii::t('app', 'Create') : Yii::t('app', 'Save'), [
+            'class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary',
+            'style' => 'margin-bottom: 5px;'
+        ]) ?>
+        <?if(!$model->isNewRecord):?>
+            <?= Html::a(Yii::t('app', 'Edit Tree'), Url::toRoute(['quest/visual', 'quest_id' => $model->id]), [
+                'class' => 'btn btn-primary',
+                'style' => 'margin-bottom: 5px;'
+            ]) ?>
+        <?endif?>
     </div>
 
     <?php ActiveForm::end(); ?>
-
 </div>
 
 <script>

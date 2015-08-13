@@ -29,7 +29,7 @@ class Node extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['name', 'quest_id'], 'required'],
+            [['name', 'quest_id', 'question', 'answer'], 'required'],
             [['quest_id', 'next', 'prev', 'prev2', 'top', 'left', 'case_depend', 'time'], 'integer'],
             [['name'], 'string', 'max' => 500],
             [['answer'], 'string']

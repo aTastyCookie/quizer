@@ -43,7 +43,8 @@ class Quest extends \yii\db\ActiveRecord {
             [['name', 'logo'], 'string', 'max' => 500],
             [['short'], 'string', 'max' => 200],
             [['descr'], 'string', 'max' => 1500],
-            [['url', 'password'], 'string', 'max' => 255]
+            [['url', 'password'], 'string', 'max' => 255],
+            [['url'], 'unique'],
         ];
     }
 
@@ -103,8 +104,7 @@ class Quest extends \yii\db\ActiveRecord {
     /**
      * @inheritdoc
      */
-    public function attributeLabels()
-    {
+    public function attributeLabels() {
         return [
             'id' => Yii::t('app', 'ID'),
             'name' => Yii::t('app', 'Name'),
@@ -119,8 +119,7 @@ class Quest extends \yii\db\ActiveRecord {
         ];
     }
 
-    public function upload($upload_dir = null, $file_name = null, $no_validate = false)
-    {
+    public function upload($upload_dir = null, $file_name = null, $no_validate = false) {
         if ($this->validate($no_validate ? [] : null)) {
             $rand = $file_name ? : \Yii::$app->security->generateRandomString();
             $fn = $rand . '.' . $this->logoFile->extension;
@@ -147,8 +146,7 @@ class Quest extends \yii\db\ActiveRecord {
      * fetch stored image file name with complete path
      * @return string
      */
-    public function getLogoFile()
-    {
+    public function getLogoFile() {
         $avatar = isset($this->logo) ? $this->logo : false;
         return UPLOAD_DIR . '/' . $this->logo;
     }

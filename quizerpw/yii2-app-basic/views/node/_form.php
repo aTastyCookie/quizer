@@ -12,15 +12,17 @@ use yii\widgets\ActiveForm;
 
     <?php $form = ActiveForm::begin(); ?>
 
-    <?= $form->field($model, 'name')->textInput(['maxlength' => true]) ?>
+    <?= $form->field($node, 'name')->textInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'quest_id')->hiddenInput()->label(false) ?>
-    <?= $form->field($model, 'question')->textInput() ?>
-    <?= $form->field($model, 'answer')->textInput() ?>
+    <?= $form->field($node, 'quest_id')->hiddenInput()->label(false) ?>
+    <?= $form->field($node, 'question')->textInput() ?>
+    <?= $form->field($node, 'answer')->textInput() ?>
 
-    <div class="form-group">
-        <?= Html::submitButton($model->isNewRecord ? Yii::t('app', 'Create') : Yii::t('app', 'Update'), ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
-    </div>
+    <?if(!Yii::$app->getRequest()->getIsAjax()):?>
+        <div class="form-group">
+            <?= Html::submitButton($model->isNewRecord ? Yii::t('app', 'Create') : Yii::t('app', 'Update'), ['class' => $node->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
+        </div>
+    <?endif?>
 
     <?php ActiveForm::end(); ?>
 

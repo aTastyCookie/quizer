@@ -58,11 +58,15 @@ class QuestController extends Controller
     /**
      * Lists all Quest models.
      * @throws BadRequestHttpException
+     * @throws NotFoundHttpException
      * @return mixed
      */
     public function actionVisual() {
         if(!Yii::$app->request->get('quest_id'))
             throw new BadRequestHttpException('Неверный запрос');
+
+        if(!($quest = Quest::findOne((int)Yii::$app->request->get('quest_id'))))
+            throw new NotFoundHttpException('Страница не найдена');
 
         $dataProvider = new ActiveDataProvider([
             'query' => Node::find()->where(array('quest_id'=>Yii::$app->request->get('quest_id')))
@@ -71,7 +75,7 @@ class QuestController extends Controller
         return $this->render('visual', [
             'nodes' => $dataProvider->getModels(),
             'chain' => Quest::getChain(Yii::$app->request->get('quest_id')),
-            'quest_id' => Yii::$app->request->get('quest_id')
+            'quest' => $quest
         ]);
     }
 
@@ -185,6 +189,7 @@ class QuestController extends Controller
      */
     public function actionCreate() {
         $model = new Quest();
+        $model->date_start = date('d.m.Y');
 
         if($model->load(Yii::$app->request->post())) {
             $this->_logoUpload($model);
@@ -192,6 +197,7 @@ class QuestController extends Controller
             if($model->validate()) {
                 $model->date_start = date('Y-m-d', strtotime($model->date_start));
                 $model->date_finish = date('Y-m-d', strtotime($model->date_finish));
+                $model->url = $model->url ? : null;
                 $model->save(false);
 
                 if($tags = Yii::$app->getRequest()->post('HashTags')) {
@@ -210,7 +216,7 @@ class QuestController extends Controller
                     }
                 }
 
-                return $this->redirect(['view', 'id' => $model->id]);
+                return $this->redirect(['visual', 'quest_id' => $model->id]);
             }
         }
 
@@ -255,7 +261,7 @@ class QuestController extends Controller
 
         $model = $this->findModel((int)$id);
         $model->date_start = date('d.m.Y', strtotime($model->date_start));
-        $model->date_finish = date('d.m.Y', strtotime($model->date_finish));
+        $model->date_finish = $model->date_finish ? date('d.m.Y', strtotime($model->date_finish)) : '';
         $tmp_logo = $model->logo;
 
         if($model->load(Yii::$app->request->post())) {
@@ -264,7 +270,7 @@ class QuestController extends Controller
 
             if($model->validate()) {
                 $model->date_start = date('Y-m-d', strtotime($model->date_start));
-                $model->date_finish = date('Y-m-d', strtotime($model->date_finish));
+                $model->date_finish = $model->date_finish ? date('Y-m-d', strtotime($model->date_finish)) : '';
                 $model->save(false);
 
                 if($tags = Yii::$app->getRequest()->post('HashTags')) {
@@ -283,7 +289,7 @@ class QuestController extends Controller
                     }
                 }
 
-                return $this->redirect(['view', 'id' => $model->id]);
+                return $this->redirect(['visual', 'quest_id' => $model->id]);
             }
         }
 

@@ -35,6 +35,7 @@ class QuestTag extends \yii\db\ActiveRecord {
             'Ч' => 'Ch',  'Ш' => 'Sh',  'Щ' => 'Sch',
             'Ь' => '',    'Ы' => 'Y',   'Ъ' => '',
             'Э' => 'E',   'Ю' => 'Yu',  'Я' => 'Ya',
+            ' ' => '_'
         ]));
     }
 }

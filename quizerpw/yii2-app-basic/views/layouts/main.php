@@ -21,7 +21,7 @@ AppAsset::register($this);
 
 	  <?php $this->head() ?>
 
-	<script type="text/javascript" src="/js/jquery-1.9.0-min.js"></script>
+	<!--<script type="text/javascript" src="/js/jquery-1.9.0-min.js"></script>-->
 	<script type="text/javascript" src="/js/run.js"></script>
 
 </head>

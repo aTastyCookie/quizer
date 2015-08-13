@@ -33,13 +33,13 @@ class NodeController extends Controller
     public function actionIndex()
     {
         $searchModel = new NodeSearch();
-		if (!isset(Yii::$app->request->queryParams['quest_id'])) {
-			Yii::$app->getResponse()->redirect('/quest/');
-		}
+        if (!isset(Yii::$app->request->queryParams['quest_id'])) {
+            Yii::$app->getResponse()->redirect('/quest/');
+        }
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
         return $this->render('index', [
-			'quest_id' => Yii::$app->request->queryParams['quest_id'],
+            'quest_id' => Yii::$app->request->queryParams['quest_id'],
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
         ]);
@@ -62,52 +62,74 @@ class NodeController extends Controller
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
      */
-    public function actionCreate()
-    {
-        $model = new Node();
+    public function actionCreate() {
+        $node = new Node();
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+        if ($node->load(Yii::$app->request->post()) && $node->save()) {
+            if (!Yii::$app->getRequest()->getIsAjax())
+                return $this->redirect(['view', 'id' => $node->id]);
         } else {
-			if (Yii::$app->request->get('quest_id')) {
-				$model->quest_id = Yii::$app->request->get('quest_id');
-			}
-            return $this->render('create', [
-                'model' => $model,
-            ]);
+            if (Yii::$app->request->get('quest_id'))
+                $node->quest_id = Yii::$app->request->get('quest_id');
+
+            if(Yii::$app->getRequest()->getIsAjax())
+                return $this->renderPartial('create', [
+                    'node' => $node,
+                ]);
+            else
+                return $this->render('create', [
+                    'node' => $node,
+                ]);
         }
+
+        Yii::$app->end();
     }
 
     /**
      * Updates an existing Node model.
      * If update is successful, the browser will be redirected to the 'view' page.
-     * @param integer $id
+     * @throws BadRequestHttpException
      * @return mixed
      */
-    public function actionUpdate($id)
-    {
-        $model = $this->findModel($id);
+    public function actionUpdate() {
+        if(!($id = Yii::$app->request->get('id')) || !is_numeric(Yii::$app->request->get('id')))
+            throw new BadRequestHttpException('Неверный запрос');
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+        $node = $this->findModel((int)$id);
+
+        if ($node->load(Yii::$app->request->post()) && $node->save()) {
+            if (!Yii::$app->getRequest()->getIsAjax())
+                return $this->redirect(['view', 'id' => $node->id]);
         } else {
-            return $this->render('update', [
-                'model' => $model,
-            ]);
+            if(Yii::$app->getRequest()->getIsAjax())
+                return $this->renderPartial('update', [
+                    'node' => $node,
+                ]);
+            else
+                return $this->render('update', [
+                    'node' => $node,
+                ]);
         }
+
+        Yii::$app->end();
     }
 
     /**
      * Deletes an existing Node model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
-     * @param integer $id
+     * @throws BadRequestHttpException
      * @return mixed
      */
-    public function actionDelete($id)
-    {
+    public function actionDelete() {
+        if(!($id = Yii::$app->request->get('id')) || !is_numeric(Yii::$app->request->get('id')))
+            throw new BadRequestHttpException('Неверный запрос');
+
         $this->findModel($id)->delete();
 
-        return $this->redirect(['index']);
+        if(!Yii::$app->getRequest()->getIsAjax())
+            return $this->redirect(['index']);
+
+        Yii::$app->end();
     }
 
     /**
