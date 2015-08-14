@@ -2,6 +2,7 @@
 
 namespace app\controllers;
 
+use app\models\NodesConnections;
 use Yii;
 use app\models\Node;
 use app\models\NodeSearch;
@@ -123,6 +124,13 @@ class NodeController extends Controller
     public function actionDelete() {
         if(!($id = Yii::$app->request->get('id')) || !is_numeric(Yii::$app->request->get('id')))
             throw new BadRequestHttpException('Неверный запрос');
+
+        $connections = NodesConnections::find()
+            ->where(['from_node_id' => (int)Yii::$app->request->get('id')])
+            ->orWhere(['from_node_id' => (int)Yii::$app->request->get('id')])->all();
+
+        foreach($connections as $connect)
+            $connect->delete();
 
         $this->findModel($id)->delete();
 

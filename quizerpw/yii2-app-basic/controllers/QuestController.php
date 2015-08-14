@@ -2,6 +2,7 @@
 
 namespace app\controllers;
 
+use app\models\NodesConnections;
 use Yii;
 use app\models\Quest;
 use yii\data\ActiveDataProvider;
@@ -95,37 +96,24 @@ class QuestController extends Controller
                 $node->save();
             }
 
-
         if($connects = Yii::$app->request->post('connects'))
             foreach($connects as $key => $connect) {
                 $srcId = (int)str_replace('flowchartWindow', '', $connect['src']);
                 $trgId = (int)str_replace('flowchartWindow', '', $connect['trg']);
 
-                $nodeSrc = Node::findOne($srcId);
-                $nodeTrg = Node::findOne($trgId);
+                if(($nodeSrc = Node::findOne($srcId)) && ($nodeTrg = Node::findOne($trgId))) {
+                    $connection = new NodesConnections();
+                    $connection->quest_id = (int)Yii::$app->request->post('quest_id');
+                    $connection->from_node_id = $nodeSrc->id;
+                    $connection->to_node_id = $nodeTrg->id;
 
-                if ($nodeSrc) {
-                    if (strpos($connect['uuid'], 'RightMiddle') !== false) {
-                        $nodeSrc->next = $trgId;
-                        //connect to next
-                    } else {
-                        //Window2TopCenter
-                        //connect to back
-                        $nodeSrc->prev2 = $trgId;
-                    }
+                    if(strpos($connect['uuid'], 'RightMiddle') !== false)
+                        $connection->type = 'next';
+                    else
+                        $connection->type = 'prev';
 
-                    $nodeSrc->save();
+                    $connection->save();
                 }
-
-                if ($nodeTrg) {
-                    if (strpos($connect['uuid'], 'RightMiddle') !== false) {
-                        $nodeTrg->prev = $srcId;
-                        //connect to next
-                    }
-
-                    $nodeTrg->save();
-                }
-
             }
 
         return true;
@@ -303,6 +291,7 @@ class QuestController extends Controller
      * Deletes an existing Quest model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
      * @throws BadRequestHttpException
+     * @throws NotFoundHttpException
      * @return mixed
      */
     public function actionDelete() {

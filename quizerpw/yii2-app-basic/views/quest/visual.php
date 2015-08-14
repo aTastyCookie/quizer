@@ -46,7 +46,6 @@ $this->params['breadcrumbs'][] = Yii::t('app', 'Edit Quest Tree');
                     $left = $leftDef + 150;
                     $leftDef = $left;
                 }
-                exit;
             ?>
                 <div class="window" id="flowchartWindow<?= $node->id ?>" style="top: <?= $top ?>px; left: <?= $left; ?>px">
                     <br/><br/><br/><strong><?= $node->name ?></strong>

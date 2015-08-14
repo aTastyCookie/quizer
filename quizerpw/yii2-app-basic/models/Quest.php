@@ -48,45 +48,27 @@ class Quest extends \yii\db\ActiveRecord {
         ];
     }
 
-    public static function getFirstNode( $questId ) {
-        $current = Node::find()
-            ->where(['quest_id' => $questId])
+    public static function getParentNodes($quest_id) {
+        $parents = Node::find()
+            ->where(['quest_id' => $quest_id])
             ->andFilterWhere(['prev' => 0])
             ->andWhere(['>', 'next', '0'])
-            ->one();
-        return $current;
+            ->all();
+
+        return $parents;
     }
 
-    public static function getChain( $questId )
-    {
-        $chain = array();
-        $current = self::getFirstNode( $questId );
+    public static function getChain($quest_id) {
+        $chain = [];
 
-        if (!$current) {
-            return $chain;
+        foreach(NodesConnections::find()->where(['quest_id' => $quest_id])->all() as $connection) {
+            $chain[] = [
+                'src' => $connection->from_node_id,
+                'trg' => $connection->to_node_id,
+                'type' => $connection->type
+            ];
         }
-        //$chain[] = $current;
 
-        while (true) {
-            if ($current->next) {
-                $next = Node::findOne( $current->next );
-                if ($next) {
-                    $chain[] = array('src' => $current->id, 'trg' => $next->id, 'type' => 'next');
-                    if ($current->prev2) {
-                        $chain[] = array('src' => $current->id, 'trg' => $current->prev2, 'type' => 'prev');
-                    }
-                    $current = $next;
-
-                }else {
-                    //break;
-                }
-            }elseif ($current->prev2) {
-                $chain[] = array('src' => $current->id, 'trg' => $current->prev2, 'type' => 'prev');
-                break;
-            }else {
-                break;
-            }
-        }
         return $chain;
     }
 
