@@ -173,13 +173,19 @@ use yii\bootstrap\ActiveForm;
     <?= $form->field($model, 'short')->textarea(['maxlength' => true]) ?>
     <?= $form->field($model, 'descr')->textarea(['rows' => 6]) ?>
 
+    <?= $form->field($model, 'success_message')->textInput() ?>
+    <?= $form->field($model, 'success_css')->fileInput() ?>
+    <?= $form->field($model, 'success_js')->fileInput() ?>
+
+    <?= $form->field($model, 'is_closed')->checkbox() ?><br />
+
     <div class="form-group">
         <?= Html::submitButton($model->isNewRecord ? Yii::t('app', 'Create') : Yii::t('app', 'Save'), [
             'class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary',
             'style' => 'margin-bottom: 5px;'
         ]) ?>
         <?if(!$model->isNewRecord):?>
-            <?= Html::a(Yii::t('app', 'Edit Tree'), Url::toRoute(['quest/visual', 'quest_id' => $model->id]), [
+            <?= Html::a(Yii::t('app', 'Update Tree'), Url::toRoute(['quest/visual', 'quest_id' => $model->id]), [
                 'class' => 'btn btn-primary',
                 'style' => 'margin-bottom: 5px;'
             ]) ?>

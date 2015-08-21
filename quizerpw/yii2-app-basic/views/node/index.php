@@ -8,18 +8,17 @@ use yii\grid\GridView;
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
 $this->title = Yii::t('app', 'Nodes');
-
-$this->params['breadcrumbs'][] = ['label' => 'Квесты', 'url' => '/quest'];
-
+$this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Quests'), 'url' => '/quest'];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
+
 <div class="node-index">
 
     <h1><?= Html::encode($this->title) ?></h1>
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
 
     <p>
-        <a class="btn btn-success" href="/node/create?quest_id=<?=$quest_id?>">Создать ноду</a>    
+        <a class="btn btn-success" href="/node/create?quest_id=<?=$quest_id?>"><?=Yii::t('app', 'Create Node')?></a>
 	</p>
 	
 

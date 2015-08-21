@@ -1,6 +1,7 @@
 <?php
 
 define('UPLOAD_DIR', 'uploads');
+define('ASSETS_DIR', 'assets');
 
 $params = require(__DIR__ . '/params.php');
 
@@ -30,7 +31,10 @@ $config = [
             'rules' => [
                 '<controller:\w+>/<id:\d+>' => '<controller>/view',
                 '<controller:\w+>/<action:\w+>/<id:\d+>' => '<controller>/<action>',
+                '' => 'site/index',
+                '<controller:\w+>' => '<controller>/index',
                 '<controller:\w+>/<action:\w+>' => '<controller>/<action>',
+
                 'user/registration/register' => 'user/registration/register',
                 '/user/registration/resend' => '/user/registration/resend',
                 '/user/registration/resend'=>'/user/registration/resend',

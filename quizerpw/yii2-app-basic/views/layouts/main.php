@@ -41,13 +41,15 @@ AppAsset::register($this);
                 'options' => ['class' => 'navbar-nav navbar-right'],
                 'items' => [
                     ['label' => 'Главная', 'url' => ['/site/index']],
-					!Yii::$app->user->isGuest ?
-						['label'=>'Профайл', 'url' => ['/user/settings/profile']] : '',
-                    Yii::$app->user->isGuest ?
-						['label' => 'Войти', 'url' => ['/user/security/login']] :
-						['label' => 'Выйти (' . Yii::$app->user->identity->username . ')',
-							'url' => ['/user/security/logout'],
-							'linkOptions' => ['data-method' => 'post']],
+                    ['label' => 'Профайл', 'url' => ['/user/settings/profile'], 'visible' => !Yii::$app->user->isGuest],
+                    ['label' => 'Квесты', 'url' => ['/quest/index'], 'visible' => !Yii::$app->user->isGuest],
+                    ['label' => 'Войти', 'url' => ['/user/security/login'], 'visible' => Yii::$app->user->isGuest],
+                    [
+                        'label' => 'Выйти ('.Yii::$app->user->identity->username.')',
+                        'url' => ['/user/security/logout'],
+						'linkOptions' => ['data-method' => 'post'],
+                        'visible' => !Yii::$app->user->isGuest
+                    ],
 					['label' => 'Регистрация', 'url' => ['/user/registration/register'], 'visible' => Yii::$app->user->isGuest]
                 ],
             ]);

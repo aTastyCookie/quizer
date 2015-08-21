@@ -7,7 +7,7 @@ return [
         'description' => 'Права администратора',
     ],
     'user' => [
-        'type' => 2,
+        'type' => 1,
         'name' => 'user',
         //'ruleName' => 'user',
         'description' => 'Права пользователя',

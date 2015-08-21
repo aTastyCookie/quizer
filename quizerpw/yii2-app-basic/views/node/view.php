@@ -8,15 +8,13 @@ use yii\widgets\DetailView;
 
 $this->title = $model->name;
 
-
-$this->params['breadcrumbs'][] = ['label' => 'Квесты', 'url' => '/quest'];
-$this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Ноды'), 'url' => ['/node?quest_id=' . $model->quest_id]];
-
-$this->params['breadcrumbs'][] = $this->title;
+$this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Quests'), 'url' => '/quest'];
+$this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Nodes'), 'url' => ['/node?quest_id=' . $model->quest_id]];
+$this->params['breadcrumbs'][] = Yii::t('app', 'Node').': '.$this->title;
 ?>
 <div class="node-view">
 
-    <h1>Ноды</h1>
+    <h1><?=Yii::t('app', 'Node')?>: <?=$this->title?></h1>
 
     <p>
         <?= Html::a(Yii::t('app', 'Update'), ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>

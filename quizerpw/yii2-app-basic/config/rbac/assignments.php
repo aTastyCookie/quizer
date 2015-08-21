@@ -4,6 +4,9 @@ return [
         'admin',
     ],
     6 => [
-        'user'
-    ]
+        'user',
+    ],
+    9 => [
+        'user',
+    ],
 ];

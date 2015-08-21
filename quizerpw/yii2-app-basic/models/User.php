@@ -2,8 +2,7 @@
 
 namespace app\models;
 
-class User extends \yii\base\Object implements \yii\web\IdentityInterface
-{
+class User extends \yii\base\Object implements \yii\web\IdentityInterface {
     public $id;
     public $username;
     public $password;
@@ -99,5 +98,14 @@ class User extends \yii\base\Object implements \yii\web\IdentityInterface
     public function validatePassword($password)
     {
         return $this->password === $password;
+    }
+
+    public static function isAdmin() {
+        $assign = \Yii::$app->getAuthManager()->getRolesByUser(\Yii::$app->getUser()->getId());
+
+        if(isset($assign['admin']) && !empty($assign['admin']))
+            return true;
+
+        return false;
     }
 }

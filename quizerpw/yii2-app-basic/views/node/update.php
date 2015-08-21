@@ -7,7 +7,8 @@ use yii\helpers\Url;
 /* @var $model app\models\Node */
 
 $this->title = Yii::t('app', 'Update Node').': '.$node->name;
-$this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Nodes'), 'url' => ['/node?quest_id=' . $node->quest_id]];
+$this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Quests'), 'url' => ['quest/index']];
+$this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Nodes'), 'url' => ['index', 'quest_id' => Yii::$app->getRequest()->get('quest_id')]];
 $this->params['breadcrumbs'][] = ['label' => $node->name, 'url' => ['view', 'id' => $node->id]];
 $this->params['breadcrumbs'][] = Yii::t('app', 'Update');
 ?>

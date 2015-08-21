@@ -29,10 +29,12 @@ class Node extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['name', 'quest_id', 'question', 'answer'], 'required'],
-            [['quest_id', 'next', 'prev', 'prev2', 'top', 'left', 'case_depend', 'time'], 'integer'],
-            [['name'], 'string', 'max' => 500],
-            [['answer'], 'string']
+            [['name', 'number', 'quest_id', 'question', 'answer'], 'required'],
+            [['quest_id', 'number', 'top', 'left', 'case_depend', 'time'], 'integer'],
+            [['number'], 'unique', 'targetAttribute' => ['quest_id', 'number']],
+            [['name', 'description'], 'string', 'max' => 500],
+            [['answer'], 'string'],
+            [['description', 'case_depend'], 'safe']
         ];
     }
 
@@ -44,11 +46,13 @@ class Node extends \yii\db\ActiveRecord
         return [
             'id' => Yii::t('app', 'ID'),
             'name' => 'Заголовок',
+            'number' => Yii::t('app', 'Number'),
             'quest_id' => Yii::t('app', 'Quest ID'),
 			'question' => 'Вопрос',
-			'time' => 'Время на ответ',
 			'answer' => 'Ответ',
-			'case_depend' => 'Регистро-зависимый ответ'
+            'description' => Yii::t('app', 'Description'),
+			'case_depend' => 'регистрозависимый ответ',
+			'time' => 'Время на ответ',
         ];
     }
 
@@ -61,7 +65,7 @@ class Node extends \yii\db\ActiveRecord
     }
 
 	public static function cleanConnections($quest_id) {
-        foreach(NodesConnections::find()->where(['quest_id' => $quest_id])->all() as $connection)
+        foreach(NodeConnection::find()->where(['quest_id' => $quest_id])->all() as $connection)
             $connection->delete();
 
 		 return true;

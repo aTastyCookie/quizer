@@ -5,10 +5,10 @@ use yii\helpers\Url;
 /* @var $this yii\web\View */
 /* @var $model app\models\Quest */
 
-$this->title = Yii::t('app', 'Edit Quest Tree') . ': ' . $quest->name;
+$this->title = Yii::t('app', 'Update Quest Tree') . ': ' . $quest->name;
 $this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Quests'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = ['label' => $quest->name, 'url' => ['view', 'id' => $quest->id]];
-$this->params['breadcrumbs'][] = Yii::t('app', 'Edit Quest Tree');
+$this->params['breadcrumbs'][] = Yii::t('app', 'Update Quest Tree');
 ?>
 
 <h1><?= Html::encode($this->title) ?></h1>
@@ -56,8 +56,8 @@ $this->params['breadcrumbs'][] = Yii::t('app', 'Edit Quest Tree');
     </div>
     <!-- /demo -->
 </div>
-<div id="node-popup"></div>
-<div id="node-popup"></div>
+<div id="create-node-popup"></div>
+<div id="update-node-popup"></div>
 <script>
     $(document).ready(function() {
         $('.add-node').click(function() {
@@ -67,8 +67,8 @@ $this->params['breadcrumbs'][] = Yii::t('app', 'Edit Quest Tree');
                 type: 'GET',
                 url: self.attr('href'),
                 success: function(response) {
-                    $('#node-popup').html(response);
-                    $('#node-popup').dialog({
+                    $('#create-node-popup').html(response);
+                    $('#create-node-popup').dialog({
                         modal: true,
                         width: 'auto',
                         closeText: 'Закрыть',
@@ -81,7 +81,7 @@ $this->params['breadcrumbs'][] = Yii::t('app', 'Edit Quest Tree');
                                     data: $('.node-form form').serialize(),
                                     success: function(response) {
                                         if(response)
-                                            $('#node-popup').html(response);
+                                            $('#create-node-popup').html(response);
                                         else
                                             window.location.reload();
                                     },
@@ -110,8 +110,8 @@ $this->params['breadcrumbs'][] = Yii::t('app', 'Edit Quest Tree');
                 type: 'GET',
                 url: self.attr('href'),
                 success: function(response) {
-                    $('#node-popup').html(response);
-                    $('#node-popup').dialog({
+                    $('#update-node-popup').html(response);
+                    $('#update-node-popup').dialog({
                         modal: true,
                         width: 'auto',
                         closeText: 'Закрыть',
@@ -124,7 +124,7 @@ $this->params['breadcrumbs'][] = Yii::t('app', 'Edit Quest Tree');
                                     data: $('.node-form form').serialize(),
                                     success: function(response) {
                                         if(response)
-                                            $('#node-popup').html(response);
+                                            $('#update-node-popup').html(response);
                                         else
                                             window.location.reload();
                                     },

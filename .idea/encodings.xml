@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
-  <component name="Encoding">
+  <component name="Encoding" defaultCharsetForPropertiesFiles="UTF-8">
+    <file url="file://$PROJECT_DIR$/quizerpw/yii2-app-basic/components/AccessRule.php" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/quizerpw/yii2-app-basic/config/web.php" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/quizerpw/yii2-app-basic/controllers/NodeController.php" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/quizerpw/yii2-app-basic/controllers/QuestController.php" charset="UTF-8" />
@@ -13,5 +14,6 @@
     <file url="file://$PROJECT_DIR$/quizerpw/yii2-app-basic/views/quest/index.php" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/quizerpw/yii2-app-basic/views/quest/update.php" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/quizerpw/yii2-app-basic/web/js/tree.css" charset="UTF-8" />
+    <file url="PROJECT" charset="UTF-8" />
   </component>
 </project>

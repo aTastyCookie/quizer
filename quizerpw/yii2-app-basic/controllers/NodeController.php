@@ -2,12 +2,14 @@
 
 namespace app\controllers;
 
-use app\models\NodesConnections;
+use app\models\NodeConnection;
 use Yii;
 use app\models\Node;
 use app\models\NodeSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
+use yii\filters\AccessControl;
+use app\components\AccessRule;
 use yii\filters\VerbFilter;
 
 /**
@@ -18,6 +20,19 @@ class NodeController extends Controller
     public function behaviors()
     {
         return [
+            'access' => [
+                'class' => AccessControl::className(),
+                'ruleConfig' => [
+                    'class' => AccessRule::className(),
+                ],
+                'rules' => [
+                    [
+                        'allow' => true,
+                        'actions' => ['index', 'view', 'create', 'update', 'delete'],
+                        'roles' => ['admin']
+                    ]
+                ],
+            ],
             'verbs' => [
                 'class' => VerbFilter::className(),
                 'actions' => [
@@ -125,7 +140,7 @@ class NodeController extends Controller
         if(!($id = Yii::$app->request->get('id')) || !is_numeric(Yii::$app->request->get('id')))
             throw new BadRequestHttpException('Неверный запрос');
 
-        $connections = NodesConnections::find()
+        $connections = NodeConnection::find()
             ->where(['from_node_id' => (int)Yii::$app->request->get('id')])
             ->orWhere(['from_node_id' => (int)Yii::$app->request->get('id')])->all();
 

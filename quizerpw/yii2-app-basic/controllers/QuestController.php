@@ -2,9 +2,12 @@
 
 namespace app\controllers;
 
-use app\models\NodesConnections;
+use app\models\NodeAnswer;
+use app\models\NodeConnection;
+use app\models\ARUser;
 use Yii;
 use app\models\Quest;
+use app\models\QuestRun;
 use yii\data\ActiveDataProvider;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
@@ -15,6 +18,7 @@ use yii\web\UploadedFile;
 use yii\helpers\Html;
 use app\models\Node;
 use app\models\QuestTag;
+use app\components\AccessRule;
 use app\models\NodeSearch;
 
 /**
@@ -23,24 +27,43 @@ use app\models\NodeSearch;
 class QuestController extends Controller
 {
     public function behaviors() {
-        //var_dump(Yii::$app->getAuthManager()); exit;
         return [
             'access' => [
                 'class' => AccessControl::className(),
+                'ruleConfig' => [
+                    'class' => AccessRule::className(),
+                ],
                 'rules' => [
-                    ['allow' => true, 'actions' => ['index', 'run'], 'roles' => ['@']],
-                    //['allow' => false, 'actions' => ['visual'], 'roles' => ['user']],
-                    ['allow' => true, 'actions' => [
-                        'visual', 'create', 'save', 'update', 'view', 'delete', 'run', 'preload'
-                    ], 'roles' => ['admin']],
+                    [
+                        'allow' => true,
+                        'actions' => ['index', 'view', 'run', 'choose'],
+                        'roles' => ['@']
+                    ],
+                    [
+                        'allow' => true,
+                        'actions' => [
+                            'create',
+                            'update',
+                            'delete',
+                            'visual',
+                            'save',
+                            'check',
+                            'preload',
+                            'statistics',
+                            'userstatistics',
+                            'runanswers'
+                        ],
+                        'roles' => ['admin']
+                    ]
                 ],
             ],
+            /*
             'verbs' => [
                 'class' => VerbFilter::className(),
                 'actions' => [
                     'delete' => ['post'],
                 ],
-            ]
+            ]*/
         ];
     }
 
@@ -51,7 +74,7 @@ class QuestController extends Controller
     public function actionIndex() {
         return $this->render('index', [
             'dataProvider' => new ActiveDataProvider([
-                'query' => Quest::find(),
+                'query' => Quest::find()->where(['is_closed' => false]),
             ])
         ]);
     }
@@ -102,7 +125,7 @@ class QuestController extends Controller
                 $trgId = (int)str_replace('flowchartWindow', '', $connect['trg']);
 
                 if(($nodeSrc = Node::findOne($srcId)) && ($nodeTrg = Node::findOne($trgId))) {
-                    $connection = new NodesConnections();
+                    $connection = new NodeConnection();
                     $connection->quest_id = (int)Yii::$app->request->post('quest_id');
                     $connection->from_node_id = $nodeSrc->id;
                     $connection->to_node_id = $nodeTrg->id;
@@ -119,6 +142,11 @@ class QuestController extends Controller
         return true;
     }
 
+    /**
+     * Return conections of the node
+     * @param int $quest_id
+     * @return array
+     */
     public function getConnections($quest_id) {
         $dataProvider = new ActiveDataProvider([
             'query' => Node::find()->where(array('quest_id' => $quest_id)),
@@ -171,6 +199,42 @@ class QuestController extends Controller
     }
 
     /**
+     * Process uploading of css file
+     * @param object $model
+     * @return bool
+     */
+    protected function _cssUpload(&$model) {
+        if ($model->cssFile = UploadedFile::getInstance($model, 'success_css')) {
+            if($model->uploadCss()) {
+                $model->success_css = $model->cssFile->name;
+                $model->cssFile = null;
+
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    /**
+     * Process uploading of js file
+     * @param object $model
+     * @return bool
+     */
+    protected function _jsUpload(&$model) {
+        if ($model->jsFile = UploadedFile::getInstance($model, 'success_js')) {
+            if($model->uploadJs()) {
+                $model->success_js = $model->jsFile->name;
+                $model->jsFile = null;
+
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    /**
      * Creates a new Quest model.
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
@@ -181,11 +245,14 @@ class QuestController extends Controller
 
         if($model->load(Yii::$app->request->post())) {
             $this->_logoUpload($model);
+            $this->_cssUpload($model);
+            $this->_jsUpload($model);
 
             if($model->validate()) {
                 $model->date_start = date('Y-m-d', strtotime($model->date_start));
                 $model->date_finish = date('Y-m-d', strtotime($model->date_finish));
                 $model->url = $model->url ? : null;
+                $model->success_message = Html::encode($model->success_message);
                 $model->save(false);
 
                 if($tags = Yii::$app->getRequest()->post('HashTags')) {
@@ -213,6 +280,12 @@ class QuestController extends Controller
         ]);
     }
 
+    /**
+     * Preloading image while create or update quest
+     * If update is successful, the browser will be redirected to the 'view' page.
+     * @throws BadRequestHttpException
+     * @return mixed
+     */
     public function actionPreload() {
         if(!Yii::$app->getRequest()->getIsAjax() || !isset($_FILES['Quest']))
             throw new BadRequestHttpException('Неверный запрос');
@@ -250,15 +323,24 @@ class QuestController extends Controller
         $model = $this->findModel((int)$id);
         $model->date_start = date('d.m.Y', strtotime($model->date_start));
         $model->date_finish = $model->date_finish ? date('d.m.Y', strtotime($model->date_finish)) : '';
+        $model->success_message = Html::decode($model->success_message);
         $tmp_logo = $model->logo;
+        $tmp_css = $model->success_css;
+        $tmp_js = $model->success_js;
 
         if($model->load(Yii::$app->request->post())) {
-            $this->_logoUpload( $model );
+            $this->_logoUpload($model);
+            $this->_cssUpload($model);
+            $this->_jsUpload($model);
             $model->logo = $model->logo ? : $tmp_logo;
+            $model->success_css = $model->success_css ? : $tmp_css;
+            $model->success_js = $model->success_js ? : $tmp_js;
 
             if($model->validate()) {
                 $model->date_start = date('Y-m-d', strtotime($model->date_start));
                 $model->date_finish = $model->date_finish ? date('Y-m-d', strtotime($model->date_finish)) : '';
+                $model->url = $model->url ? : null;
+                $model->success_message = Html::encode($model->success_message);
                 $model->save(false);
 
                 if($tags = Yii::$app->getRequest()->post('HashTags')) {
@@ -304,29 +386,186 @@ class QuestController extends Controller
     }
 
     /**
-     * Run quest
+     * Runing quest
      * @throws BadRequestHttpException
+     * @throws NotFoundHttpException
      * @return mixed
      */
     public function actionRun() {
-        if(!($id = Yii::$app->request->get('id')))
+        if(!($id = Yii::$app->request->get('id')) || !is_numeric(Yii::$app->request->get('id')))
             throw new BadRequestHttpException('Неверный запрос');
 
-        $runInfo = Yii::$app->session->get('run_'.(int)$id);
+        $answer = new NodeAnswer();
+        $answer->user_id = Yii::$app->getUser()->getId();
+        $current_run = QuestRun::find()
+            ->where([
+                'quest_id' => intval($id),
+                'user_id' => Yii::$app->getUser()->getId(),
+                'is_complete' => false
+            ])
+            ->orderBy('run_id DESC')
+            ->one();
+        $current_node = null;
 
-        if ($runInfo['current'])
-            $currentNode = Node::findModel((int)$runInfo['current']);
-        else
-            $currentNode = Quest::getFirstNode((int)$id);
+        // If got answer from user, just save it. Even is a wrong answer
+        if($answer->load(Yii::$app->request->post()) && $answer->validate()) {
+            if(!$current_run) {
+                $current_run = new QuestRun();
+                $current_run->quest_id = $answer->quest_id;
+                $current_run->node_id = $answer->node_id;
+                $current_run->user_id = Yii::$app->getUser()->getId();
+            }
+
+            if(!$answer->is_wrong) {
+                $next_nodes = NodeConnection::find()->where(['from_node_id' => $answer->node_id])->all();
+                $next_ids = [];
+
+                foreach ($next_nodes as $node)
+                    $next_ids[] = $node->toNodes->id;
+
+                $current_run->next_nodes = !empty($next_ids) ? json_encode($next_ids) : null;
+                $current_run->status = QuestRun::STATUS_CHOOSING;
+                $answer->status = true;
+            } else {
+                $current_run->status = QuestRun::STATUS_ANSWERING;
+                $answer->addError('text', 'Неверный ответ');
+                $answer->status = false;
+            }
+
+            $current_run->save(false);
+            $answer->run_id = $current_run->run_id;
+            $answer->save(false);
+
+            if(!$answer->is_wrong) {
+                $this->redirect(['run', 'id' => $id]);
+                Yii::$app->end();
+            }
+        }
+
+        // Save running process or something like this
+        if($current_run) {
+            if($current_run->status == QuestRun::STATUS_CHOOSING) {
+                $next_nodes = json_decode($current_run->next_nodes);
+
+                if(!empty($next_nodes)) {
+                    $current_node = Node::find()->where('id IN (' . implode(', ', json_decode($current_run->next_nodes)) . ')')->all();
+
+                    if (count($current_node) == 1) {
+                        $current_node = $current_node[0];
+                        $answer->quest_id = $current_node->quest_id;
+                        $answer->node_id = $current_node->id;
+                    }
+                } else {
+                    $current_node = null;
+                    $answer = null;
+                    $current_run->is_complete = true;
+                    $current_run->save(false);
+
+                    // Здесь ищется ачивка
+                }
+            } elseif($current_run->status == QuestRun::STATUS_ANSWERING) {
+                $current_node = Node::find()->where(['id' => $current_run->node_id])->one();
+                $answer->quest_id = $current_node->quest_id;
+                $answer->node_id = $current_node->id;
+            }
+        } elseif($current_node = Node::find()->where(['quest_id' => intval($id)])->orderBy('number')->one()) {
+            $answer->quest_id = $current_node->quest_id;
+            $answer->node_id = $current_node->id;
+        } else
+            throw new NotFoundHttpException();
 
         return $this->render('run', [
-            'node' => $currentNode,
-            'quest' => $this->findModel($currentNode->quest_id)
+            'answer' => $answer,
+            'node' => $current_node,
+            'quest' => $this->findModel(intval($id))
         ]);
     }
 
-    public function actionCheck($nodeId, $answer = null) {
-        $node = Node::findModel($nodeId);
+    /**
+     * Choosing from variants while quest is running
+     * @throws BadRequestHttpException
+     * @throws NotFoundHttpException
+     * @return mixed
+     */
+    public function actionChoose() {
+        if(!($node_id = Yii::$app->request->get('node_id')) || !is_numeric(Yii::$app->request->get('node_id')) ||
+           !($quest_id = Yii::$app->request->get('quest_id')) || !is_numeric(Yii::$app->request->get('quest_id')))
+            throw new BadRequestHttpException('Неверный запрос');
+
+        if(!($current_run = QuestRun::find()
+            ->where(['quest_id' => intval($quest_id), 'user_id' => Yii::$app->getUser()->getId()])
+            ->orderBy('run_id DESC')
+            ->one()))
+            throw new NotFoundHttpException();
+
+        if(!in_array($node_id, json_decode($current_run->next_nodes)))
+            throw new BadRequestHttpException();
+
+        $next_nodes = NodeConnection::find()->where(['from_node_id' => $node_id])->all();
+        $next_ids = [];
+
+        foreach ($next_nodes as $node)
+            $next_ids[] = $node->toNodes->id;
+
+        $current_run->node_id = $node_id;
+        $current_run->next_nodes = !empty($next_ids) ? json_encode($next_ids) : null;
+        $current_run->status = QuestRun::STATUS_ANSWERING;
+        $current_run->save(false);
+
+        $this->redirect(['run', 'id' => $quest_id]);
+    }
+
+
+    public function actionStatistics() {
+        if(!($id = Yii::$app->request->get('id')) || !is_numeric(Yii::$app->request->get('id')))
+            throw new BadRequestHttpException('Неверный запрос');
+
+        $quest = $this->findModel($id);
+        $user_ids = [];
+
+        foreach(QuestRun::find()->where(['quest_id' => $id])->all() as $run)
+            $user_ids[] = $run->user_id;
+
+        if(empty($user_ids))
+            $user_ids[] = 0;
+
+        return $this->render('statistics', [
+            'quest' => $quest,
+            'dataProvider' => new ActiveDataProvider([
+                'query' => ARUser::find()->where('id IN ('.implode(', ', $user_ids).')')->orderBy('username'),
+            ])
+        ]);
+    }
+
+    public function actionUserstatistics() {
+        if(!($quest_id = Yii::$app->request->get('quest_id')) || !is_numeric(Yii::$app->request->get('quest_id')) ||
+           !($user_id = Yii::$app->request->get('user_id')) || !is_numeric(Yii::$app->request->get('user_id')))
+            throw new BadRequestHttpException('Неверный запрос');
+
+        $quest = $this->findModel(intval($quest_id));
+        $user = ARUser::findOne(intval($user_id));
+
+        return $this->render('user-statistics', [
+            'quest' => $quest,
+            'user' => $user,
+            'dataProvider' => new ActiveDataProvider([
+                'query' => QuestRun::find()->where(['quest_id' => $quest->id, 'user_id' => $user->id]),
+            ])
+        ]);
+    }
+
+    public function actionRunanswers() {
+        if(!($run_id = Yii::$app->request->get('run_id')) || !is_numeric(Yii::$app->request->get('run_id')))
+            throw new BadRequestHttpException('Неверный запрос');
+
+        $run = QuestRun::findOne(intval($run_id));
+
+        return $this->render('run-answers', [
+            'run' => $run,
+            'dataProvider' => new ActiveDataProvider([
+                'query' => NodeAnswer::find()->where(['run_id' => $run->run_id]),
+            ])
+        ]);
     }
 
     /**

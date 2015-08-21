@@ -13,7 +13,7 @@ use Yii;
  *
  * @property Quest $quest
  */
-class NodesConnections extends \yii\db\ActiveRecord
+class NodeConnection extends \yii\db\ActiveRecord
 {
     /**
      * @inheritdoc
@@ -50,5 +50,9 @@ class NodesConnections extends \yii\db\ActiveRecord
 			'answer' => 'Ответ',
 			'case_depend' => 'Регистро-зависимый ответ'*/
         ];
+    }
+
+    public function getToNodes() {
+        return $this->hasOne(Node::className(), ['id' => 'to_node_id']);
     }
 }
