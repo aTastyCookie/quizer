@@ -1,4 +1,4 @@
-<?
+<?php
 use yii\helpers\Html;
 use yii\helpers\Url;
 
@@ -11,7 +11,7 @@ $this->params['breadcrumbs'][] = ['label' => $quest->name, 'url' => ['view', 'id
 $this->params['breadcrumbs'][] = Yii::t('app', 'Update Quest Tree');
 ?>
 
-<h1><?= Html::encode($this->title) ?></h1>
+<h1><?php echo Html::encode($this->title) ?></h1>
 
 <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
 <link rel="stylesheet" href="/js/jsplumb.css" />
@@ -19,13 +19,13 @@ $this->params['breadcrumbs'][] = Yii::t('app', 'Update Quest Tree');
 <script src="/js/jquery.ui.touch-punch-0.2.2.min.js"></script>
 <script src="/js/jquery.jsPlumb-1.7.5-min.js"></script>
 
-<input type="hidden" id="quest_id" value="<?= $quest->id ?>" />
+<input type="hidden" id="quest_id" value="<?php echo $quest->id ?>" />
 
 <div id="main">
     <div class="tree-panel">
-        <?=Html::a('', '#', ['class' => 'save-tree', 'onclick' => 'saveConnections(); return false;', 'title' => Yii::t('app', 'Save')]);?>&nbsp;&nbsp;
-        <?=Html::a('', Url::toRoute(['quest/update', 'id' => $quest->id]), ['class' => 'update-quest', 'title' => Yii::t('app', 'Update Quest')]);?>&nbsp;&nbsp;
-        <?=Html::a('', Url::toRoute(['node/create', 'quest_id' => $quest->id]), ['class' => 'add-node', 'title' => Yii::t('app', 'Create Node')]);?>
+        <?php echo Html::a('', '#', ['class' => 'save-tree', 'onclick' => 'saveConnections(); return false;', 'title' => Yii::t('app', 'Save')]);?>&nbsp;&nbsp;
+        <?php echo Html::a('', Url::toRoute(['quest/update', 'id' => $quest->id]), ['class' => 'update-quest', 'title' => Yii::t('app', 'Update Quest')]);?>&nbsp;&nbsp;
+        <?php echo Html::a('', Url::toRoute(['node/create', 'quest_id' => $quest->id]), ['class' => 'add-node', 'title' => Yii::t('app', 'Create Node')]);?>
     </div>
     <!-- demo -->
     <div class="demo flowchart-demo" id="flowchart-demo">
@@ -47,12 +47,12 @@ $this->params['breadcrumbs'][] = Yii::t('app', 'Update Quest Tree');
                     $leftDef = $left;
                 }
             ?>
-                <div class="window" id="flowchartWindow<?= $node->id ?>" style="top: <?= $top ?>px; left: <?= $left; ?>px">
-                    <br/><br/><br/><strong><?= $node->name ?></strong>
-                    <?=Html::a('', Url::toRoute(['node/update', 'id' => $node->id]), ['class' => 'update-node', 'title' => Yii::t('app', 'Update Node')])?>
-                    <?=Html::a('', Url::toRoute(['node/delete', 'id' => $node->id]), ['class' => 'delete-node', 'title' => Yii::t('app', 'Delete Node')])?>
+                <div class="window" id="flowchartWindow<?php echo $node->id ?>" style="top: <?= $top ?>px; left: <?= $left; ?>px">
+                    <br/><br/><br/><strong><?php echo $node->name ?></strong>
+                    <?php echo Html::a('', Url::toRoute(['node/update', 'id' => $node->id]), ['class' => 'update-node', 'title' => Yii::t('app', 'Update Node')])?>
+                    <?php echo Html::a('', Url::toRoute(['node/delete', 'id' => $node->id]), ['class' => 'delete-node', 'title' => Yii::t('app', 'Delete Node')])?>
                 </div>
-        <?endforeach?>
+        <?php endforeach?>
     </div>
     <!-- /demo -->
 </div>
@@ -70,15 +70,21 @@ $this->params['breadcrumbs'][] = Yii::t('app', 'Update Quest Tree');
                     $('#create-node-popup').html(response);
                     $('#create-node-popup').dialog({
                         modal: true,
-                        width: 'auto',
+                        width: 800,
+                        maxWidth: 800,
+                        maxHeight: 600,
                         closeText: 'Закрыть',
                         resizable: false,
                         buttons: {
                             'Ok': function() {
+                                var formData = new FormData($('.node-form form')[0]);
+
                                 $.ajax({
                                     type: 'POST',
                                     url: self.attr('href'),
-                                    data: $('.node-form form').serialize(),
+                                    data: formData,
+                                    processData: false,
+                                    contentType: false,
                                     success: function(response) {
                                         if(response)
                                             $('#create-node-popup').html(response);
@@ -113,15 +119,21 @@ $this->params['breadcrumbs'][] = Yii::t('app', 'Update Quest Tree');
                     $('#update-node-popup').html(response);
                     $('#update-node-popup').dialog({
                         modal: true,
-                        width: 'auto',
+                        width: 800,
+                        maxWidth: 800,
+                        maxHeight: 600,
                         closeText: 'Закрыть',
                         resizable: false,
                         buttons: {
                             'Ok': function() {
+                                var formData = new FormData($('.node-form form')[0]);
+
                                 $.ajax({
                                     type: 'POST',
                                     url: self.attr('href'),
-                                    data: $('.node-form form').serialize(),
+                                    data: formData,
+                                    processData: false,
+                                    contentType: false,
                                     success: function(response) {
                                         if(response)
                                             $('#update-node-popup').html(response);
@@ -147,7 +159,7 @@ $this->params['breadcrumbs'][] = Yii::t('app', 'Update Quest Tree');
         });
 
         $('.delete-node').click(function() {
-            if(confirm('<?=Yii::t('app', 'Are you sure?')?>')) {
+            if(confirm('<?php echo Yii::t('app', 'Are you sure?')?>')) {
                 var self = $(this);
 
                 $.ajax({
@@ -311,7 +323,7 @@ $this->params['breadcrumbs'][] = Yii::t('app', 'Update Quest Tree');
         instance.batch(function () {
 
             <?php foreach ($nodes as $key => $node) {?>
-            _addEndpoints("Window<?=$node->id?>", ["RightMiddle", "TopCenter"], ["LeftMiddle"]);
+            _addEndpoints("Window<?php echo $node->id?>", ["RightMiddle", "TopCenter"], ["LeftMiddle"]);
             <?php } ?>
 
             // listen for new connections; initialise them the same way we initialise the connections at startup.
@@ -332,14 +344,14 @@ $this->params['breadcrumbs'][] = Yii::t('app', 'Update Quest Tree');
                     if  ($item['type'] == 'next') {
                          ?>
             instance.connect({
-                uuids: ["Window<?=$item['src']?>RightMiddle", "Window<?=$item['trg']?>LeftMiddle"],
+                uuids: ["Window<?php echo $item['src']?>RightMiddle", "Window<?php echo $item['trg']?>LeftMiddle"],
                 editable: true
             });
             <?php
        }elseif  ($item['type'] == 'prev') {
             ?>
             instance.connect({
-                uuids: ["Window<?=$item['src']?>TopCenter", "Window<?=$item['trg']?>LeftMiddle"],
+                uuids: ["Window<?php echo $item['src']?>TopCenter", "Window<?php echo $item['trg']?>LeftMiddle"],
                 editable: true
             });
             <?php

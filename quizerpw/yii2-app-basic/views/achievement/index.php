@@ -7,30 +7,27 @@ use yii\grid\GridView;
 /* @var $searchModel app\models\NodeSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = Yii::t('app', 'Nodes');
-$this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Quests'), 'url' => '/quest'];
+$this->title = Yii::t('app', 'Achievements');
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 
-<div class="node-index">
+<div class="achievements-index">
 
     <h1><?php echo Html::encode($this->title) ?></h1>
-    <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
 
-    <p>
-        <a class="btn btn-success" href="/node/create?quest_id=<?php echo $quest_id?>"><?=Yii::t('app', 'Create Node')?></a>
-	</p>
-	
+    <p><?=Html::a(Yii::t('app', 'Create Achievement'), ['achievement/create'], ['class' => 'btn btn-success'])?></p>
 
     <?php echo GridView::widget([
         'dataProvider' => $dataProvider,
-        'filterModel' => $searchModel,
+        //'filterModel' => $searchModel,
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
 
-            'id',
+            'achievement_id',
             'name',
-            'quest_id',
+            'description',
+            'image',
+            'type',
 
             ['class' => 'yii\grid\ActionColumn'],
         ],

@@ -120,15 +120,75 @@ $this->params['breadcrumbs'][] = $this->title;
     .edit-tree:hover {
         background-position: -20px 0;
     }
+
+    .highscores {
+        display: inline-block;
+        width: 20px;
+        height: 20px;
+        vertical-align: middle;
+        background-image: url('/images/highscores.png');
+        background-repeat: no-repeat;
+        background-size: 40px auto;
+        cursor: pointer;
+        outline: 0;
+    }
+
+    .highscores:hover {
+        background-position: -20px 0;
+    }
+
+    .user-question-conformity {
+        display: inline-block;
+        width: 20px;
+        height: 20px;
+        vertical-align: middle;
+        background-image: url('/images/user-question-conformity.png');
+        background-repeat: no-repeat;
+        background-size: 40px auto;
+        cursor: pointer;
+        outline: 0;
+    }
+
+    .user-question-conformity:hover {
+        background-position: -20px 0;
+    }
+
+    .statistics {
+        display: inline-block;
+        width: 20px;
+        height: 20px;
+        vertical-align: middle;
+        background-image: url('/images/statistics.png');
+        background-repeat: no-repeat;
+        background-size: 40px auto;
+        cursor: pointer;
+        outline: 0;
+    }
+
+    .statistics:hover {
+        background-position: -20px 0;
+    }
+
+    .btn-disabled {
+        color: #fff;
+        background-color: #aaa;
+        border-color: #999;
+        cursor: default;
+    }
+
+    .btn-disabled:hover,
+    .btn-disabled:active {
+        color: #fff;
+    }
 </style>
 
 <div class="quest-index">
-	<h1><?= Html::encode($this->title) ?></h1>
-	<?if(User::isAdmin()):?>
-	    <p><?= Html::a(Yii::t('app', 'Create Quest'), ['create'], ['class' => 'btn btn-success']) ?></p>
-    <?endif?>
+	<h1><?php echo Html::encode($this->title) ?></h1>
+	<?php if(User::isAdmin()):?>
+	    <p><?php echo Html::a(Yii::t('app', 'Create Quest'), ['create'], ['class' => 'btn btn-success']) ?></p>
+    <?php endif?>
 
-	<?= GridView::widget([
+	<?php echo GridView::widget([
 		'dataProvider' => $dataProvider,
 		'columns' => [
 			[
@@ -181,16 +241,43 @@ $this->params['breadcrumbs'][] = $this->title;
                 'contentOptions' =>  ['style' => 'text-align: right;']
 			],
             [
+                'attribute' => Yii::t('app', 'Доступность'),
+                'format' => 'raw',
+                'value' => function($data) {return $data->getDatesPeriod();},
+                'headerOptions' => ['style' => 'text-align: center;'],
+                'contentOptions' =>  ['style' => 'text-align: center;']
+            ],
+            [
                 'attribute' => '',
                 'format' => 'raw',
-                'value' => function($data) {return Html::a('Пройти', Url::toRoute(['quest/run', 'id' => $data->id]), [
-                    'class' => 'btn btn-success'
-                ]);},
+                'value' => function($data) {
+                    return Html::a(Yii::t('app', 'Quest Highscores'), Url::toRoute(['quest/highscores', 'quest_id' => $data->id]), [
+                        'class' => 'btn btn-danger',
+                    ]);
+                },
+                'contentOptions' =>  ['style' => 'text-align: center;'],
+                'visible' => !User::isAdmin()
+            ],
+            [
+                'attribute' => '',
+                'format' => 'raw',
+                'value' => function($data) {
+                    $params = $data->url ? ['quest/run', 'url' => $data->url] : ['quest/run', 'id' => $data->id];
+                    $date_begin = new \DateTime($data->date_start);
+                    $date_end = new \DateTime($data->date_finish);
+                    $date_cur = new \DateTime(date('Y-m-d H:i:s'));
+                    $is_disabled = !(($date_cur >= $date_begin) && ($date_cur <= $date_end));
+
+                    return Html::a('Пройти', $is_disabled ? ' ' : Url::toRoute($params), [
+                        'class' => $is_disabled ? 'btn btn-disabled' : 'btn btn-success',
+                        'onclick' => $is_disabled ? 'return false;' : ''
+                    ]);
+                },
                 'contentOptions' =>  ['style' => 'text-align: center;']
             ],
 			[
                 'class' => 'yii\grid\ActionColumn',
-                'template' => '{view} {update} {delete}<br />{create_node} {view_nodes} {edit_tree}',
+                'template' => '{view} {update} {delete}<br />{create_node} {view_nodes} {edit_tree}<br />{highscores} {user_question_conformity} {statistics}',
                 'buttons' => [
                     'view' => function ($url, $data, $key) {
                         return Html::a('', $url, [
@@ -227,6 +314,24 @@ $this->params['breadcrumbs'][] = $this->title;
                         return Html::a('', Url::toRoute(['quest/visual', 'quest_id' => $data->id]), [
                             'class' => 'edit-tree',
                             'title' => Yii::t('app', 'Update Quest Tree')
+                        ]);
+                    },
+                    'highscores' => function ($url, $data, $key) {
+                        return Html::a('', Url::toRoute(['quest/highscores', 'quest_id' => $data->id]), [
+                            'class' => 'highscores',
+                            'title' => Yii::t('app', 'Quest Highscores')
+                        ]);
+                    },
+                    'user_question_conformity' => function ($url, $data, $key) {
+                        return Html::a('', Url::toRoute(['quest/conformity', 'quest_id' => $data->id]), [
+                            'class' => 'user-question-conformity',
+                            'title' => Yii::t('app', 'Quest User-Quest Conformity')
+                        ]);
+                    },
+                    'statistics' => function ($url, $data, $key) {
+                        return Html::a('', Url::toRoute(['quest/statistics', 'id' => $data->id]), [
+                            'class' => 'statistics',
+                            'title' => Yii::t('app', 'Quest Statistics')
                         ]);
                     },
                 ],

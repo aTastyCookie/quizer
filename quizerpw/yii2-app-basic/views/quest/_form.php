@@ -116,80 +116,80 @@ use yii\bootstrap\ActiveForm;
     <?php $form = ActiveForm::begin([
         'options' => ['class' => 'form-horizontal', 'enctype' => 'multipart/form-data'],
     ]); ?>
-    <div class="photo" <?=$model->logo ? 'style="background-image: url(\''.$model->getLogoUrl().'\'); background-size: contain; background-color: #222222"' : ''?>>
+    <div class="photo" <?php echo $model->logo ? 'style="background-image: url(\''.$model->getLogoUrl().'\'); background-size: contain; background-color: #222222"' : ''?>>
         <div class="caption">
-            <?if(!$model->logo):?>
-                <?=Yii::t('app', 'Choose Image')?>
-            <?endif?>
+            <?php if(!$model->logo):?>
+                <?php echo Yii::t('app', 'Choose Image')?>
+            <?php endif?>
         </div>
-        <?= $form->field($model, 'logo')->fileInput()->label(false) ?>
+        <?php echo $form->field($model, 'logo')->fileInput()->label(false) ?>
     </div>
     <div class="quest-info">
-        <?= $form->field($model, 'name')->textInput(['maxlength' => true]) ?>
-        <?= $form->field($model, 'complexity')->textInput() ?>
+        <?php echo $form->field($model, 'name')->textInput(['maxlength' => true]) ?>
+        <?php echo $form->field($model, 'complexity')->textInput() ?>
         <div class="complexity">
-            <?for($i = 1; $i <= 10; $i++): ?>
-                <a class="jackal <?=$model->complexity >= $i ? 'check' : 'no'?>" id="jackal-<?=$i?>" data-mark="<?=$i?>" href="#"></a>
-            <?endfor?>
+            <?php for($i = 1; $i <= 10; $i++): ?>
+                <a class="jackal <?php echo $model->complexity >= $i ? 'check' : 'no'?>" id="jackal-<?php echo $i?>" data-mark="<?php echo $i?>" href="#"></a>
+            <?php endfor?>
         </div>
-        <?= $form->field($model, 'url')->textInput(['maxlength' => true]) ?>
-        <?= $form->field($model, 'date_start')->widget(DatePicker::className(), [
+        <?php echo $form->field($model, 'url')->textInput(['maxlength' => true]) ?>
+        <?php echo $form->field($model, 'date_start')->widget(DatePicker::className(), [
             'options' => [
                 'class' => 'form-control',
             ],
             'dateFormat' => 'dd.MM.y'
         ])->textInput() ?>&nbsp&nbsp&nbsp&nbsp
-        <?= $form->field($model, 'date_finish')->widget(DatePicker::className(), [
+        <?php echo $form->field($model, 'date_finish')->widget(DatePicker::className(), [
             'options' => [
                 'class' => 'form-control'
             ],
             'dateFormat' => 'dd.MM.y'
         ])->textInput() ?>
 
-        <?= $form->field($model, 'password')->passwordInput(['maxlength' => true]) ?>
+        <?php echo $form->field($model, 'password')->passwordInput(['maxlength' => true]) ?>
     </div>
     <div style="clear: both"></div>
 
     <div class="hash-tags">
-        <?=Html::label('Особые навыки', 'hash-tag-1')?>:<br />
-        <?$i = 0;?>
-        <?if(!empty($tags)):?>
-            <?foreach($tags as $tag):?>
-                <?=Html::textInput('HashTags['.$i.']', $tag->name, [
+        <?php echo Html::label('Особые навыки', 'hash-tag-1')?>:<br />
+        <?php $i = 0;?>
+        <?php if(!empty($tags)):?>
+            <?php foreach($tags as $tag):?>
+                <?php echo Html::textInput('HashTags['.$i.']', $tag->name, [
                     'class' => 'hash-tag show-tag form-control',
                     'id' => 'hash-tag-'.$i
                 ])?>
-                <?$i++?>
-            <?endforeach?>
-        <?endif?>
-        <?=Html::textInput('HashTags['.$i.']', '', [
+                <?php $i++?>
+            <?php endforeach?>
+        <?php endif?>
+        <?php echo Html::textInput('HashTags['.$i.']', '', [
             'class' => 'hash-tag show-tag form-control',
             'id' => 'hash-tag-'.$i
         ])?>
-        <?$i++?>
+        <?php $i++?>
         <div class="add-tag"></div>
     </div>
 
-    <?= $form->field($model, 'short')->textarea(['maxlength' => true]) ?>
-    <?= $form->field($model, 'descr')->textarea(['rows' => 6]) ?>
+    <?php echo $form->field($model, 'short')->textarea(['maxlength' => true]) ?>
+    <?php echo $form->field($model, 'descr')->textarea(['rows' => 6]) ?>
 
-    <?= $form->field($model, 'success_message')->textInput() ?>
-    <?= $form->field($model, 'success_css')->fileInput() ?>
-    <?= $form->field($model, 'success_js')->fileInput() ?>
+    <?php echo $form->field($model, 'success_message')->textInput() ?>
+    <?php echo $form->field($model, 'success_css')->fileInput() ?>
+    <?php echo $form->field($model, 'success_js')->fileInput() ?>
 
-    <?= $form->field($model, 'is_closed')->checkbox() ?><br />
+    <?php echo $form->field($model, 'is_closed')->checkbox() ?><br />
 
     <div class="form-group">
-        <?= Html::submitButton($model->isNewRecord ? Yii::t('app', 'Create') : Yii::t('app', 'Save'), [
+        <?php echo Html::submitButton($model->isNewRecord ? Yii::t('app', 'Create') : Yii::t('app', 'Save'), [
             'class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary',
             'style' => 'margin-bottom: 5px;'
         ]) ?>
-        <?if(!$model->isNewRecord):?>
-            <?= Html::a(Yii::t('app', 'Update Tree'), Url::toRoute(['quest/visual', 'quest_id' => $model->id]), [
+        <?php if(!$model->isNewRecord):?>
+            <?php echo Html::a(Yii::t('app', 'Update Tree'), Url::toRoute(['quest/visual', 'quest_id' => $model->id]), [
                 'class' => 'btn btn-primary',
                 'style' => 'margin-bottom: 5px;'
             ]) ?>
-        <?endif?>
+        <?php endif?>
     </div>
 
     <?php ActiveForm::end(); ?>
@@ -252,16 +252,15 @@ use yii\bootstrap\ActiveForm;
                     'background-color': '#fff'
                 });
 
-                $('.quest-form .photo .caption').text('<?=Yii::t('app', 'Loading Image')?>');
+                $('.quest-form .photo .caption').text('<?php echo Yii::t('app', 'Loading Image')?>');
                 $.ajax({
                     type: 'POST',
-                    url: '<?=Url::toRoute('quest/preload')?>',
+                    url: '<?php echo Url::toRoute('quest/preload')?>',
                     data: new FormData($('.quest-form form').get(0)),
                     processData: false,
                     contentType: false,
                     success: function (json) {
                         response = JSON.parse(json);
-                        console.log(response);
 
                         if (response['type'] == 'error') {
                             alert(response['message']);
@@ -269,7 +268,7 @@ use yii\bootstrap\ActiveForm;
                                 'background-image': 'url(\'/images/no-image.jpg\')',
                                 'background-size': 'contain'
                             });
-                            $('.quest-form .photo .caption').text('<?=Yii::t('app', 'Choose Image')?>');
+                            $('.quest-form .photo .caption').text('<?php echo Yii::t('app', 'Choose Image')?>');
                         } else if (response['type'] == 'success') {
                             $('.quest-form .photo').css({
                                 'background-image': 'url(\'' + response['resource'] + '\')',
@@ -287,7 +286,7 @@ use yii\bootstrap\ActiveForm;
             }
         });
 
-        var tag_id = <?=$i?>;
+        var tag_id = <?php echo $i?>;
 
         $('.add-tag').click(function() {
             $(this).before(

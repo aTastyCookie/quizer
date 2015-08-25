@@ -57,14 +57,13 @@ class NodeAnswer extends \yii\db\ActiveRecord
      */
     public function attributeLabels()
     {
-        return [/*
+        return [
             'id' => Yii::t('app', 'ID'),
-            'name' => 'Заголовок',
-            'quest_id' => Yii::t('app', 'Quest ID'),
-			'question' => 'Вопрос',
-			'time' => 'Время на ответ',
-			'answer' => 'Ответ',
-			'case_depend' => 'Регистро-зависимый ответ'*/
+            'text' => Yii::t('app', 'Answer'),
         ];
+    }
+
+    public function getNode() {
+        return $this->hasOne(Node::className(), ['id' => 'node_id']);
     }
 }

@@ -8,39 +8,52 @@ use yii\helpers\Url;
 /* @var $this yii\web\View */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = Yii::t('app', 'Quest Statistics by User').': '.$user->username;
+$this->title = Yii::t('app', 'Quest Answers');
 $this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Quests'), 'url' => ['quest/index']];
-$this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Quest Statistics').': '.$quest->name, 'url' => ['quest/statistics', 'id' => $quest->id]];
+$this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Quest Statistics').': '.$run->quest->name, 'url' => ['quest/statistics', 'id' => $run->quest->id]];
+$this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Quest Statistics by User').': '.$run->user->username, 'url' => ['quest/userstatistics', 'quest_id' => $run->quest->id, 'user_id' => $run->user->id]];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 
 <style>
-    .has-success {
-        color: #3c763d;
+    .correct {
+        background-color: #5CB85C !important;
+
     }
 
-    .has-error {
-        color: #a94442;
+    .wrong {
+        background-color: #D9534F !important;
+
     }
 </style>
-<div class="quest-statistics">
+<div class="run-answers">
 	<h1><?php echo Html::encode($this->title) ?></h1>
 
 	<?php echo GridView::widget([
 		'dataProvider' => $dataProvider,
+        'rowOptions' => function ($data) {
+            return [
+                'class' => $data->status ? 'correct' : 'wrong'
+            ];
+        },
 		'columns' => [
 			[
-                'header' => Yii::t('app', 'Attempt Number'),
+                'header' => '#',
                 'class' => 'yii\grid\SerialColumn',
                 'headerOptions' => ['style' => 'text-align: center;'],
                 'contentOptions' =>  ['style' => 'text-align: right;'],
             ],
             [
-                'attribute' => 'is_complete',
-                'value' => function($data) {return $data->is_complete ? 'да' : 'нет';},
-                'headerOptions' => ['style' => 'text-align: center;'],
-                'contentOptions' =>  ['style' => 'text-align: center;'],
+                'attribute' => 'node.question',
+                'value' => function($data) {return $data->node->question;},
+                'headerOptions' => ['style' => 'text-align: center;']
             ],
+            [
+                'attribute' => 'text',
+                'headerOptions' => ['style' => 'text-align: center;']
+            ],
+
+            /*
             [
                 'attribute' => Yii::t('app', 'Right / Wrong'),
                 'format' => 'raw',
@@ -99,9 +112,9 @@ $this->params['breadcrumbs'][] = $this->title;
                             'title' => Yii::t('app', 'Update Quest Tree')
                         ]);
                     },*/
-                ],
+           /*     ],
                 'contentOptions' =>  ['style' => 'text-align: center;']
-            ],
+            ],*/
 		],
 	]); ?>
 

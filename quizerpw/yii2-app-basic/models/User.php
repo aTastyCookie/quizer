@@ -99,13 +99,4 @@ class User extends \yii\base\Object implements \yii\web\IdentityInterface {
     {
         return $this->password === $password;
     }
-
-    public static function isAdmin() {
-        $assign = \Yii::$app->getAuthManager()->getRolesByUser(\Yii::$app->getUser()->getId());
-
-        if(isset($assign['admin']) && !empty($assign['admin']))
-            return true;
-
-        return false;
-    }
 }

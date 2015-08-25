@@ -14,6 +14,8 @@ use Yii;
  */
 class ARUser extends \yii\db\ActiveRecord {
 
+    public $seconds;
+
     /**
      * @inheritdoc
      */
@@ -82,5 +84,14 @@ class ARUser extends \yii\db\ActiveRecord {
         }
 
         return $counts;
+    }
+
+    public static function isAdmin() {
+        $assign = \Yii::$app->getAuthManager()->getRolesByUser(\Yii::$app->getUser()->getId());
+
+        if(isset($assign['admin']) && !empty($assign['admin']))
+            return true;
+
+        return false;
     }
 }

@@ -47,8 +47,8 @@ class Quest extends \yii\db\ActiveRecord {
             [['descr'], 'string', 'max' => 1500],
             [['url', 'password'], 'string', 'max' => 255],
             [['url'], 'unique'],
-            [['success_css'], 'file', 'skipOnEmpty' => true, 'maxSize' => 2 * 1024 * 1024, 'extensions' => 'css'],
-            [['success_js'], 'file', 'skipOnEmpty' => true, 'maxSize' => 2 * 1024 * 1024, 'extensions' => 'js'],
+            [['success_css'], 'file', 'skipOnEmpty' => true, 'maxSize' => 2 * 1024 * 1024, 'extensions' => 'css', 'checkExtensionByMimeType' => false],
+            [['success_js'], 'file', 'skipOnEmpty' => true, 'maxSize' => 2 * 1024 * 1024, 'extensions' => 'js', 'checkExtensionByMimeType' => false],
         ];
     }
 
@@ -87,6 +87,11 @@ class Quest extends \yii\db\ActiveRecord {
         return Node::find()
             ->where(['quest_id' => $this->id])
             ->count();
+    }
+
+    public function getDatesPeriod() {
+        return (new \DateTime($this->date_start))->format('\c H:i d.m.Y ').
+               ($this->date_finish ? '<br />до '.(new \DateTime($this->date_finish))->format('H:i d.m.Y ') : '');
     }
 
     /**

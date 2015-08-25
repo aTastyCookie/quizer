@@ -2,6 +2,7 @@
 
 namespace app\controllers;
 
+use app\models\Achievement;
 use app\models\NodeAnswer;
 use app\models\NodeConnection;
 use app\models\ARUser;
@@ -10,11 +11,14 @@ use app\models\Quest;
 use app\models\QuestRun;
 use yii\data\ActiveDataProvider;
 use yii\web\Controller;
+use yii\web\ForbiddenHttpException;
+use yii\web\MethodNotAllowedHttpException;
 use yii\web\NotFoundHttpException;
 use yii\web\BadRequestHttpException;
 use yii\filters\AccessControl;
 use yii\filters\VerbFilter;
 use yii\web\UploadedFile;
+use yii\web\Cookie;
 use yii\helpers\Html;
 use app\models\Node;
 use app\models\QuestTag;
@@ -36,7 +40,14 @@ class QuestController extends Controller
                 'rules' => [
                     [
                         'allow' => true,
-                        'actions' => ['index', 'view', 'run', 'choose'],
+                        'actions' => [
+                            'index',
+                            'view',
+                            'run',
+                            'choose',
+                            'highscores',
+                            'conformity'
+                        ],
                         'roles' => ['@']
                     ],
                     [
@@ -388,18 +399,28 @@ class QuestController extends Controller
     /**
      * Runing quest
      * @throws BadRequestHttpException
+     * @throws ForbiddenHttpException
      * @throws NotFoundHttpException
      * @return mixed
      */
     public function actionRun() {
-        if(!($id = Yii::$app->request->get('id')) || !is_numeric(Yii::$app->request->get('id')))
+        if((!($id = Yii::$app->request->get('id')) || !is_numeric(Yii::$app->request->get('id'))) &&
+           (!($url = Yii::$app->request->get('url')))) {
             throw new BadRequestHttpException('Неверный запрос');
+        }
+
+        $quest = $id ? $this->findModel(intval($id)) : Quest::find()->where(['url' => Html::encode($url)])->one();
+        $date_begin = new \DateTime($quest->date_start);
+        $date_end = new \DateTime($quest->date_finish);
+        $date_cur = new \DateTime(date('Y-m-d H:i:s'));
+        if(!(($date_cur >= $date_begin) && ($date_cur <= $date_end)))
+            throw new ForbiddenHttpException();
 
         $answer = new NodeAnswer();
         $answer->user_id = Yii::$app->getUser()->getId();
         $current_run = QuestRun::find()
             ->where([
-                'quest_id' => intval($id),
+                'quest_id' => $quest->id,
                 'user_id' => Yii::$app->getUser()->getId(),
                 'is_complete' => false
             ])
@@ -414,6 +435,7 @@ class QuestController extends Controller
                 $current_run->quest_id = $answer->quest_id;
                 $current_run->node_id = $answer->node_id;
                 $current_run->user_id = Yii::$app->getUser()->getId();
+                $current_run->time_begin = time();
             }
 
             if(!$answer->is_wrong) {
@@ -424,7 +446,15 @@ class QuestController extends Controller
                     $next_ids[] = $node->toNodes->id;
 
                 $current_run->next_nodes = !empty($next_ids) ? json_encode($next_ids) : null;
-                $current_run->status = QuestRun::STATUS_CHOOSING;
+
+                if(count($next_ids) > 1)
+                    $current_run->status = QuestRun::STATUS_CHOOSING;
+                elseif(count($next_ids) == 1) {
+                    $current_run->status = QuestRun::STATUS_ANSWERING;
+                    $current_run->node_id = $next_ids[0];
+                } else
+                    $current_run->status = QuestRun::STATUS_CHOOSING;
+
                 $answer->status = true;
             } else {
                 $current_run->status = QuestRun::STATUS_ANSWERING;
@@ -433,11 +463,32 @@ class QuestController extends Controller
             }
 
             $current_run->save(false);
+            $answer_time = 0;
+            if($begin_time = Yii::$app->getRequest()->getCookies()->getValue('run-quest-'.$quest->id)) {
+                $answer_time = time() - $begin_time;
+                Yii::$app->getResponse()->getCookies()->remove('run-quest-'.$quest->id);
+
+                if($answer->is_wrong)
+                    Yii::$app->getResponse()->getCookies()->add(new Cookie([
+                        'name' => 'run-quest-'.$quest->id,
+                        'value' => time(),
+                        'expire' => time() + 60 * 60,
+                    ]));
+            }
+
             $answer->run_id = $current_run->run_id;
+            $answer->time = $answer_time;
             $answer->save(false);
 
+            // Событие на ответ (ачивка)
+            Achievement::eventOnAnswer();
+
             if(!$answer->is_wrong) {
-                $this->redirect(['run', 'id' => $id]);
+                if($id)
+                    $this->redirect(['run', 'id' => $id]);
+                else
+                    $this->redirect(['run', 'url' => $url]);
+
                 Yii::$app->end();
             }
         }
@@ -456,19 +507,40 @@ class QuestController extends Controller
                         $answer->node_id = $current_node->id;
                     }
                 } else {
-                    $current_node = null;
+                    $current_node = Node::findOne($current_run->node_id);
                     $answer = null;
+                    $current_run->time_end = time();
                     $current_run->is_complete = true;
                     $current_run->save(false);
 
-                    // Здесь ищется ачивка
+
+                    if(Yii::$app->getRequest()->getCookies()->has('run-quest-'.$quest->id))
+                        Yii::$app->getResponse()->getCookies()->remove('run-quest-'.$quest->id);
+
+                    // Событие на конец квеста (ачивка)
                 }
             } elseif($current_run->status == QuestRun::STATUS_ANSWERING) {
+                if(!Yii::$app->getRequest()->getCookies()->has('run-quest-'.$quest->id)) {
+                    Yii::$app->getResponse()->getCookies()->add(new Cookie([
+                        'name' => 'run-quest-'.$quest->id,
+                        'value' => time(),
+                        'expire' => time() + 60 * 60,
+                    ]));
+                }
+
                 $current_node = Node::find()->where(['id' => $current_run->node_id])->one();
                 $answer->quest_id = $current_node->quest_id;
                 $answer->node_id = $current_node->id;
             }
-        } elseif($current_node = Node::find()->where(['quest_id' => intval($id)])->orderBy('number')->one()) {
+        } elseif($current_node = Node::find()->where(['quest_id' => $quest->id])->orderBy('number')->one()) {
+            if(!Yii::$app->getRequest()->getCookies()->has('run-quest-'.$quest->id)) {
+                Yii::$app->getResponse()->getCookies()->add(new Cookie([
+                    'name' => 'run-quest-'.$quest->id,
+                    'value' => time(),
+                    'expire' => time() + 60 * 60,
+                ]));
+            }
+
             $answer->quest_id = $current_node->quest_id;
             $answer->node_id = $current_node->id;
         } else
@@ -477,7 +549,7 @@ class QuestController extends Controller
         return $this->render('run', [
             'answer' => $answer,
             'node' => $current_node,
-            'quest' => $this->findModel(intval($id))
+            'quest' => $quest
         ]);
     }
 
@@ -515,6 +587,66 @@ class QuestController extends Controller
         $this->redirect(['run', 'id' => $quest_id]);
     }
 
+    public function actionHighscores() {
+        if(!($quest_id = Yii::$app->request->get('quest_id')) || !is_numeric(Yii::$app->request->get('quest_id')))
+            throw new BadRequestHttpException('Неверный запрос');
+
+        $users = ARUser::find()
+            ->select('user.*, MIN(q.seconds) AS seconds')
+            ->leftJoin(
+                '(
+                     SELECT qr.user_id, (qr.time_end - qr.time_begin) AS seconds
+                     FROM quests_runs AS qr
+                     WHERE qr.quest_id = '.intval($quest_id).'
+                     ORDER BY seconds ASC
+                 ) AS q', 'user.id = q.user_id'
+            )
+            ->where('NOT ISNULL(q.seconds)')
+            ->groupBy('user.username')
+            ->orderBy('q.seconds ASC');
+
+        return $this->render('highscores', [
+            'quest' => $this->findModel(intval($quest_id)),
+            'dataProvider' => new ActiveDataProvider([
+                'query' => $users,
+            ])
+        ]);
+    }
+
+    public function actionConformity() {
+        if(!($quest_id = Yii::$app->request->get('quest_id')) || !is_numeric(Yii::$app->request->get('quest_id')))
+            throw new BadRequestHttpException('Неверный запрос');
+
+        $nodes = Node::find()
+            ->select('node.*, COUNT(nap.node_id) as count_passed, COUNT(naip.node_id) as count_in_proccess, nap.avg_time')
+            ->leftJoin(
+                '(
+                    SELECT na.node_id, na.user_id, SUM(na.status) AS status, AVG(na.time) AS avg_time
+                    FROM nodes_answers AS na
+                    GROUP BY na.node_id, na.user_id
+                    HAVING status != 0
+                ) AS nap', 'node.id = nap.node_id'
+            )
+            ->leftJoin(
+                '(
+                    SELECT na.node_id, na.user_id, SUM(na.status) AS status
+                    FROM nodes_answers AS na
+                    GROUP BY na.node_id, na.user_id
+                    HAVING status = 0
+                ) AS naip', 'node.id = naip.node_id'
+            )
+            ->where(['quest_id' => intval($quest_id)])
+            ->groupBy('node.id')
+            ->orderBy('number');
+
+
+        return $this->render('conformity', [
+            'quest' => $this->findModel(intval($quest_id)),
+            'dataProvider' => new ActiveDataProvider([
+                'query' => $nodes,
+            ])
+        ]);
+    }
 
     public function actionStatistics() {
         if(!($id = Yii::$app->request->get('id')) || !is_numeric(Yii::$app->request->get('id')))

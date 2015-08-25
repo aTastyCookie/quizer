@@ -29,11 +29,18 @@ $config = [
             // Disable r= routes
             'enablePrettyUrl' => true,
             'rules' => [
-                '<controller:\w+>/<id:\d+>' => '<controller>/view',
-                '<controller:\w+>/<action:\w+>/<id:\d+>' => '<controller>/<action>',
+
+                //'<controller:\w+>/<id:\d+>' => '<controller>/view',
+                //'<controller:\w+>/<action:\w+>/<id:\d+>' => '<controller>/<action>',
                 '' => 'site/index',
-                '<controller:\w+>' => '<controller>/index',
-                '<controller:\w+>/<action:\w+>' => '<controller>/<action>',
+                '<controller:\w+>/' => '<controller>/index',
+                'quest-<id:\d+>/' => 'quest/run',
+                'quest-<url:\w+>/' => 'quest/run',
+
+
+
+
+
 
                 'user/registration/register' => 'user/registration/register',
                 '/user/registration/resend' => '/user/registration/resend',
@@ -101,6 +108,7 @@ $config = [
 
         'request' => [
             // !!! insert a secret key in the following (if it is empty) - this is required by cookie validation
+            'enableCsrfValidation' => false,
             'cookieValidationKey' => 'ku_U7TAmam5Ilx8PmqQPvQ5PFTqUQkWG',
         ],
         'cache' => [

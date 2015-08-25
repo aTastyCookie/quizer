@@ -8,9 +8,11 @@ use app\models\Node;
 use app\models\NodeSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
+use yii\web\UploadedFile;
 use yii\filters\AccessControl;
 use app\components\AccessRule;
 use yii\filters\VerbFilter;
+use yii\helpers\Html;
 
 /**
  * NodeController implements the CRUD actions for Node model.
@@ -81,7 +83,13 @@ class NodeController extends Controller
     public function actionCreate() {
         $node = new Node();
 
-        if ($node->load(Yii::$app->request->post()) && $node->save()) {
+        if ($node->load(Yii::$app->request->post()) && $this->_uploadFiles($node)) {
+            $node->name = Html::encode($node->name);
+            $node->question = Html::encode($node->question);
+            $node->description = Html::encode($node->description);
+            $node->success_message = Html::encode($node->success_message);
+            $node->save(false);
+
             if (!Yii::$app->getRequest()->getIsAjax())
                 return $this->redirect(['view', 'id' => $node->id]);
         } else {
@@ -101,6 +109,46 @@ class NodeController extends Controller
         Yii::$app->end();
     }
 
+    private function _uploadFiles(&$node) {
+        $return = false;
+        $cur_css = $node->css;
+        $cur_js = $node->js;
+        $cur_success_css = $node->success_css;
+        $cur_success_js = $node->success_js;
+
+        if($node->validate()) {
+            if ($node->css = UploadedFile::getInstance($node, 'css')) {
+                if ($return = $node->uploadCss()) {
+                    $node->css = $node->css->name;
+                }
+            } else
+                $node->css = $cur_css;
+
+            if ($node->js = UploadedFile::getInstance($node, 'js')) {
+                if ($return = $node->uploadJs()) {
+                    $node->js = $node->js->name;
+                }
+            } else
+                $node->js = $cur_js;
+
+            if ($node->success_css = UploadedFile::getInstance($node, 'success_css')) {
+                if ($return = $node->uploadSuccessCss()) {
+                    $node->success_css = $node->success_css->name;
+                }
+            } else
+                $node->success_css = $cur_success_css;
+
+            if ($node->success_js = UploadedFile::getInstance($node, 'success_js')) {
+                if ($return = $node->uploadSuccessJs()) {
+                    $node->success_js = $node->success_js->name;
+                }
+            } else
+                $node->success_js = $cur_success_js;
+        }
+
+        return $return;
+    }
+
     /**
      * Updates an existing Node model.
      * If update is successful, the browser will be redirected to the 'view' page.
@@ -113,7 +161,13 @@ class NodeController extends Controller
 
         $node = $this->findModel((int)$id);
 
-        if ($node->load(Yii::$app->request->post()) && $node->save()) {
+        if ($node->load(Yii::$app->request->post()) && $this->_uploadFiles($node)) {
+            $node->name = Html::encode($node->name);
+            $node->question = Html::encode($node->question);
+            $node->description = Html::encode($node->description);
+            $node->success_message = Html::encode($node->success_message);
+            $node->save(false);
+
             if (!Yii::$app->getRequest()->getIsAjax())
                 return $this->redirect(['view', 'id' => $node->id]);
         } else {

@@ -34,10 +34,13 @@ return [
     'Update Node' => 'Редактирование вопроса',
     'Count Nodes' => 'Количество вопросов',
     'Are you sure?' => 'Вы уверены?',
-    'Answer' => 'Ответить',
+    'To Answer' => 'Ответить',
+    'Answer' => 'Ответ',
+    'Quest Answers' => 'Ответы квеста',
     'Closed by Admin' => 'закрыт администратором',
     'CSS-file on complete quest' => 'СSS-файл для страницы успешного завершения квеста',
     'JS-file on complete quest' => 'JS-файл для страницы успешного завершения квеста',
     'Quest Statistics' => 'Статистика квеста',
-    'Quest Statistics by User' => 'Статистика квеста по пользователю'
+    'Quest Statistics by User' => 'Статистика квеста по пользователю',
+    'Quest Highscores' => 'Рейтинги'
 ];

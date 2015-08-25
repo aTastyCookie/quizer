@@ -10,22 +10,30 @@ use yii\widgets\ActiveForm;
 
 <div class="node-form">
 
-    <?php $form = ActiveForm::begin(); ?>
+    <?php $form = ActiveForm::begin([
+        'options' => ['enctype' => 'multipart/form-data'],
+    ]); ?>
 
-    <?= $form->field($node, 'name')->textInput(['maxlength' => true]) ?>
+    <?php echo $form->field($node, 'name')->textInput(['maxlength' => true]) ?>
 
-    <?= $form->field($node, 'quest_id')->hiddenInput()->label(false) ?>
-    <?= $form->field($node, 'number')->textInput() ?>
-    <?= $form->field($node, 'question')->textInput() ?>
-    <?= $form->field($node, 'answer')->textInput() ?>
-    <?= $form->field($node, 'description')->textarea() ?>
-    <?= $form->field($node, 'case_depend')->checkbox() ?>
+    <?php echo $form->field($node, 'quest_id')->hiddenInput()->label(false) ?>
+    <?php echo $form->field($node, 'number')->textInput() ?>
+    <?php echo $form->field($node, 'question')->textInput() ?>
+    <?php echo $form->field($node, 'answer')->textInput() ?>
+    <?php echo $form->field($node, 'description')->textarea() ?>
+    <?php echo $form->field($node, 'case_depend')->checkbox() ?>
+    <?php echo $form->field($node, 'css')->fileInput() ?>
+    <?php echo $form->field($node, 'js')->fileInput() ?>
 
-    <?if(!Yii::$app->getRequest()->getIsAjax()):?>
+    <?php echo $form->field($node, 'success_message')->textInput() ?>
+    <?php echo $form->field($node, 'success_css')->fileInput() ?>
+    <?php echo $form->field($node, 'success_js')->fileInput() ?>
+
+    <?php if(!Yii::$app->getRequest()->getIsAjax()):?>
         <div class="form-group">
-            <?= Html::submitButton($model->isNewRecord ? Yii::t('app', 'Create') : Yii::t('app', 'Update'), ['class' => $node->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
+            <?php echo Html::submitButton($node->isNewRecord ? Yii::t('app', 'Create') : Yii::t('app', 'Update'), ['class' => $node->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
         </div>
-    <?endif?>
+    <?php endif?>
 
     <?php ActiveForm::end(); ?>
 

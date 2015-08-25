@@ -1,5 +1,6 @@
 <?php
 use yii\helpers\Html;
+use yii\helpers\Url;
 use yii\bootstrap\Nav;
 use yii\bootstrap\NavBar;
 use yii\widgets\Breadcrumbs;
@@ -12,12 +13,12 @@ AppAsset::register($this);
 ?>
 <?php $this->beginPage() ?>
 <!DOCTYPE html>
-<html lang="<?= Yii::$app->language ?>">
+<html lang="<?php echo Yii::$app->language ?>">
 <head>
-    <meta charset="<?= Yii::$app->charset ?>">
+    <meta charset="<?php echo Yii::$app->charset ?>">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <?= Html::csrfMetaTags() ?>
-    <title><?= Html::encode($this->title) ?></title>
+    <?php echo Html::csrfMetaTags() ?>
+    <title><?php echo Html::encode($this->title) ?></title>
 
 	  <?php $this->head() ?>
 
@@ -40,9 +41,9 @@ AppAsset::register($this);
             echo Nav::widget([
                 'options' => ['class' => 'navbar-nav navbar-right'],
                 'items' => [
-                    ['label' => 'Главная', 'url' => ['/site/index']],
+                    ['label' => 'Главная', 'url' => Url::toRoute('/site/index')],
                     ['label' => 'Профайл', 'url' => ['/user/settings/profile'], 'visible' => !Yii::$app->user->isGuest],
-                    ['label' => 'Квесты', 'url' => ['/quest/index'], 'visible' => !Yii::$app->user->isGuest],
+                    ['label' => 'Квесты', 'url' => Url::toRoute('/quest/index'), 'visible' => !Yii::$app->user->isGuest],
                     ['label' => 'Войти', 'url' => ['/user/security/login'], 'visible' => Yii::$app->user->isGuest],
                     [
                         'label' => 'Выйти ('.Yii::$app->user->identity->username.')',
@@ -57,17 +58,17 @@ AppAsset::register($this);
         ?>
 
         <div class="container">
-            <?= Breadcrumbs::widget([
+            <?php echo Breadcrumbs::widget([
                 'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
             ]) ?>
-            <?= $content ?>
+            <?php echo $content ?>
         </div>
     </div>
 
     <footer class="footer">
         <div class="container">
-            <p class="pull-left">&copy; My Company <?= date('Y') ?></p>
-            <p class="pull-right"><?= Yii::powered() ?></p>
+            <p class="pull-left">&copy; My Company <?php echo date('Y') ?></p>
+            <p class="pull-right"><?php echo Yii::powered() ?></p>
         </div>
     </footer>
 

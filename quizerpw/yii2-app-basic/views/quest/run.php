@@ -35,42 +35,56 @@ $this->params['breadcrumbs'][] = $this->title;
 </style>
 
 <div class="quest-run">
-    <h1><?= Html::encode($this->title) ?></h1>
+    <h1><?php echo Html::encode($this->title) ?></h1>
 
-    <?if($node && (count($node) == 1)):?>
-        <h3>Вопрос: <?=$node->name?></h3>
-        <br/>
+    <?php if($node && (count($node) == 1) && !empty($answer)):?>
+        <?php if($node->css):?>
+    <link rel="stylesheet" href="/assets/nodextfi/<?php echo $node->css?>" />
+    <?php endif?>
+    <?php if($node->js):?>
+        <script src="/assets/nodextfi/<?php echo $node->js?>"></script>
+    <?php endif?>
 
-        <?php $form = ActiveForm::begin(); ?>
+        <h3>Вопрос: <?php echo $node->name?></h3>
+    <br/>
 
-            <?= $form->field($answer, 'text')->textarea(['maxlength' => true]) ?>
-            <?= $form->field($answer, 'quest_id')->hiddenInput()->label(false) ?>
-            <?= $form->field($answer, 'node_id')->hiddenInput()->label(false) ?>
+    <?php $form = ActiveForm::begin(); ?>
 
-           <?= Html::submitButton(Yii::t('app', 'Answer'), ['class' => 'btn btn-success']) ?>
+    <?php echo $form->field($answer, 'text')->textarea(['maxlength' => true]) ?>
+    <?php echo $form->field($answer, 'quest_id')->hiddenInput()->label(false) ?>
+    <?php echo $form->field($answer, 'node_id')->hiddenInput()->label(false) ?>
 
-        <?php ActiveForm::end(); ?>
-    <?elseif($node && (count($node) > 1)):?>
-        <?foreach($node as $next):?>
-            <a class="choose-next" href="<?=Url::toRoute(['quest/choose', 'quest_id' => $next->quest_id, 'node_id' => $next->id])?>">
-                <div class="img"></div>
-                <div class="description">
-                    <?=$next->description?>
-                </div>
-            </a>
-        <?endforeach?>
-    <?else:?>
-        <?if($quest->success_css):?>
-            <link rel="stylesheet" href="/assets/qusuccfi/<?=$quest->success_css?>" />
-        <?endif?>
-        <?if($quest->success_js):?>
-            <script src="/assets/qusuccfi/<?=$quest->success_js?>"></script>
-        <?endif?>
+    <?php echo Html::submitButton(Yii::t('app', 'To Answer'), ['class' => 'btn btn-success']) ?>
 
-        <?if($quest->success_message):?>
-            <?=Html::decode($quest->success_message)?>
-        <?else:?>
-            <span>Поздравляем! Вы успешно прошли квест.</span>
-        <?endif?>
-    <?endif?>
+    <?php ActiveForm::end(); ?>
+    <?php elseif($node && (count($node) > 1) && !empty($answer)):?>
+    <?php foreach($node as $next):?>
+        <a class="choose-next" href="<?php echo Url::toRoute(['quest/choose', 'quest_id' => $next->quest_id, 'node_id' => $next->id])?>">
+            <div class="img"></div>
+            <div class="description">
+                <?php echo $next->description?>
+            </div>
+        </a>
+    <?php endforeach?>
+    <?php else:?>
+    <?php if($node->success_css):?>
+        <link rel="stylesheet" href="/assets/nodsucfi/<?php echo $node->success_css?>" />
+    <?php elseif($quest->success_css):?>
+        <link rel="stylesheet" href="/assets/qusuccfi/<?php echo $quest->success_css?>" />
+    <?php endif?>
+
+    <?php if($node->success_js):?>
+        <script src="/assets/nodsucfi/<?php echo $node->success_js?>"></script>
+    <?php elseif($quest->success_js):?>
+        <script src="/assets/qusuccfi/<?php echo $quest->success_js?>"></script>
+    <?php endif?>
+
+    <?php if($node->success_message):?>
+        <?php echo Html::decode($node->success_message)?>
+    <?php elseif($quest->success_message):?>
+        <?php echo Html::decode($quest->success_message)?>
+    <?php else:?>
+        <span>Поздравляем! Вы успешно прошли квест.</span>
+    <?php endif?>
+    <?php endif?>
 </div>

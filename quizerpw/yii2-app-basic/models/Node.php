@@ -15,6 +15,10 @@ use Yii;
  */
 class Node extends \yii\db\ActiveRecord
 {
+    public $count_passed;
+    public $count_in_proccess;
+    public $avg_time;
+
     /**
      * @inheritdoc
      */
@@ -30,11 +34,13 @@ class Node extends \yii\db\ActiveRecord
     {
         return [
             [['name', 'number', 'quest_id', 'question', 'answer'], 'required'],
-            [['quest_id', 'number', 'top', 'left', 'case_depend', 'time'], 'integer'],
+            [['quest_id', 'number', 'top', 'left', 'case_depend'], 'integer'],
             [['number'], 'unique', 'targetAttribute' => ['quest_id', 'number']],
-            [['name', 'description'], 'string', 'max' => 500],
+            [['name', 'description', 'success_message'], 'string', 'max' => 500],
             [['answer'], 'string'],
-            [['description', 'case_depend'], 'safe']
+            [['description', 'case_depend', 'css', 'js', 'success_message', 'success_css', 'success_js'], 'safe'],
+            [['css', 'success_css'], 'file', 'skipOnEmpty' => true, 'maxSize' => 2 * 1024 * 1024, 'extensions' => 'css', 'checkExtensionByMimeType' => false],
+            [['js', 'success_js'], 'file', 'skipOnEmpty' => true, 'maxSize' => 2 * 1024 * 1024, 'extensions' => 'js', 'checkExtensionByMimeType' => false],
         ];
     }
 
@@ -59,8 +65,7 @@ class Node extends \yii\db\ActiveRecord
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getQuest()
-    {
+    public function getQuest() {
         return $this->hasOne(Quest::className(), ['id' => 'quest_id']);
     }
 
@@ -70,6 +75,94 @@ class Node extends \yii\db\ActiveRecord
 
 		 return true;
 	}
+
+    public function uploadCss() {
+        if($this->validate(['css'])) {
+            $fn = md5($this->quest_id.$this->name).'.'.$this->css->extension;
+
+            if (!file_exists(ASSETS_DIR . DIRECTORY_SEPARATOR . 'nodextfi'))
+                mkdir(ASSETS_DIR . DIRECTORY_SEPARATOR . 'nodextfi');
+
+            $f = ASSETS_DIR . DIRECTORY_SEPARATOR . 'nodextfi' . DIRECTORY_SEPARATOR . $fn;
+
+            if (file_exists($f))
+                unlink($f);
+
+            if ($this->css->saveAs($f)) {
+                $this->css->name = $fn;
+
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    public function uploadJs() {
+        if($this->validate(['js'])) {
+            $fn = md5($this->quest_id.$this->name).'.'.$this->js->extension;
+
+            if (!file_exists(ASSETS_DIR . DIRECTORY_SEPARATOR . 'nodextfi'))
+                mkdir(ASSETS_DIR . DIRECTORY_SEPARATOR . 'nodextfi');
+
+            $f = ASSETS_DIR . DIRECTORY_SEPARATOR . 'nodextfi' . DIRECTORY_SEPARATOR . $fn;
+
+            if (file_exists($f))
+                unlink($f);
+
+            if ($this->js->saveAs($f)) {
+                $this->js->name = $fn;
+
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    public function uploadSuccessCss() {
+        if($this->validate(['success_css'])) {
+            $fn = md5($this->quest_id.$this->name).'.'.$this->success_css->extension;
+
+            if (!file_exists(ASSETS_DIR . DIRECTORY_SEPARATOR . 'nodsucfi'))
+                mkdir(ASSETS_DIR . DIRECTORY_SEPARATOR . 'nodsucfi');
+
+            $f = ASSETS_DIR . DIRECTORY_SEPARATOR . 'nodsucfi' . DIRECTORY_SEPARATOR . $fn;
+
+            if (file_exists($f))
+                unlink($f);
+
+            if ($this->success_css->saveAs($f)) {
+                $this->success_css->name = $fn;
+
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    public function uploadSuccessJs() {
+        if($this->validate(['success_js'])) {
+            $fn = md5($this->quest_id.$this->name).'.'.$this->success_js->extension;
+
+            if (!file_exists(ASSETS_DIR . DIRECTORY_SEPARATOR . 'nodsucfi'))
+                mkdir(ASSETS_DIR . DIRECTORY_SEPARATOR . 'nodsucfi');
+
+            $f = ASSETS_DIR . DIRECTORY_SEPARATOR . 'nodsucfi' . DIRECTORY_SEPARATOR . $fn;
+
+            if (file_exists($f))
+                unlink($f);
+
+            if ($this->success_js->saveAs($f)) {
+                $this->success_js->name = $fn;
+
+                return true;
+            }
+        }
+
+        return false;
+    }
 
 	public static function findModel($id)
     {

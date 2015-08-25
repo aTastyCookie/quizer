@@ -54,6 +54,14 @@ class QuestRun extends \yii\db\ActiveRecord {
         ];
     }
 
+    public function getQuest() {
+        return $this->hasOne(Quest::className(), ['id' => 'quest_id']);
+    }
+
+    public function getUser() {
+        return $this->hasOne(ARUser::className(), ['id' => 'user_id']);
+    }
+
     public function getAnswersStatistics() {
         $run_answers = NodeAnswer::find()->where(['run_id' => $this->run_id])->all();
         $counts = [

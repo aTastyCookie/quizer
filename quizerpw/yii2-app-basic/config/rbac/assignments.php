@@ -1,5 +1,8 @@
 <?php
 return [
+    2 => [
+        'admin',
+    ],
     5 => [
         'admin',
     ],

@@ -8,21 +8,12 @@ use yii\helpers\Url;
 /* @var $this yii\web\View */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = Yii::t('app', 'Quest Statistics').': '.$quest->name;
+$this->title = Yii::t('app', 'Quest Highscores').': '.$quest->name;
 $this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Quests'), 'url' => ['quest/index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 
-<style>
-    .has-success {
-        color: #3c763d;
-    }
-
-    .has-error {
-        color: #a94442;
-    }
-</style>
-<div class="quest-statistics">
+<div class="quest-highscores">
 	<h1><?php echo Html::encode($this->title) ?></h1>
 
 	<?php echo GridView::widget([
@@ -37,6 +28,13 @@ $this->params['breadcrumbs'][] = $this->title;
                 'attribute' => 'username',
                 'headerOptions' => ['style' => 'text-align: center;'],
             ],
+            [
+                'attribute' => Yii::t('app', 'Passage Time'),
+                'value' => function($data) {return date('H:i:s', mktime(0, 0, $data->seconds));},
+                'headerOptions' => ['style' => 'text-align: center;'],
+                'contentOptions' =>  ['style' => 'text-align: center;'],
+            ]
+            /*
             [
                 'attribute' => Yii::t('app', 'Complete / Not complete'),
                 'format' => 'raw',
@@ -69,47 +67,10 @@ $this->params['breadcrumbs'][] = $this->title;
                             'title' => Yii::t('app', 'View')
                         ]);
                     }
-                    /*'view' => function ($url, $data, $key) {
-                        return Html::a('', $url, [
-                            'class' => 'view-quest',
-                            'title' => Yii::t('app', 'View Quest')
-                        ]);
-                    },
-                    'update' => function ($url, $data, $key) {
-                        return Html::a('', $url, [
-                            'class' => 'update-quest',
-                            'title' => Yii::t('app', 'Update Quest')
-                        ]);
-                    },
-                    'delete' => function ($url, $data, $key) {
-                        return Html::a('', $url, [
-                            'class' => 'delete-quest',
-                            'title' => Yii::t('app', 'Delete Quest'),
-                            'onclick' => 'return confirm(\''.Yii::t('app', 'Are you sure?').'\') ? true : false;'
-                        ]);
-                    },
-                    'create_node' => function ($url, $data, $key) {
-                        return Html::a('', Url::toRoute(['node/create', 'quest_id' => $data->id]), [
-                            'class' => 'create-node',
-                            'title' => Yii::t('app', 'Create Node')
-                        ]);
-                    },
-                    'view_nodes' => function ($url, $data, $key) {
-                        return Html::a('', Url::toRoute(['node/index', 'quest_id' => $data->id]), [
-                            'class' => 'view-nodes',
-                            'title' => Yii::t('app', 'View Nodes')
-                        ]);
-                    },
-                    'edit_tree' => function ($url, $data, $key) {
-                        return Html::a('', Url::toRoute(['quest/visual', 'quest_id' => $data->id]), [
-                            'class' => 'edit-tree',
-                            'title' => Yii::t('app', 'Update Quest Tree')
-                        ]);
-                    },*/
                 ],
                 'contentOptions' =>  ['style' => 'text-align: center;']
-            ],
+            ],*/
 		],
-	]); ?>
+	]);?>
 
 </div>
