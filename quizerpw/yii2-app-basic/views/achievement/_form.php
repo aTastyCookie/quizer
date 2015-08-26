@@ -17,13 +17,14 @@ use app\models\Achievement;
 
     <?php echo $form->field($achiv, 'name')->textInput(['maxlength' => true]) ?>
     <?php echo $form->field($achiv, 'description')->textarea(['maxlength' => true]) ?>
+    <?php echo $form->field($achiv, 'conditions')->textarea(['maxlength' => true]) ?>
     <?php echo $form->field($achiv, 'image')->fileInput() ?>
     <?php echo $form->field($achiv, 'type')->dropDownList([
         Achievement::TYPE_UNIQUE => 'уникальная',
         Achievement::TYPE_ON_ANSWER => 'после ответа',
         Achievement::TYPE_ON_QUEST_END => 'после завершения квеста'
     ]) ?>
-    <?php echo $form->field($achiv, 'conditions')->textarea() ?>
+    <?php echo $form->field($achiv, 'code')->fileInput() ?>
 
     <div class="form-group">
         <?php echo Html::submitButton($achiv->isNewRecord ? Yii::t('app', 'Create') : Yii::t('app', 'Update'), ['class' => $achiv->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>

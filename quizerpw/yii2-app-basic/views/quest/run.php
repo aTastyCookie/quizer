@@ -88,3 +88,9 @@ $this->params['breadcrumbs'][] = $this->title;
     <?php endif?>
     <?php endif?>
 </div>
+
+<?php if($achiv_name = Yii::$app->getSession()->getFlash('achievement')):?>
+    <script>
+        alert('Вы получили новое достижение: "<?echo $achiv_name?>"!');
+    </script>
+<?php endif?>

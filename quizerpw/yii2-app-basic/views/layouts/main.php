@@ -44,6 +44,7 @@ AppAsset::register($this);
                     ['label' => 'Главная', 'url' => Url::toRoute('/site/index')],
                     ['label' => 'Профайл', 'url' => ['/user/settings/profile'], 'visible' => !Yii::$app->user->isGuest],
                     ['label' => 'Квесты', 'url' => Url::toRoute('/quest/index'), 'visible' => !Yii::$app->user->isGuest],
+                    ['label' => 'Достижения', 'url' => Url::toRoute('/achievement/index'), 'visible' => !Yii::$app->user->isGuest],
                     ['label' => 'Войти', 'url' => ['/user/security/login'], 'visible' => Yii::$app->user->isGuest],
                     [
                         'label' => 'Выйти ('.Yii::$app->user->identity->username.')',

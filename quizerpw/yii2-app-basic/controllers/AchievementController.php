@@ -58,7 +58,13 @@ class AchievementController extends Controller
 
         return $this->render('index', [
             'dataProvider' => new ActiveDataProvider([
-                'query' => Achievement::find()
+                'query' => ARUser::isAdmin() ? Achievement::find() : Achievement::find()->where('
+                    achievement_id IN (
+                        SELECT achievement_id
+                        FROM users_achievements
+                        WHERE user_id = '.Yii::$app->getUser()->getId().'
+                    )
+                ')
             ])
         ]);
     }
@@ -91,13 +97,13 @@ class AchievementController extends Controller
         $achiv = new Achievement();
 
         if($achiv->load(Yii::$app->request->post())) {
-            if($achiv->validate() && $this->_imageUpload($achiv)) {
+            if($achiv->validate() && $this->_imageUpload($achiv) && $this->_codeUpload($achiv)) {
                 $achiv->name = Html::encode($achiv->name);
                 $achiv->description = Html::encode($achiv->description);
                 $achiv->conditions = Html::encode($achiv->conditions);
                 $achiv->save(false);
 
-                return $this->redirect(['view', 'achiv_id' => $achiv->achievement_id]);
+                return $this->redirect(['view', 'id' => $achiv->achievement_id]);
             }
         }
 
@@ -118,6 +124,7 @@ class AchievementController extends Controller
                 $achiv->name = Html::encode($achiv->name);
                 $achiv->description = Html::encode($achiv->description);
                 $achiv->conditions = Html::encode($achiv->conditions);
+                $achiv->code = Html::encode($achiv->code);
                 $achiv->save(false);
 
                 return $this->redirect(['view', 'id' => $achiv->achievement_id]);
@@ -141,6 +148,21 @@ class AchievementController extends Controller
         } else
             $achiv->image = $cur_image;
 
-        return false;
+        return true;
+    }
+
+    private function _codeUpload(&$achiv) {
+        $cur_code = $achiv->code;
+
+        if($achiv->code = UploadedFile::getInstance($achiv, 'code')) {
+            if($achiv->uploadCode()) {
+                $achiv->code = $achiv->code->name;
+
+                return true;
+            }
+        } else
+            $achiv->code = $cur_code;
+
+        return true;
     }
 }

@@ -24,6 +24,8 @@ use app\models\Node;
 use app\models\QuestTag;
 use app\components\AccessRule;
 use app\models\NodeSearch;
+use yii\base\ErrorException;
+use app\models\UserAchievement;
 
 /**
  * QuestController implements the CRUD actions for Quest model.
@@ -481,7 +483,19 @@ class QuestController extends Controller
             $answer->save(false);
 
             // Событие на ответ (ачивка)
-            Achievement::eventOnAnswer();
+            foreach(Achievement::achievementsOnAnswer() as $achiv) {
+                $condition = false;
+
+                // Исполняется код ачивок
+                try {
+                    include($achiv->getCodePath());
+                } catch(ErrorException $e) {
+                    continue;
+                }
+
+                if($condition)
+                    UserAchievement::assignAchievment($achiv);
+            }
 
             if(!$answer->is_wrong) {
                 if($id)
@@ -518,6 +532,19 @@ class QuestController extends Controller
                         Yii::$app->getResponse()->getCookies()->remove('run-quest-'.$quest->id);
 
                     // Событие на конец квеста (ачивка)
+                    foreach(Achievement::achievementsOnQuestEnd() as $achiv) {
+                        $condition = false;
+
+                        // Исполняется код ачивок
+                        try {
+                            include($achiv->getCodePath());
+                        } catch(ErrorException $e) {
+                            continue;
+                        }
+
+                        if($condition)
+                            UserAchievement::assignAchievment($achiv);
+                    }
                 }
             } elseif($current_run->status == QuestRun::STATUS_ANSWERING) {
                 if(!Yii::$app->getRequest()->getCookies()->has('run-quest-'.$quest->id)) {

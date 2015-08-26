@@ -2,47 +2,15 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="dba62d52-26c3-4b8a-bb4e-17dfecb8afb7" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/quizerpw/yii2-app-basic/web/images/highscores.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/quizerpw/yii2-app-basic/web/images/statistics.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/quizerpw/yii2-app-basic/web/images/user-question-conformity.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/quizerpw/yii2-app-basic/models/Achievement.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/quizerpw/yii2-app-basic/controllers/AchievementController.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/quizerpw/yii2-app-basic/views/achievement/_form.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/quizerpw/yii2-app-basic/views/quest/conformity.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/quizerpw/yii2-app-basic/views/achievement/create.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/quizerpw/yii2-app-basic/views/quest/highscores.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/quizerpw/yii2-app-basic/views/achievement/index.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/quizerpw/yii2-app-basic/views/quest/run-answers.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/quizerpw/yii2-app-basic/views/achievement/update.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/quizerpw/yii2-app-basic/views/achievement/view.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/quizerpw/yii2-app-basic/models/ARUser.php" afterPath="$PROJECT_DIR$/quizerpw/yii2-app-basic/models/ARUser.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/quizerpw/yii2-app-basic/models/Node.php" afterPath="$PROJECT_DIR$/quizerpw/yii2-app-basic/models/Node.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/quizerpw/yii2-app-basic/models/NodeAnswer.php" afterPath="$PROJECT_DIR$/quizerpw/yii2-app-basic/models/NodeAnswer.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/quizerpw/yii2-app-basic/controllers/NodeController.php" afterPath="$PROJECT_DIR$/quizerpw/yii2-app-basic/controllers/NodeController.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/quizerpw/yii2-app-basic/models/Quest.php" afterPath="$PROJECT_DIR$/quizerpw/yii2-app-basic/models/Quest.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/quizerpw/yii2-app-basic/models/UserAchievement.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/quizerpw/yii2-app-basic/models/Achievement.php" afterPath="$PROJECT_DIR$/quizerpw/yii2-app-basic/models/Achievement.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/quizerpw/yii2-app-basic/controllers/AchievementController.php" afterPath="$PROJECT_DIR$/quizerpw/yii2-app-basic/controllers/AchievementController.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/quizerpw/yii2-app-basic/controllers/QuestController.php" afterPath="$PROJECT_DIR$/quizerpw/yii2-app-basic/controllers/QuestController.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/quizerpw/yii2-app-basic/models/QuestRun.php" afterPath="$PROJECT_DIR$/quizerpw/yii2-app-basic/models/QuestRun.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/quizerpw/yii2-app-basic/models/User.php" afterPath="$PROJECT_DIR$/quizerpw/yii2-app-basic/models/User.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/quizerpw/yii2-app-basic/views/node/_form.php" afterPath="$PROJECT_DIR$/quizerpw/yii2-app-basic/views/node/_form.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/quizerpw/yii2-app-basic/views/quest/_form.php" afterPath="$PROJECT_DIR$/quizerpw/yii2-app-basic/views/quest/_form.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/quizerpw/yii2-app-basic/views/node/_search.php" afterPath="$PROJECT_DIR$/quizerpw/yii2-app-basic/views/node/_search.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/quizerpw/yii2-app-basic/messages/ru-RU/app.php" afterPath="$PROJECT_DIR$/quizerpw/yii2-app-basic/messages/ru-RU/app.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/quizerpw/yii2-app-basic/config/rbac/assignments.php" afterPath="$PROJECT_DIR$/quizerpw/yii2-app-basic/config/rbac/assignments.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/quizerpw/yii2-app-basic/views/node/create.php" afterPath="$PROJECT_DIR$/quizerpw/yii2-app-basic/views/node/create.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/quizerpw/yii2-app-basic/views/quest/create.php" afterPath="$PROJECT_DIR$/quizerpw/yii2-app-basic/views/quest/create.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/quizerpw/yii2-app-basic/views/node/index.php" afterPath="$PROJECT_DIR$/quizerpw/yii2-app-basic/views/node/index.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/quizerpw/yii2-app-basic/views/achievement/_form.php" afterPath="$PROJECT_DIR$/quizerpw/yii2-app-basic/views/achievement/_form.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/quizerpw/yii2-app-basic/views/achievement/index.php" afterPath="$PROJECT_DIR$/quizerpw/yii2-app-basic/views/achievement/index.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/quizerpw/yii2-app-basic/views/quest/index.php" afterPath="$PROJECT_DIR$/quizerpw/yii2-app-basic/views/quest/index.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/quizerpw/yii2-app-basic/web/css/jquery-ui/jquery-ui.min.css" afterPath="$PROJECT_DIR$/quizerpw/yii2-app-basic/web/css/jquery-ui/jquery-ui.min.css" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/quizerpw/yii2-app-basic/views/layouts/main.php" afterPath="$PROJECT_DIR$/quizerpw/yii2-app-basic/views/layouts/main.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/quizerpw/yii2-app-basic/views/quest/run.php" afterPath="$PROJECT_DIR$/quizerpw/yii2-app-basic/views/quest/run.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/quizerpw/yii2-app-basic/views/quest/statistics.php" afterPath="$PROJECT_DIR$/quizerpw/yii2-app-basic/views/quest/statistics.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/quizerpw/yii2-app-basic/views/node/update.php" afterPath="$PROJECT_DIR$/quizerpw/yii2-app-basic/views/node/update.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/quizerpw/yii2-app-basic/views/quest/update.php" afterPath="$PROJECT_DIR$/quizerpw/yii2-app-basic/views/quest/update.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/quizerpw/yii2-app-basic/views/quest/user-statistics.php" afterPath="$PROJECT_DIR$/quizerpw/yii2-app-basic/views/quest/user-statistics.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/quizerpw/yii2-app-basic/views/node/view.php" afterPath="$PROJECT_DIR$/quizerpw/yii2-app-basic/views/node/view.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/quizerpw/yii2-app-basic/views/quest/view.php" afterPath="$PROJECT_DIR$/quizerpw/yii2-app-basic/views/quest/view.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/quizerpw/yii2-app-basic/views/quest/visual.php" afterPath="$PROJECT_DIR$/quizerpw/yii2-app-basic/views/quest/visual.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/quizerpw/yii2-app-basic/config/web.php" afterPath="$PROJECT_DIR$/quizerpw/yii2-app-basic/config/web.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="quizer.local.iws" />
@@ -68,22 +36,22 @@
       <file leaf-file-name="QuestController.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/quizerpw/yii2-app-basic/controllers/QuestController.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-17.0">
-              <caret line="483" column="32" selection-start-line="483" selection-start-column="32" selection-end-line="483" selection-end-column="32" />
+            <state vertical-scroll-proportion="-1.6923077">
+              <caret line="534" column="78" selection-start-line="534" selection-start-column="78" selection-end-line="534" selection-end-column="78" />
               <folding>
                 <element signature="e#35#62#0#PHP" expanded="true" />
-                <marker date="1440511520014" expanded="true" signature="8770:8820" placeholder="DELETE FROM ..." />
-                <marker date="1440511520014" expanded="true" signature="12512:12562" placeholder="DELETE FROM ..." />
+                <marker date="1440595895794" expanded="true" signature="8831:8881" placeholder="DELETE FROM ..." />
+                <marker date="1440595895794" expanded="true" signature="12573:12623" placeholder="DELETE FROM ..." />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="AchievementController.php" pinned="false" current-in-tab="false">
+      <file leaf-file-name="AchievementController.php" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/quizerpw/yii2-app-basic/controllers/AchievementController.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-10.846154">
-              <caret line="122" column="51" selection-start-line="122" selection-start-column="51" selection-end-line="122" selection-end-column="51" />
+            <state vertical-scroll-proportion="0.37781352">
+              <caret line="56" column="35" selection-start-line="56" selection-start-column="35" selection-end-line="56" selection-end-column="35" />
               <folding>
                 <element signature="e#35#43#0#PHP" expanded="true" />
               </folding>
@@ -91,43 +59,35 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="view.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/quizerpw/yii2-app-basic/views/achievement/view.php">
+      <file leaf-file-name="run.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/quizerpw/yii2-app-basic/views/quest/run.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-9.807693">
-              <caret line="19" column="93" selection-start-line="19" selection-start-column="93" selection-end-line="19" selection-end-column="93" />
+            <state vertical-scroll-proportion="-18.692308">
+              <caret line="93" column="64" selection-start-line="93" selection-start-column="64" selection-end-line="93" selection-end-column="64" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="update.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/quizerpw/yii2-app-basic/views/achievement/update.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-10.461538">
-              <caret line="17" column="26" selection-start-line="17" selection-start-column="26" selection-end-line="17" selection-end-column="26" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Achievement.php" pinned="false" current-in-tab="true">
+      <file leaf-file-name="Achievement.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/quizerpw/yii2-app-basic/models/Achievement.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.7540193">
-              <caret line="90" column="86" selection-start-line="90" selection-start-column="86" selection-end-line="90" selection-end-column="86" />
-              <folding />
+            <state vertical-scroll-proportion="-14.769231">
+              <caret line="137" column="52" selection-start-line="137" selection-start-column="52" selection-end-line="137" selection-end-column="52" />
+              <folding>
+                <element signature="e#29#37#0#PHP" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="NodeController.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/quizerpw/yii2-app-basic/controllers/NodeController.php">
+      <file leaf-file-name="index.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/quizerpw/yii2-app-basic/views/quest/index.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-7.9615383">
-              <caret line="123" column="13" selection-start-line="123" selection-start-column="13" selection-end-line="124" selection-end-column="38" />
+            <state vertical-scroll-proportion="-18.038462">
+              <caret line="338" column="46" selection-start-line="338" selection-start-column="46" selection-end-line="338" selection-end-column="46" />
               <folding>
-                <element signature="e#35#65#0#PHP" expanded="true" />
+                <element signature="e#7#28#0#PHP" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -136,21 +96,11 @@
       <file leaf-file-name="_form.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/quizerpw/yii2-app-basic/views/achievement/_form.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-14.769231">
-              <caret line="25" column="47" selection-start-line="25" selection-start-column="47" selection-end-line="25" selection-end-column="47" />
+            <state vertical-scroll-proportion="-15.423077">
+              <caret line="26" column="45" selection-start-line="26" selection-start-column="45" selection-end-line="26" selection-end-column="45" />
               <folding>
                 <element signature="e#7#28#0#PHP" expanded="true" />
               </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="create.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/quizerpw/yii2-app-basic/views/achievement/create.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-5.8846154">
-              <caret line="9" column="98" selection-start-line="9" selection-start-column="98" selection-end-line="9" selection-end-column="98" />
-              <folding />
             </state>
           </provider>
         </entry>
@@ -158,21 +108,11 @@
       <file leaf-file-name="index.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/quizerpw/yii2-app-basic/views/achievement/index.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-4.3076925">
-              <caret line="12" column="0" selection-start-line="12" selection-start-column="0" selection-end-line="12" selection-end-column="0" />
+            <state vertical-scroll-proportion="-8.884615">
+              <caret line="20" column="77" selection-start-line="20" selection-start-column="77" selection-end-line="20" selection-end-column="77" />
               <folding>
                 <element signature="e#7#28#0#PHP" expanded="true" />
               </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="ARUser.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/quizerpw/yii2-app-basic/models/ARUser.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-20.0">
-              <caret line="95" column="5" selection-start-line="95" selection-start-column="5" selection-end-line="95" selection-end-column="5" />
-              <folding />
             </state>
           </provider>
         </entry>
@@ -185,10 +125,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/quizerpw/yii2-app-basic/vendor/yiisoft/yii2/web/User.php" />
-        <option value="$PROJECT_DIR$/quizerpw/yii2-app-basic/components/AccessRule.php" />
-        <option value="$PROJECT_DIR$/quizerpw/yii2-app-basic/web/js/tree.css" />
-        <option value="$PROJECT_DIR$/quizerpw/yii2-app-basic/models/NodesAnswers.php" />
         <option value="$PROJECT_DIR$/quizerpw/yii2-app-basic/models/NodesConnections.php" />
         <option value="$PROJECT_DIR$/quizerpw/yii2-app-basic/models/QuestsRuns.php" />
         <option value="$PROJECT_DIR$/quizerpw/yii2-app-basic/web/index.php" />
@@ -213,29 +149,33 @@
         <option value="$PROJECT_DIR$/quizerpw/yii2-app-basic/web/assets/nodextfi/d41d8cd98f00b204e9800998ecf8427e.css" />
         <option value="$PROJECT_DIR$/quizerpw/yii2-app-basic/web/assets/nodextfi/a9beb269fd81b26dd14746a94638a394.css" />
         <option value="$PROJECT_DIR$/quizerpw/yii2-app-basic/web/assets/nodextfi/a9beb269fd81b26dd14746a94638a394.js" />
-        <option value="$PROJECT_DIR$/quizerpw/yii2-app-basic/views/layouts/main.php" />
         <option value="$PROJECT_DIR$/quizerpw/yii2-app-basic/web/css/jquery-ui/jquery-ui.min.css" />
         <option value="$PROJECT_DIR$/quizerpw/yii2-app-basic/views/quest/visual.php" />
         <option value="$PROJECT_DIR$/quizerpw/yii2-app-basic/controllers/NodeController.php" />
-        <option value="$PROJECT_DIR$/quizerpw/yii2-app-basic/views/quest/run.php" />
         <option value="$PROJECT_DIR$/quizerpw/yii2-app-basic/web/assets/nodsucfi/a9beb269fd81b26dd14746a94638a394.css" />
         <option value="$PROJECT_DIR$/quizerpw/yii2-app-basic/views/node/_form.php" />
         <option value="$PROJECT_DIR$/quizerpw/yii2-app-basic/views/quest/highscores.php" />
         <option value="$PROJECT_DIR$/quizerpw/yii2-app-basic/messages/ru-RU/app.php" />
-        <option value="$PROJECT_DIR$/quizerpw/yii2-app-basic/views/quest/index.php" />
         <option value="$PROJECT_DIR$/quizerpw/yii2-app-basic/config/web.php" />
         <option value="$PROJECT_DIR$/quizerpw/yii2-app-basic/models/Node.php" />
         <option value="$PROJECT_DIR$/quizerpw/yii2-app-basic/views/quest/conformity.php" />
         <option value="$PROJECT_DIR$/quizerpw/yii2-app-basic/models/User.php" />
         <option value="$PROJECT_DIR$/quizerpw/yii2-app-basic/models/ARUser.php" />
-        <option value="$PROJECT_DIR$/quizerpw/yii2-app-basic/views/achievement/_form.php" />
-        <option value="$PROJECT_DIR$/quizerpw/yii2-app-basic/views/achievement/index.php" />
         <option value="$PROJECT_DIR$/quizerpw/yii2-app-basic/views/achievement/update.php" />
         <option value="$PROJECT_DIR$/quizerpw/yii2-app-basic/views/achievement/create.php" />
         <option value="$PROJECT_DIR$/quizerpw/yii2-app-basic/views/achievement/view.php" />
-        <option value="$PROJECT_DIR$/quizerpw/yii2-app-basic/controllers/AchievementController.php" />
+        <option value="$PROJECT_DIR$/quizerpw/yii2-app-basic/views/quest/index.php" />
+        <option value="$PROJECT_DIR$/quizerpw/yii2-app-basic/views/layouts/main.php" />
+        <option value="$PROJECT_DIR$/quizerpw/yii2-app-basic/views/achievement/_form.php" />
+        <option value="$PROJECT_DIR$/quizerpw/yii2-app-basic/web/assets/achicode/6b50e2cf373bbff86a6784ed8d9535e0.php" />
+        <option value="$PROJECT_DIR$/quizerpw/yii2-app-basic/web/assets/achicode/3ad2369ad5ada461f9f8d95e9e8e3b4c.php" />
+        <option value="$PROJECT_DIR$/quizerpw/yii2-app-basic/views/quest/run.php" />
         <option value="$PROJECT_DIR$/quizerpw/yii2-app-basic/controllers/QuestController.php" />
+        <option value="$PROJECT_DIR$/quizerpw/yii2-app-basic/models/UserAchievement.php" />
         <option value="$PROJECT_DIR$/quizerpw/yii2-app-basic/models/Achievement.php" />
+        <option value="$PROJECT_DIR$/quizerpw/yii2-app-basic/web/assets/achicode/06312d621345159c2732ba7c304330c8.php" />
+        <option value="$PROJECT_DIR$/quizerpw/yii2-app-basic/controllers/AchievementController.php" />
+        <option value="$PROJECT_DIR$/quizerpw/yii2-app-basic/views/achievement/index.php" />
       </list>
     </option>
   </component>
@@ -279,6 +219,7 @@
       <sortByType />
     </navigator>
     <panes>
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -371,6 +312,36 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
+              <option name="myItemId" value="web" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="assets" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="achicode" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="quizer.local" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="quizer.local" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="quizerpw" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="yii2-app-basic" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
               <option name="myItemId" value="views" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
@@ -398,58 +369,6 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="quest" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="quizer.local" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="quizer.local" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="quizerpw" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="yii2-app-basic" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="views" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="node" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="quizer.local" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="quizer.local" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="quizerpw" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="yii2-app-basic" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="views" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="layouts" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -654,7 +573,6 @@
         </subPane>
       </pane>
       <pane id="Scratches" />
-      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -666,8 +584,8 @@
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
-      <recent name="E:\OpenServer\domains\quizer.local\quizerpw\yii2-app-basic\views\achievement" />
       <recent name="E:\OpenServer\domains\quizer.local\quizerpw\yii2-app-basic\models" />
+      <recent name="E:\OpenServer\domains\quizer.local\quizerpw\yii2-app-basic\views\achievement" />
       <recent name="E:\OpenServer\domains\quizer.local\quizerpw\yii2-app-basic\views\quest" />
       <recent name="E:\OpenServer\domains\quizer.local\quizerpw\yii2-app-basic\web\images" />
       <recent name="E:\OpenServer\domains\quizer.local\quizerpw\yii2-app-basic\web\css\jquery-ui" />
@@ -715,7 +633,7 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1382" height="784" extended-state="7" />
+    <frame x="-8" y="-8" width="1382" height="784" extended-state="0" />
     <editor active="true" />
     <layout>
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.23718888" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
@@ -723,6 +641,7 @@
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32988167" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
@@ -734,7 +653,6 @@
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32988167" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
     </layout>
@@ -755,34 +673,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/quizerpw/yii2-app-basic/views/quest/statistics.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-5.1153846">
-          <caret line="27" column="14" selection-start-line="27" selection-start-column="14" selection-end-line="27" selection-end-column="14" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/quizerpw/yii2-app-basic/views/quest/update.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-8.807693">
-          <caret line="16" column="14" selection-start-line="16" selection-start-column="14" selection-end-line="16" selection-end-column="14" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/quizerpw/yii2-app-basic/views/quest/view.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-5.1153846">
-          <caret line="27" column="14" selection-start-line="27" selection-start-column="14" selection-end-line="27" selection-end-column="14" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/quizerpw/yii2-app-basic/views/quest/create.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-10.461538">
-          <caret line="16" column="4" selection-start-line="16" selection-start-column="4" selection-end-line="16" selection-end-column="4" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/quizerpw/yii2-app-basic/assets/AppAsset.php">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-5.8846154">
@@ -801,7 +691,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -852,7 +741,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.3585209">
           <caret line="53" column="10" selection-start-line="53" selection-start-column="10" selection-end-line="53" selection-end-column="10" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -898,13 +786,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/quizerpw/yii2-app-basic/views/layouts/main.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.27331188">
-          <caret line="43" column="52" selection-start-line="43" selection-start-column="52" selection-end-line="43" selection-end-column="52" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/quizerpw/yii2-app-basic/views/quest/visual.php">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-13.730769">
@@ -926,18 +807,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/quizerpw/yii2-app-basic/views/quest/run.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-10.846154">
-          <caret line="71" column="19" selection-start-line="71" selection-start-column="19" selection-end-line="71" selection-end-column="19" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/quizerpw/yii2-app-basic/views/node/_form.php">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="24" column="57" selection-start-line="24" selection-start-column="57" selection-end-line="24" selection-end-column="57" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -945,17 +818,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="44" column="35" selection-start-line="44" selection-start-column="35" selection-end-line="44" selection-end-column="35" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/quizerpw/yii2-app-basic/views/quest/index.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="327" column="81" selection-start-line="327" selection-start-column="54" selection-end-line="327" selection-end-column="81" />
-          <folding>
-            <element signature="e#7#28#0#PHP" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -963,7 +825,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.3006431">
           <caret line="15" column="6" selection-start-line="15" selection-start-column="6" selection-end-line="15" selection-end-column="6" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -971,7 +832,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.8938907">
           <caret line="88" column="36" selection-start-line="88" selection-start-column="28" selection-end-line="88" selection-end-column="36" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -979,7 +839,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.511254">
           <caret line="1190" column="20" selection-start-line="1190" selection-start-column="20" selection-end-line="1190" selection-end-column="20" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -987,7 +846,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.34726688">
           <caret line="542" column="20" selection-start-line="542" selection-start-column="20" selection-end-line="542" selection-end-column="20" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -995,7 +853,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-8.961538">
           <caret line="811" column="40" selection-start-line="811" selection-start-column="7" selection-end-line="811" selection-end-column="40" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1010,7 +867,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="32" column="93" selection-start-line="32" selection-start-column="51" selection-end-line="32" selection-end-column="93" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1018,7 +874,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="23" column="35" selection-start-line="23" selection-start-column="35" selection-end-line="23" selection-end-column="35" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1026,9 +881,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-0.0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="34" selection-end-column="5" />
-          <folding>
-            <element signature="e#35#43#0#PHP" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1036,7 +888,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.5192926">
           <caret line="19" column="102" selection-start-line="19" selection-start-column="26" selection-end-line="19" selection-end-column="102" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1044,25 +895,14 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-18.692308">
           <caret line="100" column="5" selection-start-line="100" selection-start-column="5" selection-end-line="100" selection-end-column="5" />
-          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/quizerpw/yii2-app-basic/models/ARUser.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-20.0">
+        <state vertical-scroll-proportion="0.0">
           <caret line="95" column="5" selection-start-line="95" selection-start-column="5" selection-end-line="95" selection-end-column="5" />
           <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/quizerpw/yii2-app-basic/views/achievement/_form.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-14.769231">
-          <caret line="25" column="47" selection-start-line="25" selection-start-column="47" selection-end-line="25" selection-end-column="47" />
-          <folding>
-            <element signature="e#7#28#0#PHP" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1078,81 +918,150 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.7926045">
           <caret line="98" column="5" selection-start-line="78" selection-start-column="4" selection-end-line="98" selection-end-column="5" />
-          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/quizerpw/yii2-app-basic/controllers/NodeController.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-7.9615383">
+        <state vertical-scroll-proportion="0.0">
           <caret line="123" column="13" selection-start-line="123" selection-start-column="13" selection-end-line="124" selection-end-column="38" />
           <folding>
-            <element signature="e#35#65#0#PHP" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/quizerpw/yii2-app-basic/views/achievement/index.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-4.3076925">
-          <caret line="12" column="0" selection-start-line="12" selection-start-column="0" selection-end-line="12" selection-end-column="0" />
-          <folding>
-            <element signature="e#7#28#0#PHP" expanded="true" />
+            <element signature="e#35#65#0#PHP" expanded="false" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/quizerpw/yii2-app-basic/views/achievement/create.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-5.8846154">
+        <state vertical-scroll-proportion="0.0">
           <caret line="9" column="98" selection-start-line="9" selection-start-column="98" selection-end-line="9" selection-end-column="98" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/quizerpw/yii2-app-basic/views/achievement/update.php">
+    <entry file="file://$PROJECT_DIR$/quizerpw/yii2-app-basic/views/layouts/main.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-10.461538">
-          <caret line="17" column="26" selection-start-line="17" selection-start-column="26" selection-end-line="17" selection-end-column="26" />
+        <state vertical-scroll-proportion="-8.807693">
+          <caret line="46" column="131" selection-start-line="46" selection-start-column="131" selection-end-line="46" selection-end-column="131" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/quizerpw/yii2-app-basic/views/achievement/_form.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-15.423077">
+          <caret line="26" column="45" selection-start-line="26" selection-start-column="45" selection-end-line="26" selection-end-column="45" />
+          <folding>
+            <element signature="e#7#28#0#PHP" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/quizerpw/yii2-app-basic/views/achievement/view.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-9.807693">
+        <state vertical-scroll-proportion="-7.576923">
           <caret line="19" column="93" selection-start-line="19" selection-start-column="93" selection-end-line="19" selection-end-column="93" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/quizerpw/yii2-app-basic/controllers/AchievementController.php">
+    <entry file="file://$PROJECT_DIR$/quizerpw/yii2-app-basic/web/assets/achicode/6b50e2cf373bbff86a6784ed8d9535e0.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-10.846154">
-          <caret line="122" column="51" selection-start-line="122" selection-start-column="51" selection-end-line="122" selection-end-column="51" />
-          <folding>
-            <element signature="e#35#43#0#PHP" expanded="true" />
-          </folding>
+        <state vertical-scroll-proportion="0.08199357">
+          <caret line="3" column="22" selection-start-line="3" selection-start-column="22" selection-end-line="3" selection-end-column="22" />
+          <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/quizerpw/yii2-app-basic/controllers/QuestController.php">
+    <entry file="file://$PROJECT_DIR$/quizerpw/yii2-app-basic/web/assets/achicode/3ad2369ad5ada461f9f8d95e9e8e3b4c.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-17.0">
-          <caret line="483" column="32" selection-start-line="483" selection-start-column="32" selection-end-line="483" selection-end-column="32" />
-          <folding>
-            <element signature="e#35#62#0#PHP" expanded="true" />
-            <marker date="1440511520014" expanded="true" signature="8770:8820" placeholder="DELETE FROM ..." />
-            <marker date="1440511520014" expanded="true" signature="12512:12562" placeholder="DELETE FROM ..." />
-          </folding>
+        <state vertical-scroll-proportion="-5.8846154">
+          <caret line="9" column="24" selection-start-line="9" selection-start-column="24" selection-end-line="9" selection-end-column="24" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/quizerpw/yii2-app-basic/models/UserAchievement.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-18.692308">
+          <caret line="68" column="5" selection-start-line="68" selection-start-column="5" selection-end-line="68" selection-end-column="5" />
+          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/quizerpw/yii2-app-basic/models/Achievement.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.7540193">
-          <caret line="90" column="86" selection-start-line="90" selection-start-column="86" selection-end-line="90" selection-end-column="86" />
+        <state vertical-scroll-proportion="-14.769231">
+          <caret line="137" column="52" selection-start-line="137" selection-start-column="52" selection-end-line="137" selection-end-column="52" />
+          <folding>
+            <element signature="e#29#37#0#PHP" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/quizerpw/yii2-app-basic/web/assets/achicode/06312d621345159c2732ba7c304330c8.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-1.9615384">
+          <caret line="3" column="22" selection-start-line="3" selection-start-column="22" selection-end-line="3" selection-end-column="22" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/quizerpw/yii2-app-basic/controllers/QuestController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-1.6923077">
+          <caret line="534" column="78" selection-start-line="534" selection-start-column="78" selection-end-line="534" selection-end-column="78" />
+          <folding>
+            <element signature="e#35#62#0#PHP" expanded="true" />
+            <marker date="1440595895794" expanded="true" signature="8831:8881" placeholder="DELETE FROM ..." />
+            <marker date="1440595895794" expanded="true" signature="12573:12623" placeholder="DELETE FROM ..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/quizerpw/yii2-app-basic/views/quest/index.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-18.038462">
+          <caret line="338" column="46" selection-start-line="338" selection-start-column="46" selection-end-line="338" selection-end-column="46" />
+          <folding>
+            <element signature="e#7#28#0#PHP" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/quizerpw/yii2-app-basic/views/achievement/update.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.43729904">
+          <caret line="17" column="26" selection-start-line="17" selection-start-column="26" selection-end-line="17" selection-end-column="26" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/quizerpw/yii2-app-basic/views/quest/run.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-18.692308">
+          <caret line="93" column="64" selection-start-line="93" selection-start-column="64" selection-end-line="93" selection-end-column="64" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/quizerpw/yii2-app-basic/views/achievement/index.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-8.884615">
+          <caret line="20" column="77" selection-start-line="20" selection-start-column="77" selection-end-line="20" selection-end-column="77" />
+          <folding>
+            <element signature="e#7#28#0#PHP" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/quizerpw/yii2-app-basic/controllers/AchievementController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.37781352">
+          <caret line="56" column="35" selection-start-line="56" selection-start-column="35" selection-end-line="56" selection-end-column="35" />
+          <folding>
+            <element signature="e#35#43#0#PHP" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>

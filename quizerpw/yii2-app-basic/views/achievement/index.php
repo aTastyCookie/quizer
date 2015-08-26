@@ -2,6 +2,7 @@
 
 use yii\helpers\Html;
 use yii\grid\GridView;
+use app\models\ARUser;
 
 /* @var $this yii\web\View */
 /* @var $searchModel app\models\NodeSearch */
@@ -15,7 +16,10 @@ $this->params['breadcrumbs'][] = $this->title;
 
     <h1><?php echo Html::encode($this->title) ?></h1>
 
-    <p><?=Html::a(Yii::t('app', 'Create Achievement'), ['achievement/create'], ['class' => 'btn btn-success'])?></p>
+    <?php if(ARUser::isAdmin()):?>
+        <p><?=Html::a(Yii::t('app', 'Create Achievement'), ['achievement/create'], ['class' => 'btn btn-success'])?></p>
+        <p><?=Html::a(Yii::t('app', 'Issue Achievement'), ['achievement/issue'], ['class' => 'btn btn-success'])?></p>
+    <?endif?>
 
     <?php echo GridView::widget([
         'dataProvider' => $dataProvider,
@@ -23,11 +27,27 @@ $this->params['breadcrumbs'][] = $this->title;
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
 
-            'achievement_id',
-            'name',
-            'description',
-            'image',
-            'type',
+            [
+                'attribute' => 'name'
+            ],
+            [
+                'attribute' => 'description',
+            ],
+            [
+                'attribute' => 'conditions',
+            ],
+            [
+                'attribute' => 'image',
+                'visible' => ARUser::isAdmin()
+            ],
+            [
+                'attribute' => 'code',
+                'visible' => ARUser::isAdmin()
+            ],
+            [
+                'attribute' => 'type',
+                'visible' => ARUser::isAdmin()
+            ],
 
             ['class' => 'yii\grid\ActionColumn'],
         ],
