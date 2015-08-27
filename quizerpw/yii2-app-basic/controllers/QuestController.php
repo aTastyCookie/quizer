@@ -48,7 +48,8 @@ class QuestController extends Controller
                             'run',
                             'choose',
                             'highscores',
-                            'conformity'
+                            'conformity',
+                            'visual'
                         ],
                         'roles' => ['@']
                     ],
@@ -58,7 +59,6 @@ class QuestController extends Controller
                             'create',
                             'update',
                             'delete',
-                            'visual',
                             'save',
                             'check',
                             'preload',

@@ -14,6 +14,7 @@ use yii\helpers\Html;
 use yii\web\UploadedFile;
 use yii\web\NotFoundHttpException;
 use yii\web\BadRequestHttpException;
+use app\models\UserAchievement;
 
 class AchievementController extends Controller
 {
@@ -38,7 +39,8 @@ class AchievementController extends Controller
                             'view',
                             'create',
                             'update',
-                            'delete'
+                            'delete',
+                            'issue'
                         ],
                         'roles' => ['admin']
                     ]
@@ -133,6 +135,26 @@ class AchievementController extends Controller
 
         return $this->render('update', [
             'achiv' => $achiv,
+        ]);
+    }
+
+    public function actionIssue() {
+        $issue_achiv = new UserAchievement();
+
+        if($issue_achiv->load(Yii::$app->request->post())) {
+            if($issue_achiv->validate()) {
+                $issue_achiv->save(false);
+
+                Yii::$app->getSession()->setFlash('message', 'Вы успешно добавили пользователю достижение!');
+
+                return $this->redirect(['issue']);
+            }
+        }
+
+        return $this->render('issue', [
+            'issue_achiv' => $issue_achiv,
+            'users' => ARUser::find()->all(),
+            'achievements' => Achievement::find()->all()
         ]);
     }
 

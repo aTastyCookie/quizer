@@ -28,6 +28,11 @@ class UserAchievement extends \yii\db\ActiveRecord {
      */
     public function rules() {
         return [
+            [['user_id', 'achievement_id'], 'required'],
+            [['user_id', 'achievement_id'], 'integer'],
+            [['achievement_id'], 'unique', 'targetAttribute' => ['user_id', 'achievement_id'], 'message' => 'У этого пользователя уже есть данное достижение'],
+            [['user_id'], 'exist', 'targetClass' => 'app\models\ARUser', 'targetAttribute' => 'id'],
+            [['achievement_id'], 'exist', 'targetClass' => 'app\models\Achievement', 'targetAttribute' => 'achievement_id'],
             //[['type'], 'in', 'range' => [Achievement::TYPE_UNIQUE, Achievement::TYPE_ON_ANSWER, Achievement::TYPE_ON_QUEST_END]]
             /*[['name', 'number', 'quest_id', 'question', 'answer'], 'required'],
             [['quest_id', 'number', 'top', 'left', 'case_depend'], 'integer'],
@@ -56,6 +61,13 @@ class UserAchievement extends \yii\db\ActiveRecord {
 			'case_depend' => 'регистрозависимый ответ',
 			'time' => 'Время на ответ',*/
         ];
+    }
+
+    public function beforeSave($insert) {
+        if(empty($this->datetime))
+            $this->datetime = date('Y-m-d H:i:s');
+
+        return parent::beforeSave($insert);
     }
 
     public static function assignAchievment($achiv) {

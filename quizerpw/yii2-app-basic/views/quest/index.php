@@ -262,6 +262,17 @@ $this->params['breadcrumbs'][] = $this->title;
                 'attribute' => '',
                 'format' => 'raw',
                 'value' => function($data) {
+                    return Html::a(Yii::t('app', 'Quest Tree'), Url::toRoute(['quest/visual', 'quest_id' => $data->id]), [
+                        'class' => 'btn btn-success',
+                    ]);
+                },
+                'contentOptions' =>  ['style' => 'text-align: center;'],
+                'visible' => !ARUser::isAdmin()
+            ],
+            [
+                'attribute' => '',
+                'format' => 'raw',
+                'value' => function($data) {
                     $params = $data->url ? ['quest/run', 'url' => $data->url] : ['quest/run', 'id' => $data->id];
                     $date_begin = new \DateTime($data->date_start);
                     $date_end = new \DateTime($data->date_finish);

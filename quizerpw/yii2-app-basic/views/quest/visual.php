@@ -1,6 +1,7 @@
 <?php
 use yii\helpers\Html;
 use yii\helpers\Url;
+use app\models\ARUser;
 
 /* @var $this yii\web\View */
 /* @var $model app\models\Quest */
@@ -22,11 +23,13 @@ $this->params['breadcrumbs'][] = Yii::t('app', 'Update Quest Tree');
 <input type="hidden" id="quest_id" value="<?php echo $quest->id ?>" />
 
 <div id="main">
-    <div class="tree-panel">
-        <?php echo Html::a('', '#', ['class' => 'save-tree', 'onclick' => 'saveConnections(); return false;', 'title' => Yii::t('app', 'Save')]);?>&nbsp;&nbsp;
-        <?php echo Html::a('', Url::toRoute(['quest/update', 'id' => $quest->id]), ['class' => 'update-quest', 'title' => Yii::t('app', 'Update Quest')]);?>&nbsp;&nbsp;
-        <?php echo Html::a('', Url::toRoute(['node/create', 'quest_id' => $quest->id]), ['class' => 'add-node', 'title' => Yii::t('app', 'Create Node')]);?>
-    </div>
+    <?php if(ARUser::isAdmin()):?>
+        <div class="tree-panel">
+            <?php echo Html::a('', '#', ['class' => 'save-tree', 'onclick' => 'saveConnections(); return false;', 'title' => Yii::t('app', 'Save')]);?>&nbsp;&nbsp;
+            <?php echo Html::a('', Url::toRoute(['quest/update', 'id' => $quest->id]), ['class' => 'update-quest', 'title' => Yii::t('app', 'Update Quest')]);?>&nbsp;&nbsp;
+            <?php echo Html::a('', Url::toRoute(['node/create', 'quest_id' => $quest->id]), ['class' => 'add-node', 'title' => Yii::t('app', 'Create Node')]);?>
+        </div>
+    <?php endif?>
     <!-- demo -->
     <div class="demo flowchart-demo" id="flowchart-demo">
         <?php
@@ -48,136 +51,142 @@ $this->params['breadcrumbs'][] = Yii::t('app', 'Update Quest Tree');
                 }
             ?>
                 <div class="window" id="flowchartWindow<?php echo $node->id ?>" style="top: <?= $top ?>px; left: <?= $left; ?>px">
+                    <?php if(ARUser::isAdmin()):?>
                     <br/><br/><br/><strong><?php echo $node->name ?></strong>
-                    <?php echo Html::a('', Url::toRoute(['node/update', 'id' => $node->id]), ['class' => 'update-node', 'title' => Yii::t('app', 'Update Node')])?>
-                    <?php echo Html::a('', Url::toRoute(['node/delete', 'id' => $node->id]), ['class' => 'delete-node', 'title' => Yii::t('app', 'Delete Node')])?>
+                        <?php echo Html::a('', Url::toRoute(['node/update', 'id' => $node->id]), ['class' => 'update-node', 'title' => Yii::t('app', 'Update Node')])?>
+                        <?php echo Html::a('', Url::toRoute(['node/delete', 'id' => $node->id]), ['class' => 'delete-node', 'title' => Yii::t('app', 'Delete Node')])?>
+                    <?php endif?>
                 </div>
         <?php endforeach?>
     </div>
     <!-- /demo -->
 </div>
-<div id="create-node-popup"></div>
-<div id="update-node-popup"></div>
+<?php if(ARUser::isAdmin()):?>
+    <div id="create-node-popup"></div>
+    <div id="update-node-popup"></div>
+<?php endif?>
 <script>
-    $(document).ready(function() {
-        $('.add-node').click(function() {
-            var self = $(this);
-
-            $.ajax({
-                type: 'GET',
-                url: self.attr('href'),
-                success: function(response) {
-                    $('#create-node-popup').html(response);
-                    $('#create-node-popup').dialog({
-                        modal: true,
-                        width: 800,
-                        maxWidth: 800,
-                        maxHeight: 600,
-                        closeText: 'Закрыть',
-                        resizable: false,
-                        buttons: {
-                            'Ok': function() {
-                                var formData = new FormData($('.node-form form')[0]);
-
-                                $.ajax({
-                                    type: 'POST',
-                                    url: self.attr('href'),
-                                    data: formData,
-                                    processData: false,
-                                    contentType: false,
-                                    success: function(response) {
-                                        if(response)
-                                            $('#create-node-popup').html(response);
-                                        else
-                                            window.location.reload();
-                                    },
-                                    error: function(err) {
-                                        alert('Ошибка сервера');
-                                        console.log(err);
-                                    }
-                                });
-                            }
-                        }
-                    });
-                },
-                error: function(err) {
-                    alert('Ошибка сервера');
-                    console.log(err);
-                }
-            });
-
-            return false;
-        });
-
-        $('.update-node').click(function() {
-            var self = $(this);
-
-            $.ajax({
-                type: 'GET',
-                url: self.attr('href'),
-                success: function(response) {
-                    $('#update-node-popup').html(response);
-                    $('#update-node-popup').dialog({
-                        modal: true,
-                        width: 800,
-                        maxWidth: 800,
-                        maxHeight: 600,
-                        closeText: 'Закрыть',
-                        resizable: false,
-                        buttons: {
-                            'Ok': function() {
-                                var formData = new FormData($('.node-form form')[0]);
-
-                                $.ajax({
-                                    type: 'POST',
-                                    url: self.attr('href'),
-                                    data: formData,
-                                    processData: false,
-                                    contentType: false,
-                                    success: function(response) {
-                                        if(response)
-                                            $('#update-node-popup').html(response);
-                                        else
-                                            window.location.reload();
-                                    },
-                                    error: function(err) {
-                                        alert('Ошибка сервера');
-                                        console.log(err);
-                                    }
-                                });
-                            }
-                        }
-                    });
-                },
-                error: function(err) {
-                    alert('Ошибка сервера');
-                    console.log(err);
-                }
-            });
-
-            return false;
-        });
-
-        $('.delete-node').click(function() {
-            if(confirm('<?php echo Yii::t('app', 'Are you sure?')?>')) {
+    <?php if(ARUser::isAdmin()):?>
+        $(document).ready(function() {
+            $('.add-node').click(function() {
                 var self = $(this);
 
                 $.ajax({
-                    type: 'POST',
+                    type: 'GET',
                     url: self.attr('href'),
-                    success: function (response) {
-                        window.location.reload();
+                    success: function(response) {
+                        $('#create-node-popup').html(response);
+                        $('#create-node-popup').dialog({
+                            modal: true,
+                            width: 800,
+                            maxWidth: 800,
+                            maxHeight: 600,
+                            closeText: 'Закрыть',
+                            resizable: false,
+                            buttons: {
+                                'Ok': function() {
+                                    var formData = new FormData($('.node-form form')[0]);
+
+                                    $.ajax({
+                                        type: 'POST',
+                                        url: self.attr('href'),
+                                        data: formData,
+                                        processData: false,
+                                        contentType: false,
+                                        success: function(response) {
+                                            if(response)
+                                                $('#create-node-popup').html(response);
+                                            else
+                                                window.location.reload();
+                                        },
+                                        error: function(err) {
+                                            alert('Ошибка сервера');
+                                            console.log(err);
+                                        }
+                                    });
+                                }
+                            }
+                        });
                     },
-                    error: function (err) {
+                    error: function(err) {
                         alert('Ошибка сервера');
                         console.log(err);
                     }
                 });
-            }
 
-            return false;
+                return false;
+            });
+
+            $('.update-node').click(function() {
+                var self = $(this);
+
+                $.ajax({
+                    type: 'GET',
+                    url: self.attr('href'),
+                    success: function(response) {
+                        $('#update-node-popup').html(response);
+                        $('#update-node-popup').dialog({
+                            modal: true,
+                            width: 800,
+                            maxWidth: 800,
+                            maxHeight: 600,
+                            closeText: 'Закрыть',
+                            resizable: false,
+                            buttons: {
+                                'Ok': function() {
+                                    var formData = new FormData($('.node-form form')[0]);
+
+                                    $.ajax({
+                                        type: 'POST',
+                                        url: self.attr('href'),
+                                        data: formData,
+                                        processData: false,
+                                        contentType: false,
+                                        success: function(response) {
+                                            if(response)
+                                                $('#update-node-popup').html(response);
+                                            else
+                                                window.location.reload();
+                                        },
+                                        error: function(err) {
+                                            alert('Ошибка сервера');
+                                            console.log(err);
+                                        }
+                                    });
+                                }
+                            }
+                        });
+                    },
+                    error: function(err) {
+                        alert('Ошибка сервера');
+                        console.log(err);
+                    }
+                });
+
+                return false;
+            });
+
+            $('.delete-node').click(function() {
+                if(confirm('<?php echo Yii::t('app', 'Are you sure?')?>')) {
+                    var self = $(this);
+
+                    $.ajax({
+                        type: 'POST',
+                        url: self.attr('href'),
+                        success: function (response) {
+                            window.location.reload();
+                        },
+                        error: function (err) {
+                            alert('Ошибка сервера');
+                            console.log(err);
+                        }
+                    });
+                }
+
+                return false;
+            });
         });
-    });
+    <?php endif;?>
 
 
     var instance;

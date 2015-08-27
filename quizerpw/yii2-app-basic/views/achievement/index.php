@@ -17,8 +17,10 @@ $this->params['breadcrumbs'][] = $this->title;
     <h1><?php echo Html::encode($this->title) ?></h1>
 
     <?php if(ARUser::isAdmin()):?>
-        <p><?=Html::a(Yii::t('app', 'Create Achievement'), ['achievement/create'], ['class' => 'btn btn-success'])?></p>
-        <p><?=Html::a(Yii::t('app', 'Issue Achievement'), ['achievement/issue'], ['class' => 'btn btn-success'])?></p>
+        <p>
+            <?=Html::a(Yii::t('app', 'Create Achievement'), ['achievement/create'], ['class' => 'btn btn-success'])?>
+            <?=Html::a(Yii::t('app', 'Issue Achievement'), ['achievement/issue'], ['class' => 'btn btn-success'])?>
+        </p>
     <?endif?>
 
     <?php echo GridView::widget([
