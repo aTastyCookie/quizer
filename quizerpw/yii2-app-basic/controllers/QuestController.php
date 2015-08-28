@@ -32,6 +32,8 @@ use app\models\UserAchievement;
  */
 class QuestController extends Controller
 {
+    private $_sleep_config = [1 => 2, 2 => 5, 3 => 10, 4 => 15];
+
     public function behaviors() {
         return [
             'access' => [
@@ -429,9 +431,17 @@ class QuestController extends Controller
             ->orderBy('run_id DESC')
             ->one();
         $current_node = null;
+        $is_penalty = false;
+
+        // Wait timer while wrong answer
+        if($current_run->sleep > time()) {
+            $answer->load(Yii::$app->request->post());
+            $answer->addError('text', 'Вы не можете ответить пока не закончится штраф. Осталось секунд: '.(($current_run->sleep - time())));
+            $is_penalty = true;
+        }
 
         // If got answer from user, just save it. Even is a wrong answer
-        if($answer->load(Yii::$app->request->post()) && $answer->validate()) {
+        if(!$is_penalty && $answer->load(Yii::$app->request->post()) && $answer->validate()) {
             if(!$current_run) {
                 $current_run = new QuestRun();
                 $current_run->quest_id = $answer->quest_id;
@@ -459,8 +469,17 @@ class QuestController extends Controller
 
                 $answer->status = true;
             } else {
+                $penalty_timer = 0;
+                $current_run->count_attempts++;
+
+                if($current_run->count_attempts && isset($this->_sleep_config[$current_run->count_attempts]))
+                    $penalty_timer = $this->_sleep_config[$current_run->count_attempts];
+                else
+                    $penalty_timer = $this->_sleep_config[count($this->_sleep_config)];
+
+                $current_run->sleep = time() + $penalty_timer;
                 $current_run->status = QuestRun::STATUS_ANSWERING;
-                $answer->addError('text', 'Неверный ответ');
+                $answer->addError('text', 'Вы ответили неверно. Вы сможете ответить снова через секунд: '.($penalty_timer));
                 $answer->status = false;
             }
 
@@ -528,7 +547,7 @@ class QuestController extends Controller
                     $current_run->save(false);
 
 
-                    if(Yii::$app->getRequest()->getCookies()->has('run-quest-'.$quest->id))
+                    if(!$is_penalty && Yii::$app->getRequest()->getCookies()->has('run-quest-'.$quest->id))
                         Yii::$app->getResponse()->getCookies()->remove('run-quest-'.$quest->id);
 
                     // Событие на конец квеста (ачивка)

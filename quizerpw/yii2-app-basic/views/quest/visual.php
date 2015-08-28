@@ -32,6 +32,9 @@ $this->params['breadcrumbs'][] = Yii::t('app', 'Update Quest Tree');
     <?php endif?>
     <!-- demo -->
     <div class="demo flowchart-demo" id="flowchart-demo">
+        <?php if(!ARUser::isAdmin()):?>
+            <div style="position: absolute; height: 100%; width: 100%; z-index: 99999;"></div>
+        <?php endif?>
         <?php
             $top = 0;
             $left = 0;
@@ -294,7 +297,7 @@ $this->params['breadcrumbs'][] = Yii::t('app', 'Update Quest Tree');
                 overlays: [
                     ["Label", {
                         location: [0.5, 1.5],
-                        label: "Drag",
+                        label:  "<?php echo (ARUser::isAdmin() ? 'Drag' : '');?>",
                         cssClass: "endpointSourceLabel"
                     }]
                 ]
@@ -308,12 +311,13 @@ $this->params['breadcrumbs'][] = Yii::t('app', 'Update Quest Tree');
                 dropOptions: {hoverClass: "hover", activeClass: "active"},
                 isTarget: true,
                 overlays: [
-                    ["Label", {location: [0.5, -0.5], label: "Drop", cssClass: "endpointTargetLabel"}]
+                    ["Label", {location: [0.5, -0.5], label: "<?php echo (ARUser::isAdmin() ? 'Drop' : '');?>", cssClass: "endpointTargetLabel"}]
                 ]
             },
             init = function (connection) {
                 connection.getOverlay("label").setLabel(connection.sourceId.substring(15) + "-" + connection.targetId.substring(15));
             };
+
 
         var _addEndpoints = function (toId, sourceAnchors, targetAnchors) {
             for (var i = 0; i < sourceAnchors.length; i++) {
@@ -328,11 +332,11 @@ $this->params['breadcrumbs'][] = Yii::t('app', 'Update Quest Tree');
             }
         };
 
+
         // suspend drawing and initialise.
         instance.batch(function () {
-
             <?php foreach ($nodes as $key => $node) {?>
-            _addEndpoints("Window<?php echo $node->id?>", ["RightMiddle", "TopCenter"], ["LeftMiddle"]);
+                _addEndpoints("Window<?php echo $node->id?>", ["RightMiddle", "TopCenter"], ["LeftMiddle"]);
             <?php } ?>
 
             // listen for new connections; initialise them the same way we initialise the connections at startup.
@@ -341,33 +345,35 @@ $this->params['breadcrumbs'][] = Yii::t('app', 'Update Quest Tree');
             });
 
             // make all the window divs draggable
-            instance.draggable(jsPlumb.getSelector(".flowchart-demo .window"), {grid: [20, 20]});
+            <?php if(ARUser::isAdmin()):?>
+                instance.draggable(jsPlumb.getSelector(".flowchart-demo .window"), {grid: [20, 20]});
+            <?php endif?>
             // THIS DEMO ONLY USES getSelector FOR CONVENIENCE. Use your library's appropriate selector
             // method, or document.querySelectorAll:
             //jsPlumb.draggable(document.querySelectorAll(".window"), { grid: [20, 20] });
 
             // connect a few up
             <?php
-            if ($chain) {
-                foreach ($chain as $item) {
-                    if  ($item['type'] == 'next') {
-                         ?>
-            instance.connect({
-                uuids: ["Window<?php echo $item['src']?>RightMiddle", "Window<?php echo $item['trg']?>LeftMiddle"],
-                editable: true
-            });
-            <?php
-       }elseif  ($item['type'] == 'prev') {
+                if ($chain) {
+                    foreach ($chain as $item) {
+                        if  ($item['type'] == 'next') {
+                             ?>
+                        instance.connect({
+                            uuids: ["Window<?php echo $item['src']?>RightMiddle", "Window<?php echo $item['trg']?>LeftMiddle"],
+                            editable: true
+                        });
+                <?php
+                       } elseif ($item['type'] == 'prev') {
+                            ?>
+                            instance.connect({
+                                uuids: ["Window<?php echo $item['src']?>TopCenter", "Window<?php echo $item['trg']?>LeftMiddle"],
+                                editable: true
+                            });
+                            <?php
+                       }
+                   }
+                }
             ?>
-            instance.connect({
-                uuids: ["Window<?php echo $item['src']?>TopCenter", "Window<?php echo $item['trg']?>LeftMiddle"],
-                editable: true
-            });
-            <?php
-       }
-   }
-}
-?>
             //instance.connect({uuids: ["Window1RightMiddle", "Window2LeftMiddle"], editable: true});
             /*
              instance.connect({uuids: ["Window2LeftMiddle", "Window4LeftMiddle"], editable: true});
@@ -380,6 +386,7 @@ $this->params['breadcrumbs'][] = Yii::t('app', 'Update Quest Tree');
             //
             // listen for clicks on connections, and offer to delete connections on click.
             //
+
             instance.bind("click", function (conn, originalEvent) {
                 // if (confirm("Delete connection from " + conn.sourceId + " to " + conn.targetId + "?"))
                 //   instance.detach(conn);
@@ -400,6 +407,5 @@ $this->params['breadcrumbs'][] = Yii::t('app', 'Update Quest Tree');
         });
 
         jsPlumb.fire("jsPlumbDemoLoaded", instance);
-
     });
 </script>
