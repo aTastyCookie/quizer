@@ -277,7 +277,7 @@ $this->params['breadcrumbs'][] = $this->title;
                     $date_begin = new \DateTime($data->date_start);
                     $date_end = new \DateTime($data->date_finish);
                     $date_cur = new \DateTime(date('Y-m-d H:i:s'));
-                    $is_disabled = !(($date_cur >= $date_begin) && ($date_cur <= $date_end));
+                    $is_disabled = !(($date_cur >= $date_begin) && ($date_cur <= $date_end)) || ($data->getNodeCount() == 0);
 
                     return Html::a('Пройти', $is_disabled ? ' ' : Url::toRoute($params), [
                         'class' => $is_disabled ? 'btn btn-disabled' : 'btn btn-success',

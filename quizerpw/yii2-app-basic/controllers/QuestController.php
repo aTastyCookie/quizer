@@ -26,14 +26,13 @@ use app\components\AccessRule;
 use app\models\NodeSearch;
 use yii\base\ErrorException;
 use app\models\UserAchievement;
+use app\models\NodeHint;
 
 /**
  * QuestController implements the CRUD actions for Quest model.
  */
 class QuestController extends Controller
 {
-    private $_sleep_config = [1 => 2, 2 => 5, 3 => 10, 4 => 15];
-
     public function behaviors() {
         return [
             'access' => [
@@ -79,6 +78,14 @@ class QuestController extends Controller
                     'delete' => ['post'],
                 ],
             ]*/
+        ];
+    }
+
+    public function actions() {
+        return [
+            'captcha' => [
+                'class' => 'yii\captcha\CaptchaAction',
+            ],
         ];
     }
 
@@ -131,7 +138,7 @@ class QuestController extends Controller
                 $node = Node::findOne($id);
                 $node->left = (int)str_replace('px', '', $data['left']);
                 $node->top = (int)str_replace('px', '', $data['top']);
-                $node->save();
+                $node->save(false);
             }
 
         if($connects = Yii::$app->request->post('connects'))
@@ -265,7 +272,7 @@ class QuestController extends Controller
 
             if($model->validate()) {
                 $model->date_start = date('Y-m-d', strtotime($model->date_start));
-                $model->date_finish = date('Y-m-d', strtotime($model->date_finish));
+                $model->date_finish = $model->date_finish ? date('Y-m-d', strtotime($model->date_finish)) : null;
                 $model->url = $model->url ? : null;
                 $model->success_message = Html::encode($model->success_message);
                 $model->save(false);
@@ -353,7 +360,7 @@ class QuestController extends Controller
 
             if($model->validate()) {
                 $model->date_start = date('Y-m-d', strtotime($model->date_start));
-                $model->date_finish = $model->date_finish ? date('Y-m-d', strtotime($model->date_finish)) : '';
+                $model->date_finish = $model->date_finish ? date('Y-m-d', strtotime($model->date_finish)) : null;
                 $model->url = $model->url ? : null;
                 $model->success_message = Html::encode($model->success_message);
                 $model->save(false);
@@ -409,36 +416,17 @@ class QuestController extends Controller
      */
     public function actionRun() {
         if((!($id = Yii::$app->request->get('id')) || !is_numeric(Yii::$app->request->get('id'))) &&
-           (!($url = Yii::$app->request->get('url')))) {
+           (!($url = Yii::$app->request->get('url'))))
             throw new BadRequestHttpException('Неверный запрос');
-        }
 
         $quest = $id ? $this->findModel(intval($id)) : Quest::find()->where(['url' => Html::encode($url)])->one();
-        $date_begin = new \DateTime($quest->date_start);
-        $date_end = new \DateTime($quest->date_finish);
-        $date_cur = new \DateTime(date('Y-m-d H:i:s'));
-        if(!(($date_cur >= $date_begin) && ($date_cur <= $date_end)))
-            throw new ForbiddenHttpException();
+        $this->_checkAccessByDate($quest);
 
         $answer = new NodeAnswer();
         $answer->user_id = Yii::$app->getUser()->getId();
-        $current_run = QuestRun::find()
-            ->where([
-                'quest_id' => $quest->id,
-                'user_id' => Yii::$app->getUser()->getId(),
-                'is_complete' => false
-            ])
-            ->orderBy('run_id DESC')
-            ->one();
+        $current_run = QuestRun::find()->where(['quest_id' => $quest->id, 'user_id' => Yii::$app->getUser()->getId(), 'is_complete' => false])->orderBy('run_id DESC')->one();
         $current_node = null;
-        $is_penalty = false;
-
-        // Wait timer while wrong answer
-        if($current_run->sleep > time()) {
-            $answer->load(Yii::$app->request->post());
-            $answer->addError('text', 'Вы не можете ответить пока не закончится штраф. Осталось секунд: '.(($current_run->sleep - time())));
-            $is_penalty = true;
-        }
+        $is_penalty = $this->_checkQuestRunPenalty($current_run, $answer);
 
         // If got answer from user, just save it. Even is a wrong answer
         if(!$is_penalty && $answer->load(Yii::$app->request->post()) && $answer->validate()) {
@@ -450,135 +438,23 @@ class QuestController extends Controller
                 $current_run->time_begin = time();
             }
 
-            if(!$answer->is_wrong) {
-                $next_nodes = NodeConnection::find()->where(['from_node_id' => $answer->node_id])->all();
-                $next_ids = [];
-
-                foreach ($next_nodes as $node)
-                    $next_ids[] = $node->toNodes->id;
-
-                $current_run->next_nodes = !empty($next_ids) ? json_encode($next_ids) : null;
-
-                if(count($next_ids) > 1)
-                    $current_run->status = QuestRun::STATUS_CHOOSING;
-                elseif(count($next_ids) == 1) {
-                    $current_run->status = QuestRun::STATUS_ANSWERING;
-                    $current_run->node_id = $next_ids[0];
-                } else
-                    $current_run->status = QuestRun::STATUS_CHOOSING;
-
-                $answer->status = true;
-            } else {
-                $penalty_timer = 0;
-                $current_run->count_attempts++;
-
-                if($current_run->count_attempts && isset($this->_sleep_config[$current_run->count_attempts]))
-                    $penalty_timer = $this->_sleep_config[$current_run->count_attempts];
-                else
-                    $penalty_timer = $this->_sleep_config[count($this->_sleep_config)];
-
-                $current_run->sleep = time() + $penalty_timer;
-                $current_run->status = QuestRun::STATUS_ANSWERING;
-                $answer->addError('text', 'Вы ответили неверно. Вы сможете ответить снова через секунд: '.($penalty_timer));
-                $answer->status = false;
-            }
-
+            $answer->checkAnswer($current_run);
             $current_run->save(false);
-            $answer_time = 0;
-            if($begin_time = Yii::$app->getRequest()->getCookies()->getValue('run-quest-'.$quest->id)) {
-                $answer_time = time() - $begin_time;
-                Yii::$app->getResponse()->getCookies()->remove('run-quest-'.$quest->id);
-
-                if($answer->is_wrong)
-                    Yii::$app->getResponse()->getCookies()->add(new Cookie([
-                        'name' => 'run-quest-'.$quest->id,
-                        'value' => time(),
-                        'expire' => time() + 60 * 60,
-                    ]));
-            }
-
             $answer->run_id = $current_run->run_id;
-            $answer->time = $answer_time;
+            $answer->calculateAnswerTime($quest);
             $answer->save(false);
 
-            // Событие на ответ (ачивка)
-            foreach(Achievement::achievementsOnAnswer() as $achiv) {
-                $condition = false;
+            // Listener event in answer (for achievements)
+            Achievement::listenerEventOnAnswer($current_run, $quest, $answer);
 
-                // Исполняется код ачивок
-                try {
-                    include($achiv->getCodePath());
-                } catch(ErrorException $e) {
-                    continue;
-                }
-
-                if($condition)
-                    UserAchievement::assignAchievment($achiv);
-            }
-
-            if(!$answer->is_wrong) {
-                if($id)
-                    $this->redirect(['run', 'id' => $id]);
-                else
-                    $this->redirect(['run', 'url' => $url]);
-
-                Yii::$app->end();
-            }
+            if(!$answer->is_wrong)
+                return $id ? $this->redirect(['run', 'id' => $id]) : $this->redirect(['run', 'url' => $url]);
         }
 
-        // Save running process or something like this
-        if($current_run) {
-            if($current_run->status == QuestRun::STATUS_CHOOSING) {
-                $next_nodes = json_decode($current_run->next_nodes);
-
-                if(!empty($next_nodes)) {
-                    $current_node = Node::find()->where('id IN (' . implode(', ', json_decode($current_run->next_nodes)) . ')')->all();
-
-                    if (count($current_node) == 1) {
-                        $current_node = $current_node[0];
-                        $answer->quest_id = $current_node->quest_id;
-                        $answer->node_id = $current_node->id;
-                    }
-                } else {
-                    $current_node = Node::findOne($current_run->node_id);
-                    $answer = null;
-                    $current_run->time_end = time();
-                    $current_run->is_complete = true;
-                    $current_run->save(false);
-
-
-                    if(!$is_penalty && Yii::$app->getRequest()->getCookies()->has('run-quest-'.$quest->id))
-                        Yii::$app->getResponse()->getCookies()->remove('run-quest-'.$quest->id);
-
-                    // Событие на конец квеста (ачивка)
-                    foreach(Achievement::achievementsOnQuestEnd() as $achiv) {
-                        $condition = false;
-
-                        // Исполняется код ачивок
-                        try {
-                            include($achiv->getCodePath());
-                        } catch(ErrorException $e) {
-                            continue;
-                        }
-
-                        if($condition)
-                            UserAchievement::assignAchievment($achiv);
-                    }
-                }
-            } elseif($current_run->status == QuestRun::STATUS_ANSWERING) {
-                if(!Yii::$app->getRequest()->getCookies()->has('run-quest-'.$quest->id)) {
-                    Yii::$app->getResponse()->getCookies()->add(new Cookie([
-                        'name' => 'run-quest-'.$quest->id,
-                        'value' => time(),
-                        'expire' => time() + 60 * 60,
-                    ]));
-                }
-
-                $current_node = Node::find()->where(['id' => $current_run->node_id])->one();
-                $answer->quest_id = $current_node->quest_id;
-                $answer->node_id = $current_node->id;
-            }
-        } elseif($current_node = Node::find()->where(['quest_id' => $quest->id])->orderBy('number')->one()) {
+        // Update running process or something like this
+        if($current_run)
+            $current_run->updateCurrentRun($quest, $current_node, $answer, $is_penalty);
+        elseif($current_node = Node::find()->where(['quest_id' => $quest->id])->orderBy('number')->one()) {
             if(!Yii::$app->getRequest()->getCookies()->has('run-quest-'.$quest->id)) {
                 Yii::$app->getResponse()->getCookies()->add(new Cookie([
                     'name' => 'run-quest-'.$quest->id,
@@ -595,8 +471,29 @@ class QuestController extends Controller
         return $this->render('run', [
             'answer' => $answer,
             'node' => $current_node,
-            'quest' => $quest
+            'quest' => $quest,
+            'hint' => NodeHint::find()->where(['node_id' => $current_node->id, 'attemp' => $current_run->count_attempts])->one()
         ]);
+    }
+
+    private function _checkAccessByDate($quest) {
+        $date_begin = new \DateTime($quest->date_start);
+        $date_end = new \DateTime($quest->date_finish);
+        $date_cur = new \DateTime(date('Y-m-d H:i:s'));
+
+        if(!(($date_cur >= $date_begin) && ($date_cur <= $date_end)))
+            throw new ForbiddenHttpException();
+    }
+
+    private function _checkQuestRunPenalty($current_run, &$answer) {
+        // Wait timer while wrong answer
+        if($current_run->sleep > time()) {
+            $answer->load(Yii::$app->request->post());
+            $answer->addError('text', 'Вы не можете ответить пока не закончится штраф. Осталось секунд: '.(($current_run->sleep - time())));
+            return true;
+        }
+
+        return false;
     }
 
     /**

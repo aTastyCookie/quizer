@@ -3,16 +3,20 @@
 namespace app\controllers;
 
 use app\models\NodeConnection;
+use app\models\NodeHint;
+use app\models\Quest;
 use Yii;
 use app\models\Node;
 use app\models\NodeSearch;
 use yii\web\Controller;
+use yii\web\BadRequestHttpException;
 use yii\web\NotFoundHttpException;
 use yii\web\UploadedFile;
 use yii\filters\AccessControl;
 use app\components\AccessRule;
 use yii\filters\VerbFilter;
 use yii\helpers\Html;
+use yii\data\ActiveDataProvider;
 
 /**
  * NodeController implements the CRUD actions for Node model.
@@ -30,17 +34,27 @@ class NodeController extends Controller
                 'rules' => [
                     [
                         'allow' => true,
-                        'actions' => ['index', 'view', 'create', 'update', 'delete'],
+                        'actions' => [
+                            'index',
+                            'view',
+                            'create',
+                            'update',
+                            'hints',
+                            'createhint',
+                            'updatehint',
+                            'deletehint',
+                            'delete'
+                        ],
                         'roles' => ['admin']
                     ]
                 ],
-            ],
+            ],/*
             'verbs' => [
                 'class' => VerbFilter::className(),
                 'actions' => [
                     'delete' => ['post'],
                 ],
-            ],
+            ],*/
         ];
     }
 
@@ -48,16 +62,16 @@ class NodeController extends Controller
      * Lists all Node models.
      * @return mixed
      */
-    public function actionIndex()
-    {
+    public function actionIndex() {
         $searchModel = new NodeSearch();
-        if (!isset(Yii::$app->request->queryParams['quest_id'])) {
+
+        if(!isset(Yii::$app->request->queryParams['quest_id']))
             Yii::$app->getResponse()->redirect('/quest/');
-        }
+
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
         return $this->render('index', [
-            'quest_id' => Yii::$app->request->queryParams['quest_id'],
+            'quest' => Quest::findOne(Yii::$app->request->queryParams['quest_id']),
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
         ]);
@@ -82,12 +96,14 @@ class NodeController extends Controller
      */
     public function actionCreate() {
         $node = new Node();
+        $node->scenario = Node::QUESTION_TYPE_TEXT;
 
         if ($node->load(Yii::$app->request->post()) && $this->_uploadFiles($node)) {
             $node->name = Html::encode($node->name);
             $node->question = Html::encode($node->question);
             $node->description = Html::encode($node->description);
             $node->success_message = Html::encode($node->success_message);
+
             $node->save(false);
 
             if (!Yii::$app->getRequest()->getIsAjax())
@@ -115,8 +131,23 @@ class NodeController extends Controller
         $cur_js = $node->js;
         $cur_success_css = $node->success_css;
         $cur_success_js = $node->success_js;
+        $cur_question = $node->question;
+        $node->scenario = $node->question_type;
+
+        if(in_array($node->scenario, [
+            Node::QUESTION_TYPE_IMAGE,
+            Node::QUESTION_TYPE_JS_FILE,
+            Node::QUESTION_TYPE_PHP_FILE
+        ]))
+            $node->question = UploadedFile::getInstance($node, 'question');
 
         if($node->validate()) {
+            if($node->question instanceof UploadedFile) {
+                $return = $node->uploadQuestion();
+                $node->question = $node->question->name;
+            } else
+                $return = true;
+
             if ($node->css = UploadedFile::getInstance($node, 'css')) {
                 if ($return = $node->uploadCss()) {
                     $node->css = $node->css->name;
@@ -160,6 +191,8 @@ class NodeController extends Controller
             throw new BadRequestHttpException('Неверный запрос');
 
         $node = $this->findModel((int)$id);
+        $node->scenario = $node->question_type;
+        $node->question = Html::decode($node->question);
 
         if ($node->load(Yii::$app->request->post()) && $this->_uploadFiles($node)) {
             $node->name = Html::encode($node->name);
@@ -184,6 +217,83 @@ class NodeController extends Controller
         Yii::$app->end();
     }
 
+    public function actionHints() {
+        if(!($id = Yii::$app->request->get('id')) || !is_numeric(Yii::$app->request->get('id')))
+            throw new BadRequestHttpException('Неверный запрос');
+
+        $node = $this->findModel(intval($id));
+
+        return $this->render('hints', [
+            'quest' => Quest::find()->where(['id' => $node->quest_id])->one(),
+            'node' => $node,
+            'dataProvider' => new ActiveDataProvider([
+                'query' => NodeHint::find()->where(['node_id' => $id])->orderBy('attemp'),
+            ])
+        ]);
+    }
+
+    public function actionCreatehint() {
+        if(!($id = Yii::$app->request->get('id')) || !is_numeric(Yii::$app->request->get('id')))
+            throw new BadRequestHttpException('Неверный запрос');
+
+        if(!$node = $this->findModel(intval($id)))
+            throw new NotFoundHttpException('Страница не найдена');
+
+        $quest = Quest::findOne($node->quest_id);
+        $hint = new NodeHint();
+
+        if($hint->load(Yii::$app->request->post()) && $hint->validate()) {
+            $hint->message = Html::encode($hint->message);
+            $hint->node_id = $node->id;
+            $hint->save(false);
+
+            return $this->redirect(['hints', 'id' => $hint->node_id]);
+        }
+
+        return $this->render('create-hint', [
+            'quest' => $quest,
+            'node' => $node,
+            'hint' => $hint
+        ]);
+    }
+
+    public function actionUpdatehint() {
+        if(!($id = Yii::$app->request->get('id')) || !is_numeric(Yii::$app->request->get('id')))
+            throw new BadRequestHttpException('Неверный запрос');
+
+        if(!$hint = NodeHint::findOne(intval($id)))
+            throw new NotFoundHttpException('Страница не найдена');
+
+        $node = Node::findOne($hint->node_id);
+        $quest = Quest::findOne($node->quest_id);
+        $hint->message = Html::decode($hint->message);
+
+        if ($hint->load(Yii::$app->request->post()) && $hint->validate()) {
+            $hint->message = Html::encode($hint->message);
+            $hint->save(false);
+
+            return $this->redirect(['hints', 'id' => $hint->node_id]);
+        }
+
+        return $this->render('update-hint', [
+            'quest' => $quest,
+            'node' => $node,
+            'hint' => $hint
+        ]);
+    }
+
+    public function actionDeletehint() {
+        if(!($id = Yii::$app->request->get('id')) || !is_numeric(Yii::$app->request->get('id')))
+            throw new BadRequestHttpException('Неверный запрос');
+
+        if(!$hint = NodeHint::findOne(intval($id)))
+            throw new NotFoundHttpException('Страница не найдена');
+
+        $hint->delete();
+
+        return $this->redirect(['hints', 'id' => $hint->node_id]);
+    }
+
     /**
      * Deletes an existing Node model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
@@ -201,10 +311,12 @@ class NodeController extends Controller
         foreach($connections as $connect)
             $connect->delete();
 
-        $this->findModel($id)->delete();
+        $node = $this->findModel($id);
+        $quest_id = $node->quest_id;
+        $node->delete();
 
         if(!Yii::$app->getRequest()->getIsAjax())
-            return $this->redirect(['index']);
+            return $this->redirect(['index', 'quest_id' => $quest_id]);
 
         Yii::$app->end();
     }
@@ -221,7 +333,7 @@ class NodeController extends Controller
         if (($model = Node::findOne($id)) !== null) {
             return $model;
         } else {
-            throw new NotFoundHttpException('The requested page does not exist.');
+            throw new NotFoundHttpException('Вопрос не найден');
         }
     }
 }

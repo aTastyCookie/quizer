@@ -21,7 +21,7 @@ $this->params['breadcrumbs'][] = $this->title;
             <?=Html::a(Yii::t('app', 'Create Achievement'), ['achievement/create'], ['class' => 'btn btn-success'])?>
             <?=Html::a(Yii::t('app', 'Issue Achievement'), ['achievement/issue'], ['class' => 'btn btn-success'])?>
         </p>
-    <?endif?>
+    <?php endif?>
 
     <?php echo GridView::widget([
         'dataProvider' => $dataProvider,

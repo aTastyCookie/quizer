@@ -136,6 +136,13 @@ $config = [
             ],
         ],
         'db' => require(__DIR__ . '/db.php'),
+        'ym' => [
+            'class' => 'grigorieff\ym\YMComponent',
+            'client_id' => '......',
+            'code' => '......',
+            'redirect_uri' => '......',
+            'client_secret' => '......'
+        ],
     ],
 
     'params' => $params,

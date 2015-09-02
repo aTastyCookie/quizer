@@ -2,7 +2,7 @@
 
 namespace app\models;
 use Yii;
-use yii\base\Exception;
+use yii\base\ErrorException;
 use yii\helpers\Html;
 
 /**
@@ -121,8 +121,8 @@ class Achievement extends \yii\db\ActiveRecord {
         return ASSETS_DIR . DIRECTORY_SEPARATOR . 'achicode' . DIRECTORY_SEPARATOR . $this->code;
     }
 
-    public static function achievementsOnAnswer() {
-        return Achievement::find()->where([
+    public static function listenerEventOnAnswer(&$current_run, &$quest, &$answer) {
+        $achievements = Achievement::find()->where([
             'type' => Achievement::TYPE_ON_ANSWER
         ])->andWhere('
             achievement_id NOT IN (
@@ -131,10 +131,24 @@ class Achievement extends \yii\db\ActiveRecord {
                 WHERE user_id = '.Yii::$app->getUser()->getId().'
             )
         ')->all();
+
+        foreach($achievements as $achiv) {
+            $condition = false;
+
+            // Исполняется код ачивок
+            try {
+                include($achiv->getCodePath());
+            } catch(ErrorException $e) {
+                continue;
+            }
+
+            if($condition)
+                UserAchievement::assignAchievment($achiv);
+        }
     }
 
-    public static function achievementsOnQuestEnd() {
-        return Achievement::find()->where([
+    public static function listenerEventOnQuestEnd(&$current_run, &$quest, &$answer) {
+        $achievements = Achievement::find()->where([
             'type' => Achievement::TYPE_ON_QUEST_END
         ])->andWhere('
             achievement_id NOT IN (
@@ -143,7 +157,22 @@ class Achievement extends \yii\db\ActiveRecord {
                 WHERE user_id = '.Yii::$app->getUser()->getId().'
             )
         ')->all();
+
+        foreach($achievements as $achiv) {
+            $condition = false;
+
+            // Исполняется код ачивок
+            try {
+                include($achiv->getCodePath());
+            } catch(ErrorException $e) {
+                continue;
+            }
+
+            if($condition)
+                UserAchievement::assignAchievment($achiv);
+        }
     }
+
     /*
     public static function eventOnAnswer() {
         $achivs = Achievement::find()->where(['type' => self::TYPE_ON_ANSWER])->all();

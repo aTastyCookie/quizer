@@ -42,5 +42,7 @@ return [
     'JS-file on complete quest' => 'JS-файл для страницы успешного завершения квеста',
     'Quest Statistics' => 'Статистика квеста',
     'Quest Statistics by User' => 'Статистика квеста по пользователю',
-    'Quest Highscores' => 'Рейтинги'
+    'Quest Highscores' => 'Рейтинги',
+    'Check Code' => 'Код проверки',
+    'Node Hints' => 'Подсказки'
 ];

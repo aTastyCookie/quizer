@@ -3,6 +3,7 @@
 namespace app\models;
 use yii\data\ActiveDataProvider;
 use Yii;
+use yii\web\Cookie;
 
 /**
  * This is the model class for table "node".
@@ -60,6 +61,47 @@ class QuestRun extends \yii\db\ActiveRecord {
 
     public function getUser() {
         return $this->hasOne(ARUser::className(), ['id' => 'user_id']);
+    }
+
+    public function updateCurrentRun(&$quest, &$current_node, &$answer, $is_penalty) {
+        if($this->status == self::STATUS_CHOOSING) {
+            $next_nodes = json_decode($this->next_nodes);
+
+            if(!empty($next_nodes)) {
+                $current_node = Node::find()->where('id IN (' . implode(', ', json_decode($this->next_nodes)) . ')')->all();
+
+                if (count($current_node) == 1) {
+                    $current_node = $current_node[0];
+                    $answer->quest_id = $current_node->quest_id;
+                    $answer->node_id = $current_node->id;
+                }
+            } else {
+                $current_node = Node::findOne($this->node_id);
+                $answer = null;
+                $this->time_end = time();
+                $this->is_complete = true;
+                $this->save(false);
+
+
+                if(!$is_penalty && Yii::$app->getRequest()->getCookies()->has('run-quest-'.$quest->id))
+                    Yii::$app->getResponse()->getCookies()->remove('run-quest-'.$quest->id);
+
+                // Listener event on quest end (for achievements)
+                Achievement::listenerEventOnQuestEnd($current_run, $quest, $answer);
+            }
+        } elseif($this->status == self::STATUS_ANSWERING) {
+            if(!Yii::$app->getRequest()->getCookies()->has('run-quest-'.$quest->id)) {
+                Yii::$app->getResponse()->getCookies()->add(new Cookie([
+                    'name' => 'run-quest-'.$quest->id,
+                    'value' => time(),
+                    'expire' => time() + 60 * 60,
+                ]));
+            }
+
+            $current_node = Node::find()->where(['id' => $this->node_id])->one();
+            $answer->quest_id = $current_node->quest_id;
+            $answer->node_id = $current_node->id;
+        }
     }
 
     public function getAnswersStatistics() {

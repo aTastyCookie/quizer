@@ -15,6 +15,22 @@ use Yii;
  */
 class Node extends \yii\db\ActiveRecord
 {
+    const QUESTION_TYPE_TEXT = 'text';
+    const QUESTION_TYPE_IMAGE = 'image';
+    const QUESTION_TYPE_JS_CODE = 'js_code';
+    const QUESTION_TYPE_JS_FILE = 'js_file';
+    const QUESTION_TYPE_PHP_CODE = 'php_code';
+    const QUESTION_TYPE_PHP_FILE = 'php_file';
+
+    public static $_transcript = [
+        self::QUESTION_TYPE_TEXT => 'html или просто текст',
+        self::QUESTION_TYPE_IMAGE => 'изображение',
+        self::QUESTION_TYPE_JS_CODE => 'js-код',
+        self::QUESTION_TYPE_JS_FILE => 'js-файл',
+        self::QUESTION_TYPE_PHP_CODE => 'php-код',
+        self::QUESTION_TYPE_PHP_FILE => 'php-файл'
+    ];
+
     public $count_passed;
     public $count_in_proccess;
     public $avg_time;
@@ -33,10 +49,29 @@ class Node extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['name', 'number', 'quest_id', 'question', 'answer'], 'required'],
+            [['name', 'number', 'quest_id', 'question_type', 'question', 'answer'], 'required'],
             [['quest_id', 'number', 'top', 'left', 'case_depend'], 'integer'],
             [['number'], 'unique', 'targetAttribute' => ['quest_id', 'number']],
             [['name', 'description', 'success_message'], 'string', 'max' => 500],
+            [['question_type'], 'in', 'range' => [
+                self::QUESTION_TYPE_TEXT,
+                self::QUESTION_TYPE_IMAGE,
+                self::QUESTION_TYPE_JS_CODE,
+                self::QUESTION_TYPE_JS_FILE,
+                self::QUESTION_TYPE_PHP_CODE,
+                self::QUESTION_TYPE_PHP_FILE
+            ]],
+
+            [['question'], 'string', 'max' => 2000, 'on' => [
+                self::QUESTION_TYPE_TEXT,
+                self::QUESTION_TYPE_JS_CODE,
+                self::QUESTION_TYPE_PHP_CODE
+            ]],
+
+            [['question'], 'file', 'on' => self::QUESTION_TYPE_IMAGE, 'maxSize' => 2 * 1024 * 1024, 'extensions' => ['jpg', 'png', 'gif', 'jpeg']],
+            [['question'], 'file', 'on' => self::QUESTION_TYPE_JS_FILE, 'maxSize' => 2 * 1024 * 1024, 'extensions' => 'js', 'checkExtensionByMimeType' => false],
+            [['question'], 'file', 'on' => self::QUESTION_TYPE_PHP_FILE, 'maxSize' => 2 * 1024 * 1024, 'extensions' => 'php', 'checkExtensionByMimeType' => false],
+
             [['answer'], 'string'],
             [['description', 'case_depend', 'css', 'js', 'success_message', 'success_css', 'success_js'], 'safe'],
             [['css', 'success_css'], 'file', 'skipOnEmpty' => true, 'maxSize' => 2 * 1024 * 1024, 'extensions' => 'css', 'checkExtensionByMimeType' => false],
@@ -54,6 +89,7 @@ class Node extends \yii\db\ActiveRecord
             'name' => 'Заголовок',
             'number' => Yii::t('app', 'Number'),
             'quest_id' => Yii::t('app', 'Quest ID'),
+			'question_type' => 'Тип вопроса',
 			'question' => 'Вопрос',
 			'answer' => 'Ответ',
             'description' => Yii::t('app', 'Description'),
@@ -75,6 +111,26 @@ class Node extends \yii\db\ActiveRecord
 
 		 return true;
 	}
+
+    public function uploadQuestion() {
+        $fn = md5($this->quest_id.$this->name).'.'.$this->question->extension;
+
+        if (!file_exists(ASSETS_DIR . DIRECTORY_SEPARATOR . 'nodquest'))
+            mkdir(ASSETS_DIR . DIRECTORY_SEPARATOR . 'nodquest');
+
+        $f = ASSETS_DIR . DIRECTORY_SEPARATOR . 'nodquest' . DIRECTORY_SEPARATOR . $fn;
+
+        if (file_exists($f))
+            unlink($f);
+
+        if ($this->question->saveAs($f)) {
+            $this->question->name = $fn;
+
+            return true;
+        }
+
+        return false;
+    }
 
     public function uploadCss() {
         if($this->validate(['css'])) {
@@ -162,6 +218,14 @@ class Node extends \yii\db\ActiveRecord
         }
 
         return false;
+    }
+
+    public function getQuestionFilePath() {
+        return ASSETS_DIR . DIRECTORY_SEPARATOR . 'nodquest' . DIRECTORY_SEPARATOR . $this->question;
+    }
+
+    public function getQuestionFileUrl() {
+        return '/assets/nodquest/'.$this->question;
     }
 
 	public static function findModel($id)
