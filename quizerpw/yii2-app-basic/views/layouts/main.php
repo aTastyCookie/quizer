@@ -47,7 +47,7 @@ AppAsset::register($this);
                     ['label' => 'Достижения', 'url' => Url::toRoute('/achievement/index'), 'visible' => !Yii::$app->user->isGuest],
                     ['label' => 'Войти', 'url' => ['/user/security/login'], 'visible' => Yii::$app->user->isGuest],
                     [
-                        'label' => 'Выйти ('.Yii::$app->user->identity->username.')',
+                        'label' => 'Выйти ('.(Yii::$app->user->identity ? Yii::$app->user->identity->username : '').')',
                         'url' => ['/user/security/logout'],
 						'linkOptions' => ['data-method' => 'post'],
                         'visible' => !Yii::$app->user->isGuest

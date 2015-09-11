@@ -56,16 +56,13 @@ class Achievement extends \yii\db\ActiveRecord {
      * @inheritdoc
      */
     public function attributeLabels() {
-        return [/*
-            'id' => Yii::t('app', 'ID'),
-            'name' => 'Заголовок',
-            'number' => Yii::t('app', 'Number'),
-            'quest_id' => Yii::t('app', 'Quest ID'),
-			'question' => 'Вопрос',
-			'answer' => 'Ответ',
-            'description' => Yii::t('app', 'Description'),
-			'case_depend' => 'регистрозависимый ответ',
-			'time' => 'Время на ответ',*/
+        return [
+            'name' => 'Наименование',
+            'description' => 'Описание',
+            'conditions' => 'Условия',
+            'image' => 'Изображение',
+            'code' => 'Код',
+            'type' => 'Тип'
         ];
     }
 

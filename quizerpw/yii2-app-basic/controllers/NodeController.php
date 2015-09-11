@@ -45,7 +45,11 @@ class NodeController extends Controller
                             'deletehint',
                             'delete'
                         ],
-                        'roles' => ['admin']
+                        //'roles' => ['admin']
+                        'roles' => ['@'],
+                        'matchCallback' => function () {
+                            return Yii::$app->user->identity->getIsAdmin();
+                        }
                     ]
                 ],
             ],/*

@@ -16,7 +16,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
     <h1><?php echo Html::encode($this->title) ?></h1>
 
-    <?php if(ARUser::isAdmin()):?>
+    <?php if(Yii::$app->user->identity->getIsAdmin()):?>
         <p>
             <?=Html::a(Yii::t('app', 'Create Achievement'), ['achievement/create'], ['class' => 'btn btn-success'])?>
             <?=Html::a(Yii::t('app', 'Issue Achievement'), ['achievement/issue'], ['class' => 'btn btn-success'])?>
@@ -40,15 +40,15 @@ $this->params['breadcrumbs'][] = $this->title;
             ],
             [
                 'attribute' => 'image',
-                'visible' => ARUser::isAdmin()
+                'visible' => Yii::$app->user->identity->getIsAdmin()
             ],
             [
                 'attribute' => 'code',
-                'visible' => ARUser::isAdmin()
+                'visible' => Yii::$app->user->identity->getIsAdmin()
             ],
             [
                 'attribute' => 'type',
-                'visible' => ARUser::isAdmin()
+                'visible' => Yii::$app->user->identity->getIsAdmin()
             ],
 
             ['class' => 'yii\grid\ActionColumn'],

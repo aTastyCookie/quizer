@@ -29,6 +29,13 @@ class AchievementController extends Controller
                     [
                         'allow' => true,
                         'actions' => [
+                            'received'
+                        ],
+                        'roles' => ['?', '@']
+                    ],
+                    [
+                        'allow' => true,
+                        'actions' => [
                             'index'
                         ],
                         'roles' => ['@']
@@ -42,7 +49,11 @@ class AchievementController extends Controller
                             'delete',
                             'issue'
                         ],
-                        'roles' => ['admin']
+                        //'roles' => ['admin']
+                        'roles' => ['@'],
+                        'matchCallback' => function () {
+                            return Yii::$app->user->identity->getIsAdmin();
+                        }
                     ]
                 ],
             ],
@@ -60,7 +71,7 @@ class AchievementController extends Controller
 
         return $this->render('index', [
             'dataProvider' => new ActiveDataProvider([
-                'query' => ARUser::isAdmin() ? Achievement::find() : Achievement::find()->where('
+                'query' => Yii::$app->user->identity->getIsAdmin() ? Achievement::find() : Achievement::find()->where('
                     achievement_id IN (
                         SELECT achievement_id
                         FROM users_achievements
@@ -186,5 +197,18 @@ class AchievementController extends Controller
             $achiv->code = $cur_code;
 
         return true;
+    }
+
+    public function actionReceived() {
+        if(!($user_id = Yii::$app->request->get('user_id')) || !is_numeric(Yii::$app->request->get('user_id')))
+            throw new BadRequestHttpException('Неверный запрос');
+
+        return $this->render('received', [
+            'dataProvider' => new ActiveDataProvider([
+                'query' => UserAchievement::find()->where([
+                    'user_id' => $user_id,
+                ]),
+            ])
+        ]);
     }
 }

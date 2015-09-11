@@ -37,10 +37,17 @@ class QuestController extends Controller
         return [
             'access' => [
                 'class' => AccessControl::className(),
-                'ruleConfig' => [
+                /*'ruleConfig' => [
                     'class' => AccessRule::className(),
-                ],
+                ],*/
                 'rules' => [
+                    [
+                        'allow' => true,
+                        'actions' => [
+                            'passed'
+                        ],
+                        'roles' => ['?', '@']
+                    ],
                     [
                         'allow' => true,
                         'actions' => [
@@ -67,7 +74,11 @@ class QuestController extends Controller
                             'userstatistics',
                             'runanswers'
                         ],
-                        'roles' => ['admin']
+                        //'roles' => ['admin'],
+                        'roles' => ['@'],
+                        'matchCallback' => function () {
+                            return Yii::$app->user->identity->getIsAdmin();
+                        }
                     ]
                 ],
             ],
@@ -472,7 +483,7 @@ class QuestController extends Controller
             'answer' => $answer,
             'node' => $current_node,
             'quest' => $quest,
-            'hint' => NodeHint::find()->where(['node_id' => $current_node->id, 'attemp' => $current_run->count_attempts])->one()
+            'hint' => !is_array($current_node) ? NodeHint::find()->where(['node_id' => $current_node->id, 'attemp' => $current_run ? $current_run->count_attempts : 0])->one() : null
         ]);
     }
 
@@ -487,7 +498,7 @@ class QuestController extends Controller
 
     private function _checkQuestRunPenalty($current_run, &$answer) {
         // Wait timer while wrong answer
-        if($current_run->sleep > time()) {
+        if($current_run && ($current_run->sleep > time())) {
             $answer->load(Yii::$app->request->post());
             $answer->addError('text', 'Вы не можете ответить пока не закончится штраф. Осталось секунд: '.(($current_run->sleep - time())));
             return true;
@@ -639,6 +650,20 @@ class QuestController extends Controller
             'run' => $run,
             'dataProvider' => new ActiveDataProvider([
                 'query' => NodeAnswer::find()->where(['run_id' => $run->run_id]),
+            ])
+        ]);
+    }
+
+    public function actionPassed() {
+        if(!($user_id = Yii::$app->request->get('user_id')) || !is_numeric(Yii::$app->request->get('user_id')))
+            throw new BadRequestHttpException('Неверный запрос');
+
+        return $this->render('passed', [
+            'dataProvider' => new ActiveDataProvider([
+                'query' => QuestRun::find()->select('user_id, quest_id')->distinct('user_id, quest_id')->where([
+                    'user_id' => $user_id,
+                    'is_complete' => true,
+                ]),
             ])
         ]);
     }

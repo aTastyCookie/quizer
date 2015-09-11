@@ -85,7 +85,7 @@ class ARUser extends \yii\db\ActiveRecord {
 
         return $counts;
     }
-
+/*
     public static function isAdmin() {
         $assign = \Yii::$app->getAuthManager()->getRolesByUser(\Yii::$app->getUser()->getId());
 
@@ -93,5 +93,5 @@ class ARUser extends \yii\db\ActiveRecord {
             return true;
 
         return false;
-    }
+    }*/
 }

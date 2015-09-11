@@ -4,12 +4,12 @@ return [
         'type' => 1,
         'name' => 'admin',
         //'ruleName' => 'admin',
-        'description' => 'Права администратора',
+        'description' => 'РџСЂР°РІР° Р°РґРјРёРЅРёС‚СЂР°С‚РѕСЂР°',
     ],
     'user' => [
         'type' => 1,
         'name' => 'user',
         //'ruleName' => 'user',
-        'description' => 'Права пользователя',
+        'description' => 'РџСЂР°РІР° РїРѕР»СЊР·РѕРІР°С‚РµР»СЏ',
     ],
 ];

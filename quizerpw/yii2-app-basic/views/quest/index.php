@@ -184,7 +184,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
 <div class="quest-index">
 	<h1><?php echo Html::encode($this->title) ?></h1>
-	<?php if(ARUser::isAdmin()):?>
+	<?php if(Yii::$app->user->identity->getIsAdmin()):?>
 	    <p><?php echo Html::a(Yii::t('app', 'Create Quest'), ['create'], ['class' => 'btn btn-success']) ?></p>
     <?php endif?>
 
@@ -200,7 +200,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 'attribute' => 'id',
                 'headerOptions' => ['style' => 'text-align: center;'],
                 'contentOptions' =>  ['style' => 'text-align: right;'],
-                'visible' => ARUser::isAdmin()
+                'visible' => Yii::$app->user->identity->getIsAdmin()
             ],
             [
                 'attribute' => 'name',
@@ -222,18 +222,6 @@ $this->params['breadcrumbs'][] = $this->title;
                 'contentOptions' =>  ['style' => 'text-align: center;']
             ],
             [
-                'attribute' => 'url',
-                'format' => 'url',
-                'headerOptions' => ['style' => 'text-align: center;'],
-                'visible' => ARUser::isAdmin()
-            ],
-			// 'short',
-			// 'descr:ntext',
-			// 'date_start',
-			// 'date_finish',
-			// 'password',
-
-			[
 				'attribute' => Yii::t('app', 'Nodes'),
 				'format' => 'raw',
 				'value' => function($data) {return $data->getNodeCount().' шт.';},
@@ -256,7 +244,7 @@ $this->params['breadcrumbs'][] = $this->title;
                     ]);
                 },
                 'contentOptions' =>  ['style' => 'text-align: center;'],
-                'visible' => !ARUser::isAdmin()
+                'visible' => !Yii::$app->user->identity->getIsAdmin()
             ],
             [
                 'attribute' => '',
@@ -267,7 +255,7 @@ $this->params['breadcrumbs'][] = $this->title;
                     ]);
                 },
                 'contentOptions' =>  ['style' => 'text-align: center;'],
-                'visible' => !ARUser::isAdmin()
+                'visible' => !Yii::$app->user->identity->getIsAdmin()
             ],
             [
                 'attribute' => '',
@@ -347,7 +335,7 @@ $this->params['breadcrumbs'][] = $this->title;
                     },
                 ],
                 'contentOptions' =>  ['style' => 'text-align: center;'],
-                'visible' => ARUser::isAdmin()
+                'visible' => Yii::$app->user->identity->getIsAdmin()
             ],
 		],
 	]); ?>

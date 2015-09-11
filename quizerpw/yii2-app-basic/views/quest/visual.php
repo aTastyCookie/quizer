@@ -6,10 +6,13 @@ use app\models\ARUser;
 /* @var $this yii\web\View */
 /* @var $model app\models\Quest */
 
-$this->title = Yii::t('app', 'Update Quest Tree') . ': ' . $quest->name;
+$this->title = Yii::t('app', Yii::$app->user->identity->getIsAdmin() ? 'Update Quest Tree' : 'View Quest Tree') . ': ' . $quest->name;
 $this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Quests'), 'url' => ['index']];
-$this->params['breadcrumbs'][] = ['label' => $quest->name, 'url' => ['view', 'id' => $quest->id]];
-$this->params['breadcrumbs'][] = Yii::t('app', 'Update Quest Tree');
+
+if(Yii::$app->user->identity->getIsAdmin())
+    $this->params['breadcrumbs'][] = ['label' => $quest->name, 'url' => ['view', 'id' => $quest->id]];
+
+$this->params['breadcrumbs'][] = $this->title;
 ?>
 
 <h1><?php echo Html::encode($this->title) ?></h1>
@@ -23,7 +26,7 @@ $this->params['breadcrumbs'][] = Yii::t('app', 'Update Quest Tree');
 <input type="hidden" id="quest_id" value="<?php echo $quest->id ?>" />
 
 <div id="main">
-    <?php if(ARUser::isAdmin()):?>
+    <?php if(Yii::$app->user->identity->getIsAdmin()):?>
         <div class="tree-panel">
             <?php echo Html::a('', '#', ['class' => 'save-tree', 'onclick' => 'saveConnections(); return false;', 'title' => Yii::t('app', 'Save')]);?>&nbsp;&nbsp;
             <?php echo Html::a('', Url::toRoute(['quest/update', 'id' => $quest->id]), ['class' => 'update-quest', 'title' => Yii::t('app', 'Update Quest')]);?>&nbsp;&nbsp;
@@ -32,7 +35,7 @@ $this->params['breadcrumbs'][] = Yii::t('app', 'Update Quest Tree');
     <?php endif?>
     <!-- demo -->
     <div class="demo flowchart-demo" id="flowchart-demo">
-        <?php if(!ARUser::isAdmin()):?>
+        <?php if(!Yii::$app->user->identity->getIsAdmin()):?>
             <div style="position: absolute; height: 100%; width: 100%; z-index: 99999;"></div>
         <?php endif?>
         <?php
@@ -54,7 +57,7 @@ $this->params['breadcrumbs'][] = Yii::t('app', 'Update Quest Tree');
                 }
             ?>
                 <div class="window" id="flowchartWindow<?php echo $node->id ?>" style="top: <?= $top ?>px; left: <?= $left; ?>px">
-                    <?php if(ARUser::isAdmin()):?>
+                    <?php if(Yii::$app->user->identity->getIsAdmin()):?>
                     <br/><br/><br/><strong><?php echo $node->name ?></strong>
                         <?php echo Html::a('', Url::toRoute(['node/update', 'id' => $node->id]), ['class' => 'update-node', 'title' => Yii::t('app', 'Update Node')])?>
                         <?php echo Html::a('', Url::toRoute(['node/delete', 'id' => $node->id]), ['class' => 'delete-node', 'title' => Yii::t('app', 'Delete Node')])?>
@@ -64,12 +67,12 @@ $this->params['breadcrumbs'][] = Yii::t('app', 'Update Quest Tree');
     </div>
     <!-- /demo -->
 </div>
-<?php if(ARUser::isAdmin()):?>
+<?php if(Yii::$app->user->identity->getIsAdmin()):?>
     <div id="create-node-popup"></div>
     <div id="update-node-popup"></div>
 <?php endif?>
 <script>
-    <?php if(ARUser::isAdmin()):?>
+    <?php if(Yii::$app->user->identity->getIsAdmin()):?>
         $(document).ready(function() {
             $('.add-node').click(function() {
                 var self = $(this);
@@ -297,7 +300,7 @@ $this->params['breadcrumbs'][] = Yii::t('app', 'Update Quest Tree');
                 overlays: [
                     ["Label", {
                         location: [0.5, 1.5],
-                        label:  "<?php echo (ARUser::isAdmin() ? 'Drag' : '');?>",
+                        label:  "<?php echo (Yii::$app->user->identity->getIsAdmin() ? 'Drag' : '');?>",
                         cssClass: "endpointSourceLabel"
                     }]
                 ]
@@ -311,7 +314,7 @@ $this->params['breadcrumbs'][] = Yii::t('app', 'Update Quest Tree');
                 dropOptions: {hoverClass: "hover", activeClass: "active"},
                 isTarget: true,
                 overlays: [
-                    ["Label", {location: [0.5, -0.5], label: "<?php echo (ARUser::isAdmin() ? 'Drop' : '');?>", cssClass: "endpointTargetLabel"}]
+                    ["Label", {location: [0.5, -0.5], label: "<?php echo (Yii::$app->user->identity->getIsAdmin() ? 'Drop' : '');?>", cssClass: "endpointTargetLabel"}]
                 ]
             },
             init = function (connection) {
@@ -345,7 +348,7 @@ $this->params['breadcrumbs'][] = Yii::t('app', 'Update Quest Tree');
             });
 
             // make all the window divs draggable
-            <?php if(ARUser::isAdmin()):?>
+            <?php if(Yii::$app->user->identity->getIsAdmin()):?>
                 instance.draggable(jsPlumb.getSelector(".flowchart-demo .window"), {grid: [20, 20]});
             <?php endif?>
             // THIS DEMO ONLY USES getSelector FOR CONVENIENCE. Use your library's appropriate selector

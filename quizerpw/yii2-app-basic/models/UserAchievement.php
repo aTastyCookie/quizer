@@ -79,4 +79,8 @@ class UserAchievement extends \yii\db\ActiveRecord {
 
         Yii::$app->getSession()->setFlash('achievement', $achiv->name);
     }
+
+    public function getAchievement() {
+        return $this->hasOne(Achievement::className(), ['achievement_id' => 'achievement_id']);
+    }
 }

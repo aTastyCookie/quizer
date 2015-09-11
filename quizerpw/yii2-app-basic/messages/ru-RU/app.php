@@ -44,5 +44,6 @@ return [
     'Quest Statistics by User' => 'Статистика квеста по пользователю',
     'Quest Highscores' => 'Рейтинги',
     'Check Code' => 'Код проверки',
-    'Node Hints' => 'Подсказки'
+    'Node Hints' => 'Подсказки',
+    'View Quest Tree' => 'Просмотр дерева квеста'
 ];

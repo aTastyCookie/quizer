@@ -2,27 +2,26 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="dba62d52-26c3-4b8a-bb4e-17dfecb8afb7" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/quizerpw/yii2-app-basic/web/images/hint.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/quizerpw/yii2-app-basic/models/NodeHint.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/quizerpw/yii2-app-basic/views/node/_hint_form.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/quizerpw/yii2-app-basic/views/node/create-hint.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/quizerpw/yii2-app-basic/views/node/hints.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/quizerpw/yii2-app-basic/views/node/update-hint.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/quizerpw/yii2-app-basic/web/images/noavatar.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/quizerpw/yii2-app-basic/web/images/quest.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/quizerpw/yii2-app-basic/views/quest/passed.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/quizerpw/yii2-app-basic/views/achievement/received.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/quizerpw/yii2-app-basic/web/images/highscores.png" afterPath="$PROJECT_DIR$/quizerpw/yii2-app-basic/web/images/highscores.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/quizerpw/yii2-app-basic/models/ARUser.php" afterPath="$PROJECT_DIR$/quizerpw/yii2-app-basic/models/ARUser.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/quizerpw/yii2-app-basic/models/Achievement.php" afterPath="$PROJECT_DIR$/quizerpw/yii2-app-basic/models/Achievement.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/quizerpw/yii2-app-basic/models/Node.php" afterPath="$PROJECT_DIR$/quizerpw/yii2-app-basic/models/Node.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/quizerpw/yii2-app-basic/models/NodeAnswer.php" afterPath="$PROJECT_DIR$/quizerpw/yii2-app-basic/models/NodeAnswer.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/quizerpw/yii2-app-basic/controllers/AchievementController.php" afterPath="$PROJECT_DIR$/quizerpw/yii2-app-basic/controllers/AchievementController.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/quizerpw/yii2-app-basic/controllers/NodeController.php" afterPath="$PROJECT_DIR$/quizerpw/yii2-app-basic/controllers/NodeController.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/quizerpw/yii2-app-basic/controllers/QuestController.php" afterPath="$PROJECT_DIR$/quizerpw/yii2-app-basic/controllers/QuestController.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/quizerpw/yii2-app-basic/models/QuestRun.php" afterPath="$PROJECT_DIR$/quizerpw/yii2-app-basic/models/QuestRun.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/quizerpw/yii2-app-basic/views/node/_form.php" afterPath="$PROJECT_DIR$/quizerpw/yii2-app-basic/views/node/_form.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/quizerpw/yii2-app-basic/models/UserAchievement.php" afterPath="$PROJECT_DIR$/quizerpw/yii2-app-basic/models/UserAchievement.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/quizerpw/yii2-app-basic/messages/ru-RU/app.php" afterPath="$PROJECT_DIR$/quizerpw/yii2-app-basic/messages/ru-RU/app.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/quizerpw/yii2-app-basic/composer.json" afterPath="$PROJECT_DIR$/quizerpw/yii2-app-basic/composer.json" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/quizerpw/yii2-app-basic/views/achievement/index.php" afterPath="$PROJECT_DIR$/quizerpw/yii2-app-basic/views/achievement/index.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/quizerpw/yii2-app-basic/views/node/index.php" afterPath="$PROJECT_DIR$/quizerpw/yii2-app-basic/views/node/index.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/quizerpw/yii2-app-basic/views/quest/index.php" afterPath="$PROJECT_DIR$/quizerpw/yii2-app-basic/views/quest/index.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/quizerpw/yii2-app-basic/config/rbac/items.php" afterPath="$PROJECT_DIR$/quizerpw/yii2-app-basic/config/rbac/items.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/quizerpw/yii2-app-basic/views/layouts/main.php" afterPath="$PROJECT_DIR$/quizerpw/yii2-app-basic/views/layouts/main.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/quizerpw/yii2-app-basic/views/quest/run.php" afterPath="$PROJECT_DIR$/quizerpw/yii2-app-basic/views/quest/run.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/quizerpw/yii2-app-basic/config/web.php" afterPath="$PROJECT_DIR$/quizerpw/yii2-app-basic/config/web.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/quizerpw/yii2-app-basic/views/quest/visual.php" afterPath="$PROJECT_DIR$/quizerpw/yii2-app-basic/views/quest/visual.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MOVED" beforePath="E:\OpenServer\domains\quizer.local\quizerpw\yii2-app-basic\web\images\highscores.png" afterPath="$PROJECT_DIR$/quizerpw/yii2-app-basic/web/images/achievement.png" />
     </list>
     <ignored path="quizer.local.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -44,34 +43,107 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="composer.json" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/quizerpw/yii2-app-basic/composer.json">
+      <file leaf-file-name="User.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/quizerpw/yii2-app-basic/vendor/dektrium/yii2-user/models/User.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-7.8461537">
-              <caret line="18" column="38" selection-start-line="18" selection-start-column="38" selection-end-line="18" selection-end-column="38" />
+            <state vertical-scroll-proportion="-6.423077">
+              <caret line="104" column="59" selection-start-line="104" selection-start-column="59" selection-end-line="104" selection-end-column="59" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="web.php" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/quizerpw/yii2-app-basic/config/web.php">
+      <file leaf-file-name="Module.php" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/quizerpw/yii2-app-basic/vendor/dektrium/yii2-user/Module.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.7379421">
-              <caret line="144" column="10" selection-start-line="144" selection-start-column="10" selection-end-line="144" selection-end-column="10" />
+            <state vertical-scroll-proportion="0.355">
+              <caret line="69" column="55" selection-start-line="69" selection-start-column="55" selection-end-line="69" selection-end-column="55" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="YMComponent.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/quizerpw/yii2-app-basic/vendor/grigorieff/yii2-yandex-money/YMComponent.php">
+      <file leaf-file-name="Profile.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/quizerpw/yii2-app-basic/vendor/dektrium/yii2-user/models/Profile.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-3.9230769">
-              <caret line="6" column="36" selection-start-line="6" selection-start-column="36" selection-end-line="6" selection-end-column="36" />
+            <state vertical-scroll-proportion="-10.192307">
+              <caret line="201" column="25" selection-start-line="201" selection-start-column="25" selection-end-line="201" selection-end-column="25" />
               <folding>
-                <element signature="e#33#54#0#PHP" expanded="true" />
+                <element signature="e#281#305#0#PHP" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="show.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/quizerpw/yii2-app-basic/vendor/dektrium/yii2-user/views/profile/show.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="-34.0">
+              <caret line="59" column="35" selection-start-line="59" selection-start-column="35" selection-end-line="59" selection-end-column="35" />
+              <folding>
+                <element signature="n#style#0;n#div#0;n#div#0;n#div#0;n#div#0;n#div#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#div#0;n#div#1;n#div#0;n#div#0;n#div#0;n#!!top" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="AchievementController.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/quizerpw/yii2-app-basic/controllers/AchievementController.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="-13.730769">
+              <caret line="54" column="72" selection-start-line="54" selection-start-column="62" selection-end-line="54" selection-end-column="72" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="user.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/quizerpw/yii2-app-basic/vendor/dektrium/yii2-user/messages/ru/user.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="-19.346153">
+              <caret line="170" column="33" selection-start-line="170" selection-start-column="33" selection-end-line="170" selection-end-column="33" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="update.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/quizerpw/yii2-app-basic/vendor/dektrium/yii2-user/views/admin/update.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="-14.769231">
+              <caret line="45" column="53" selection-start-line="45" selection-start-column="53" selection-end-line="45" selection-end-column="53" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="_user.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/quizerpw/yii2-app-basic/vendor/dektrium/yii2-user/views/admin/_user.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="-9.153846">
+              <caret line="21" column="53" selection-start-line="21" selection-start-column="53" selection-end-line="21" selection-end-column="53" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="index.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/quizerpw/yii2-app-basic/vendor/dektrium/yii2-user/views/admin/index.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="-14.115385">
+              <caret line="68" column="39" selection-start-line="68" selection-start-column="28" selection-end-line="68" selection-end-column="39" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Achievement.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/quizerpw/yii2-app-basic/models/Achievement.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="64" column="27" selection-start-line="64" selection-start-column="27" selection-end-line="64" selection-end-column="27" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -84,40 +156,8 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/quizerpw/yii2-app-basic/views/quest/_form.php" />
-        <option value="$PROJECT_DIR$/quizerpw/yii2-app-basic/views/quest/run-answers.php" />
-        <option value="$PROJECT_DIR$/quizerpw/yii2-app-basic/vendor/yiisoft/yii2/validators/Validator.php" />
-        <option value="$PROJECT_DIR$/quizerpw/yii2-app-basic/vendor/yiisoft/yii2/validators/FileValidator.php" />
-        <option value="$PROJECT_DIR$/quizerpw/yii2-app-basic/models/Quest.php" />
-        <option value="$PROJECT_DIR$/quizerpw/yii2-app-basic/web/assets/nodextfi/d41d8cd98f00b204e9800998ecf8427e.css" />
-        <option value="$PROJECT_DIR$/quizerpw/yii2-app-basic/web/assets/nodextfi/a9beb269fd81b26dd14746a94638a394.css" />
-        <option value="$PROJECT_DIR$/quizerpw/yii2-app-basic/web/assets/nodextfi/a9beb269fd81b26dd14746a94638a394.js" />
-        <option value="$PROJECT_DIR$/quizerpw/yii2-app-basic/web/css/jquery-ui/jquery-ui.min.css" />
-        <option value="$PROJECT_DIR$/quizerpw/yii2-app-basic/web/assets/nodsucfi/a9beb269fd81b26dd14746a94638a394.css" />
-        <option value="$PROJECT_DIR$/quizerpw/yii2-app-basic/views/quest/highscores.php" />
-        <option value="$PROJECT_DIR$/quizerpw/yii2-app-basic/views/quest/conformity.php" />
-        <option value="$PROJECT_DIR$/quizerpw/yii2-app-basic/models/User.php" />
-        <option value="$PROJECT_DIR$/quizerpw/yii2-app-basic/models/ARUser.php" />
-        <option value="$PROJECT_DIR$/quizerpw/yii2-app-basic/views/achievement/update.php" />
-        <option value="$PROJECT_DIR$/quizerpw/yii2-app-basic/views/achievement/create.php" />
-        <option value="$PROJECT_DIR$/quizerpw/yii2-app-basic/views/achievement/view.php" />
-        <option value="$PROJECT_DIR$/quizerpw/yii2-app-basic/views/layouts/main.php" />
-        <option value="$PROJECT_DIR$/quizerpw/yii2-app-basic/views/achievement/_form.php" />
-        <option value="$PROJECT_DIR$/quizerpw/yii2-app-basic/web/assets/achicode/6b50e2cf373bbff86a6784ed8d9535e0.php" />
-        <option value="$PROJECT_DIR$/quizerpw/yii2-app-basic/web/assets/achicode/3ad2369ad5ada461f9f8d95e9e8e3b4c.php" />
-        <option value="$PROJECT_DIR$/quizerpw/yii2-app-basic/web/assets/achicode/06312d621345159c2732ba7c304330c8.php" />
-        <option value="$PROJECT_DIR$/quizerpw/yii2-app-basic/controllers/AchievementController.php" />
-        <option value="$PROJECT_DIR$/quizerpw/yii2-app-basic/views/achievement/issue.php" />
-        <option value="$PROJECT_DIR$/quizerpw/yii2-app-basic/models/UserAchievement.php" />
-        <option value="$PROJECT_DIR$/quizerpw/yii2-app-basic/web/js/tree.css" />
-        <option value="$PROJECT_DIR$/quizerpw/yii2-app-basic/views/quest/visual.php" />
-        <option value="$PROJECT_DIR$/quizerpw/yii2-app-basic/web/js/jsplumb.css" />
-        <option value="$PROJECT_DIR$/quizerpw/yii2-app-basic/views/achievement/index.php" />
-        <option value="$PROJECT_DIR$/quizerpw/yii2-app-basic/models/NodeAnswer.php" />
-        <option value="$PROJECT_DIR$/quizerpw/yii2-app-basic/models/Achievement.php" />
         <option value="$PROJECT_DIR$/quizerpw/yii2-app-basic/models/QuestRun.php" />
         <option value="$PROJECT_DIR$/quizerpw/yii2-app-basic/views/node/create.php" />
-        <option value="$PROJECT_DIR$/quizerpw/yii2-app-basic/messages/ru-RU/app.php" />
         <option value="$PROJECT_DIR$/quizerpw/yii2-app-basic/views/node/index.php" />
         <option value="$PROJECT_DIR$/quizerpw/yii2-app-basic/views/node/update-hint.php" />
         <option value="$PROJECT_DIR$/quizerpw/yii2-app-basic/models/NodeHint.php" />
@@ -125,16 +165,48 @@
         <option value="$PROJECT_DIR$/quizerpw/yii2-app-basic/views/node/create-hint.php" />
         <option value="$PROJECT_DIR$/quizerpw/yii2-app-basic/views/node/_hint_form.php" />
         <option value="$PROJECT_DIR$/quizerpw/yii2-app-basic/views/node/_form.php" />
-        <option value="$PROJECT_DIR$/quizerpw/yii2-app-basic/controllers/NodeController.php" />
         <option value="$PROJECT_DIR$/quizerpw/yii2-app-basic/models/Node.php" />
-        <option value="$PROJECT_DIR$/quizerpw/yii2-app-basic/views/quest/run.php" />
         <option value="$PROJECT_DIR$/quizerpw/yii2-app-basic/web/assets/nodquest/fbd7939d674997cdb4692d34de8633c4.php" />
-        <option value="$PROJECT_DIR$/quizerpw/yii2-app-basic/controllers/QuestController.php" />
-        <option value="$PROJECT_DIR$/quizerpw/yii2-app-basic/views/quest/index.php" />
         <option value="$PROJECT_DIR$/quizerpw/yii2-app-basic/components/tests/ExternalPaymentTest.php" />
         <option value="$PROJECT_DIR$/quizerpw/yii2-app-basic/vendor/composer/installed.json" />
         <option value="$PROJECT_DIR$/quizerpw/yii2-app-basic/composer.json" />
         <option value="$PROJECT_DIR$/quizerpw/yii2-app-basic/config/web.php" />
+        <option value="$PROJECT_DIR$/quizerpw/yii2-app-basic/views/layouts/main.php" />
+        <option value="$PROJECT_DIR$/quizerpw/yii2-app-basic/config/rbac/items.php" />
+        <option value="$PROJECT_DIR$/quizerpw/yii2-app-basic/messages/ru-RU/app.php" />
+        <option value="$PROJECT_DIR$/quizerpw/yii2-app-basic/vendor/dektrium/yii2-user/models/AddFields.php" />
+        <option value="$PROJECT_DIR$/quizerpw/yii2-app-basic/views/quest/run.php" />
+        <option value="$PROJECT_DIR$/quizerpw/yii2-app-basic/vendor/dektrium/yii2-user/models/ProfileAddFields.php" />
+        <option value="$PROJECT_DIR$/quizerpw/yii2-app-basic/vendor/dektrium/yii2-user/views/settings/profile-add-info.php" />
+        <option value="$PROJECT_DIR$/quizerpw/yii2-app-basic/vendor/dektrium/yii2-user/models/ProfileAddValues.php" />
+        <option value="$PROJECT_DIR$/quizerpw/yii2-app-basic/vendor/dektrium/yii2-user/views/settings/update-profile-add-info.php" />
+        <option value="$PROJECT_DIR$/quizerpw/yii2-app-basic/vendor/dektrium/yii2-user/views/settings/_menu.php" />
+        <option value="$PROJECT_DIR$/quizerpw/yii2-app-basic/vendor/dektrium/yii2-user/controllers/AdminController.php" />
+        <option value="$PROJECT_DIR$/quizerpw/yii2-app-basic/vendor/dektrium/yii2-user/Module.php" />
+        <option value="$PROJECT_DIR$/quizerpw/yii2-app-basic/controllers/NodeController.php" />
+        <option value="$PROJECT_DIR$/quizerpw/yii2-app-basic/models/ARUser.php" />
+        <option value="$PROJECT_DIR$/quizerpw/yii2-app-basic/views/achievement/index.php" />
+        <option value="$PROJECT_DIR$/quizerpw/yii2-app-basic/views/quest/visual.php" />
+        <option value="$PROJECT_DIR$/quizerpw/yii2-app-basic/vendor/dektrium/yii2-user/views/settings/account.php" />
+        <option value="$PROJECT_DIR$/quizerpw/yii2-app-basic/vendor/dektrium/yii2-user/controllers/SettingsController.php" />
+        <option value="$PROJECT_DIR$/quizerpw/yii2-app-basic/vendor/dektrium/yii2-user/views/settings/profile.php" />
+        <option value="$PROJECT_DIR$/quizerpw/yii2-app-basic/vendor/dektrium/yii2-user/controllers/ProfileController.php" />
+        <option value="$PROJECT_DIR$/quizerpw/yii2-app-basic/vendor/dektrium/yii2-user/controllers/RegistrationController.php" />
+        <option value="$PROJECT_DIR$/quizerpw/yii2-app-basic/vendor/dektrium/yii2-user/models/Account.php" />
+        <option value="$PROJECT_DIR$/quizerpw/yii2-app-basic/vendor/dektrium/yii2-user/models/Profile.php" />
+        <option value="$PROJECT_DIR$/quizerpw/yii2-app-basic/views/quest/passed.php" />
+        <option value="$PROJECT_DIR$/quizerpw/yii2-app-basic/controllers/QuestController.php" />
+        <option value="$PROJECT_DIR$/quizerpw/yii2-app-basic/controllers/AchievementController.php" />
+        <option value="$PROJECT_DIR$/quizerpw/yii2-app-basic/models/UserAchievement.php" />
+        <option value="$PROJECT_DIR$/quizerpw/yii2-app-basic/models/Achievement.php" />
+        <option value="$PROJECT_DIR$/quizerpw/yii2-app-basic/views/quest/index.php" />
+        <option value="$PROJECT_DIR$/quizerpw/yii2-app-basic/views/achievement/received.php" />
+        <option value="$PROJECT_DIR$/quizerpw/yii2-app-basic/vendor/dektrium/yii2-user/views/admin/update.php" />
+        <option value="$PROJECT_DIR$/quizerpw/yii2-app-basic/vendor/dektrium/yii2-user/views/admin/index.php" />
+        <option value="$PROJECT_DIR$/quizerpw/yii2-app-basic/vendor/dektrium/yii2-user/messages/ru/user.php" />
+        <option value="$PROJECT_DIR$/quizerpw/yii2-app-basic/vendor/dektrium/yii2-user/views/admin/_user.php" />
+        <option value="$PROJECT_DIR$/quizerpw/yii2-app-basic/vendor/dektrium/yii2-user/models/User.php" />
+        <option value="$PROJECT_DIR$/quizerpw/yii2-app-basic/vendor/dektrium/yii2-user/views/profile/show.php" />
       </list>
     </option>
   </component>
@@ -179,7 +251,6 @@
     </navigator>
     <panes>
       <pane id="Scratches" />
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -224,7 +295,7 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="web" />
+              <option name="myItemId" value="vendor" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -246,37 +317,15 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="web" />
+              <option name="myItemId" value="vendor" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="js" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="quizer.local" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="quizer.local" />
+              <option name="myItemId" value="dektrium" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="quizerpw" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="yii2-app-basic" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="web" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="images" />
+              <option name="myItemId" value="yii2-user" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -298,59 +347,15 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="web" />
+              <option name="myItemId" value="vendor" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="assets" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="quizer.local" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="quizer.local" />
+              <option name="myItemId" value="dektrium" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="quizerpw" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="yii2-app-basic" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="web" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="assets" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="nodquest" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="quizer.local" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="quizer.local" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="quizerpw" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="yii2-app-basic" />
+              <option name="myItemId" value="yii2-user" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
@@ -379,34 +384,20 @@
               <option name="myItemId" value="vendor" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
-          </PATH>
-          <PATH>
             <PATH_ELEMENT>
-              <option name="myItemId" value="quizer.local" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="quizer.local" />
+              <option name="myItemId" value="dektrium" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="quizerpw" />
+              <option name="myItemId" value="yii2-user" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="yii2-app-basic" />
+              <option name="myItemId" value="views" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="vendor" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="grigorieff" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="yii2-yandex-money" />
+              <option name="myItemId" value="profile" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -432,15 +423,19 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="grigorieff" />
+              <option name="myItemId" value="dektrium" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="yii2-yandex-money" />
+              <option name="myItemId" value="yii2-user" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="lib" />
+              <option name="myItemId" value="views" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="admin" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -459,6 +454,18 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="yii2-app-basic" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="vendor" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="dektrium" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="yii2-user" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
@@ -475,165 +482,26 @@
               <option name="myItemId" value="quizer.local" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="quizerpw" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="yii2-app-basic" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="messages" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="ru-RU" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="quizer.local" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="quizer.local" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="quizerpw" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="yii2-app-basic" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="controllers" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="quizer.local" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="quizer.local" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="quizerpw" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="yii2-app-basic" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="config" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="quizer.local" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="quizer.local" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="quizerpw" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="yii2-app-basic" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="config" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="rbac" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="quizer.local" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="quizer.local" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="quizerpw" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="yii2-app-basic" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="components" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="quizer.local" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="quizer.local" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="quizerpw" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="yii2-app-basic" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="assets" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="quizer.local" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="quizer.local" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
           </PATH>
         </subPane>
       </pane>
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../russiangap.local" />
+    <property name="last_opened_file_path" value="E:/Pimentos/missaqua.ru" />
     <property name="FullScreen" value="false" />
     <property name="settings.editor.selected.configurable" value="File.Encoding" />
     <property name="settings.editor.splitter.proportion" value="0.2" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
-      <recent name="E:\OpenServer\domains\quizer.local\quizerpw\yii2-app-basic\vendor\grigorieff\yii2-yandex-money" />
-      <recent name="E:\OpenServer\domains\quizer.local\quizerpw\yii2-app-basic\vendor\grigorieff" />
-      <recent name="E:\OpenServer\domains\quizer.local\quizerpw\yii2-app-basic\components" />
-      <recent name="E:\OpenServer\domains\quizer.local\quizerpw\yii2-app-basic\views\node" />
+      <recent name="E:\OpenServer\domains\quizer.local\quizerpw\yii2-app-basic\views\achievement" />
+      <recent name="E:\OpenServer\domains\quizer.local\quizerpw\yii2-app-basic\views\quest" />
       <recent name="E:\OpenServer\domains\quizer.local\quizerpw\yii2-app-basic\web\images" />
+      <recent name="E:\OpenServer\domains\quizer.local\quizerpw\yii2-app-basic\vendor\dektrium\yii2-user\models" />
+      <recent name="E:\OpenServer\domains\quizer.local\quizerpw\yii2-app-basic\vendor\grigorieff\yii2-yandex-money" />
     </key>
   </component>
   <component name="RunManager">
@@ -678,14 +546,15 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1382" height="784" extended-state="6" />
-    <editor active="false" />
+    <frame x="-8" y="-8" width="1382" height="784" extended-state="7" />
+    <editor active="true" />
     <layout>
-      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.23645681" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.23645681" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="11" side_tool="true" content_ui="tabs" />
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.32840237" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
@@ -697,7 +566,6 @@
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32886904" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
     </layout>
@@ -720,358 +588,271 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/quizerpw/yii2-app-basic/views/achievement/create.php">
+    <entry file="file://$PROJECT_DIR$/quizerpw/yii2-app-basic/vendor/yiisoft/yii2/db/ActiveQueryTrait.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.24598071">
-          <caret line="9" column="98" selection-start-line="0" selection-start-column="0" selection-end-line="20" selection-end-column="0" />
+        <state vertical-scroll-proportion="0.34726688">
+          <caret line="21" column="11" selection-start-line="21" selection-start-column="11" selection-end-line="21" selection-end-column="11" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/quizerpw/yii2-app-basic/views/achievement/_form.php">
+    <entry file="jar://$APPLICATION_HOME_DIR$/plugins/php/lib/php.jar!/com/jetbrains/php/lang/psi/stubs/data/fileinfo.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.08199357">
-          <caret line="3" column="0" selection-start-line="3" selection-start-column="0" selection-end-line="3" selection-end-column="27" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/quizerpw/yii2-app-basic/models/NodeConnection.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-0.3279743">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/quizerpw/yii2-app-basic/views/achievement/issue.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.8745981">
-          <caret line="32" column="44" selection-start-line="32" selection-start-column="44" selection-end-line="32" selection-end-column="44" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/quizerpw/yii2-app-basic/models/UserAchievement.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.53536975">
-          <caret line="32" column="156" selection-start-line="32" selection-start-column="156" selection-end-line="32" selection-end-column="156" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/quizerpw/yii2-app-basic/controllers/AchievementController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-24.576923">
-          <caret line="160" column="44" selection-start-line="160" selection-start-column="44" selection-end-line="160" selection-end-column="44" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/quizerpw/yii2-app-basic/web/js/tree.css">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-2.9310346">
-          <caret line="5" column="23" selection-start-line="5" selection-start-column="23" selection-end-line="5" selection-end-column="23" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/quizerpw/yii2-app-basic/web/js/jsplumb.css">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.3602585">
-          <caret line="121" column="20" selection-start-line="121" selection-start-column="20" selection-end-line="121" selection-end-column="20" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/quizerpw/yii2-app-basic/views/quest/visual.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.3035413">
-          <caret line="35" column="85" selection-start-line="35" selection-start-column="85" selection-end-line="35" selection-end-column="85" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/quizerpw/yii2-app-basic/models/QuestRun.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="14.153846">
-          <caret line="65" column="83" selection-start-line="65" selection-start-column="83" selection-end-line="65" selection-end-column="83" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/quizerpw/yii2-app-basic/views/node/index.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-11.346154">
-          <caret line="86" column="117" selection-start-line="86" selection-start-column="113" selection-end-line="86" selection-end-column="117" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/quizerpw/yii2-app-basic/views/achievement/index.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.5275081">
-          <caret line="34" column="13" selection-start-line="34" selection-start-column="13" selection-end-line="34" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/quizerpw/yii2-app-basic/views/node/hints.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-7.1923075">
-          <caret line="68" column="104" selection-start-line="68" selection-start-column="104" selection-end-line="68" selection-end-column="104" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/quizerpw/yii2-app-basic/views/node/create-hint.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-10.461538">
-          <caret line="17" column="44" selection-start-line="17" selection-start-column="44" selection-end-line="17" selection-end-column="44" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/quizerpw/yii2-app-basic/views/node/update-hint.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-10.461538">
-          <caret line="17" column="44" selection-start-line="17" selection-start-column="44" selection-end-line="17" selection-end-column="44" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/quizerpw/yii2-app-basic/models/Achievement.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-54.923077">
-          <caret line="174" column="0" selection-start-line="174" selection-start-column="0" selection-end-line="174" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/quizerpw/yii2-app-basic/views/node/create.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.3576052">
-          <caret line="13" column="25" selection-start-line="13" selection-start-column="25" selection-end-line="13" selection-end-column="25" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/quizerpw/yii2-app-basic/views/node/_hint_form.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.49514562">
-          <caret line="18" column="60" selection-start-line="18" selection-start-column="60" selection-end-line="18" selection-end-column="60" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/quizerpw/yii2-app-basic/models/NodeHint.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.55501616">
-          <caret line="22" column="73" selection-start-line="22" selection-start-column="27" selection-end-line="22" selection-end-column="73" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/quizerpw/yii2-app-basic/vendor/yiisoft/yii2/db/BaseActiveRecord.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-8.230769">
-          <caret line="41" column="42" selection-start-line="41" selection-start-column="42" selection-end-line="41" selection-end-column="42" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/quizerpw/yii2-app-basic/vendor/yiisoft/yii2/base/Component.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.36407766">
-          <caret line="140" column="82" selection-start-line="140" selection-start-column="80" selection-end-line="140" selection-end-column="82" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/quizerpw/yii2-app-basic/vendor/yiisoft/yii2/base/Object.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.33333334">
-          <caret line="101" column="20" selection-start-line="101" selection-start-column="20" selection-end-line="101" selection-end-column="20" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/quizerpw/yii2-app-basic/models/NodeAnswer.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-0.9352751">
-          <caret line="2" column="0" selection-start-line="2" selection-start-column="0" selection-end-line="2" selection-end-column="21" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/quizerpw/yii2-app-basic/vendor/yiisoft/yii2/db/Schema.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.3462783">
-          <caret line="289" column="19" selection-start-line="289" selection-start-column="19" selection-end-line="289" selection-end-column="19" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/quizerpw/yii2-app-basic/vendor/yiisoft/yii2/db/ActiveRecord.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.3327674">
-          <caret line="415" column="62" selection-start-line="415" selection-start-column="62" selection-end-line="415" selection-end-column="62" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/quizerpw/yii2-app-basic/web/assets/nodquest/32bb90e8976aab5298d5da10fe66f21d.jpg">
-      <provider selected="true" editor-type-id="images">
-        <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/quizerpw/yii2-app-basic/views/node/_form.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="22" column="78" selection-start-line="22" selection-start-column="78" selection-end-line="22" selection-end-column="78" />
-          <folding>
-            <element signature="e#7#28#0#PHP" expanded="true" />
-            <marker date="1440973186769" expanded="true" signature="-1:-1" placeholder="..." />
-          </folding>
+        <state vertical-scroll-proportion="0.5385852">
+          <caret line="191" column="27" selection-start-line="191" selection-start-column="9" selection-end-line="191" selection-end-column="27" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/quizerpw/yii2-app-basic/messages/ru-RU/app.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="46" column="30" selection-start-line="46" selection-start-column="30" selection-end-line="46" selection-end-column="30" />
-          <folding />
+        <state vertical-scroll-proportion="1.1639872">
+          <caret line="47" column="48" selection-start-line="47" selection-start-column="48" selection-end-line="47" selection-end-column="48" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/quizerpw/yii2-app-basic/models/Node.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="222" column="39" selection-start-line="222" selection-start-column="20" selection-end-line="222" selection-end-column="39" />
-          <folding>
-            <element signature="e#4464#5079#0#PHP" expanded="false" />
-            <element signature="e#5085#5695#0#PHP" expanded="false" />
-            <element signature="e#5701#6355#0#PHP" expanded="false" />
-            <element signature="e#6361#7010#0#PHP" expanded="false" />
-            <element signature="e#7268#7451#0#PHP" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/quizerpw/yii2-app-basic/web/assets/nodquest/1c2b6446c780589ed9977a27edb635f9.php">
+    <entry file="file://$PROJECT_DIR$/quizerpw/yii2-app-basic/views/quest/user-statistics.php">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/quizerpw/yii2-app-basic/web/assets/nodquest/fbd7939d674997cdb4692d34de8633c4.php">
+    <entry file="file://$PROJECT_DIR$/quizerpw/yii2-app-basic/vendor/dektrium/yii2-user/widgets/Connect.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.05466238">
-          <caret line="2" column="46" selection-start-line="2" selection-start-column="46" selection-end-line="2" selection-end-column="46" />
-          <folding />
+        <state vertical-scroll-proportion="-28.5">
+          <caret line="67" column="30" selection-start-line="67" selection-start-column="22" selection-end-line="67" selection-end-column="30" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/quizerpw/yii2-app-basic/vendor/yiisoft/yii2/base/Model.php">
+    <entry file="file://$PROJECT_DIR$/quizerpw/yii2-app-basic/vendor/yiisoft/yii2/base/Widget.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.34726688">
+          <caret line="51" column="27" selection-start-line="51" selection-start-column="27" selection-end-line="51" selection-end-column="27" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/quizerpw/yii2-app-basic/vendor/dektrium/yii2-user/tests/codeception/functional/RecoveryCept.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.27331188">
+          <caret line="16" column="0" selection-start-line="16" selection-start-column="0" selection-end-line="16" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/quizerpw/yii2-app-basic/vendor/dektrium/yii2-user/views/settings/networks.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-21.576923">
+          <caret line="40" column="42" selection-start-line="40" selection-start-column="37" selection-end-line="40" selection-end-column="42" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/quizerpw/yii2-app-basic/views/quest/run.php">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="329" column="20" selection-start-line="329" selection-start-column="20" selection-end-line="329" selection-end-column="20" />
+          <caret line="143" column="10" selection-start-line="143" selection-start-column="10" selection-end-line="143" selection-end-column="10" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/quizerpw/yii2-app-basic/vendor/yiisoft/yii2/db/BaseActiveRecord.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.34726688">
+          <caret line="585" column="20" selection-start-line="585" selection-start-column="20" selection-end-line="585" selection-end-column="20" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/quizerpw/yii2-app-basic/views/quest/index.php">
+    <entry file="file://$PROJECT_DIR$/quizerpw/yii2-app-basic/vendor/dektrium/yii2-user/models/ProfileAddValues.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.38263667">
-          <caret line="278" column="67" selection-start-line="278" selection-start-column="67" selection-end-line="278" selection-end-column="67" />
+        <state vertical-scroll-proportion="0.0">
+          <caret line="18" column="18" selection-start-line="18" selection-start-column="18" selection-end-line="18" selection-end-column="18" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/quizerpw/yii2-app-basic/vendor/dektrium/yii2-user/views/settings/update-profile-add-info.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="40" column="16" selection-start-line="40" selection-start-column="16" selection-end-line="40" selection-end-column="16" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/quizerpw/yii2-app-basic/vendor/dektrium/yii2-user/views/settings/_menu.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="24" column="25" selection-start-line="24" selection-start-column="25" selection-end-line="24" selection-end-column="25" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/quizerpw/yii2-app-basic/vendor/dektrium/yii2-user/models/ProfileAddFields.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="38" column="41" selection-start-line="38" selection-start-column="41" selection-end-line="38" selection-end-column="41" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/quizerpw/yii2-app-basic/controllers/SiteController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/quizerpw/yii2-app-basic/controllers/NodeController.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.24598071">
-          <caret line="154" column="18" selection-start-line="154" selection-start-column="18" selection-end-line="154" selection-end-column="18" />
-          <folding>
-            <element signature="e#35#65#0#PHP" expanded="true" />
-            <element signature="e#438#507#0#PHP" expanded="false" />
-            <element signature="e#2193#2288#0#PHP" expanded="false" />
-            <element signature="e#2346#2426#0#PHP" expanded="false" />
-            <element signature="e#2368#2425#0#PHP" expanded="false" />
-            <element signature="e#2439#2589#0#PHP" expanded="false" />
-            <element signature="e#3425#3513#0#PHP" expanded="false" />
-            <element signature="e#3456#3512#0#PHP" expanded="false" />
-            <element signature="e#3555#3636#0#PHP" expanded="false" />
-            <element signature="e#3579#3635#0#PHP" expanded="false" />
-            <element signature="e#4756#4987#0#PHP" expanded="false" />
-            <element signature="e#4830#4931#0#PHP" expanded="false" />
-            <element signature="e#5001#5294#0#PHP" expanded="false" />
-            <element signature="e#5093#5220#0#PHP" expanded="false" />
-            <element signature="e#5308#5594#0#PHP" expanded="false" />
-            <element signature="e#5398#5522#0#PHP" expanded="false" />
-            <element signature="e#5641#5834#0#PHP" expanded="false" />
-            <element signature="e#6777#6865#0#PHP" expanded="false" />
-            <element signature="e#6808#6864#0#PHP" expanded="false" />
-            <element signature="e#6907#6988#0#PHP" expanded="false" />
-            <element signature="e#6931#6987#0#PHP" expanded="false" />
-            <element signature="e#9772#9968#0#PHP" expanded="false" />
-            <element signature="e#10716#10987#0#PHP" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/quizerpw/yii2-app-basic/views/quest/run.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.40996784">
-          <caret line="106" column="39" selection-start-line="106" selection-start-column="39" selection-end-line="106" selection-end-column="39" />
-          <folding>
-            <element signature="e#7#28#0#PHP" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/quizerpw/yii2-app-basic/models/Quest.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.12861736">
-          <caret line="84" column="32" selection-start-line="84" selection-start-column="20" selection-end-line="84" selection-end-column="32" />
+        <state vertical-scroll-proportion="-16.346153">
+          <caret line="51" column="25" selection-start-line="51" selection-start-column="25" selection-end-line="51" selection-end-column="25" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/quizerpw/yii2-app-basic/views/achievement/index.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-6.230769">
+          <caret line="50" column="68" selection-start-line="50" selection-start-column="68" selection-end-line="50" selection-end-column="68" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/quizerpw/yii2-app-basic/views/quest/visual.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-5.1153846">
+          <caret line="350" column="60" selection-start-line="350" selection-start-column="60" selection-end-line="350" selection-end-column="60" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/quizerpw/yii2-app-basic/vendor/dektrium/yii2-user/views/settings/profile-add-info.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-9.807693">
+          <caret line="51" column="16" selection-start-line="51" selection-start-column="16" selection-end-line="51" selection-end-column="81" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/quizerpw/yii2-app-basic/vendor/dektrium/yii2-user/views/settings/account.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-7.8461537">
+          <caret line="32" column="41" selection-start-line="32" selection-start-column="41" selection-end-line="32" selection-end-column="41" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/quizerpw/yii2-app-basic/vendor/dektrium/yii2-user/controllers/SecurityController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-50.346153">
+          <caret line="131" column="47" selection-start-line="131" selection-start-column="47" selection-end-line="131" selection-end-column="47" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/quizerpw/yii2-app-basic/vendor/dektrium/yii2-user/tests/codeception/unit/UserTest.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-9.384615">
+          <caret line="56" column="35" selection-start-line="56" selection-start-column="35" selection-end-line="56" selection-end-column="35" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/quizerpw/yii2-app-basic/vendor/dektrium/yii2-user/views/message.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/quizerpw/yii2-app-basic/vendor/dektrium/yii2-user/tests/codeception/functional/ConfirmationCept.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.3825">
+          <caret line="10" column="106" selection-start-line="10" selection-start-column="13" selection-end-line="10" selection-end-column="106" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/quizerpw/yii2-app-basic/vendor/dektrium/yii2-user/controllers/SettingsController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="6.1538463">
+          <caret line="139" column="41" selection-start-line="139" selection-start-column="41" selection-end-line="139" selection-end-column="41" />
+          <folding>
+            <element signature="e#286#308#0#PHP" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/quizerpw/yii2-app-basic/vendor/dektrium/yii2-user/models/RegistrationForm.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-1.7877814">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/quizerpw/yii2-app-basic/vendor/dektrium/yii2-user/controllers/AdminController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="66" column="28" selection-start-line="66" selection-start-column="28" selection-end-line="66" selection-end-column="28" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/quizerpw/yii2-app-basic/vendor/dektrium/yii2-user/controllers/RegistrationController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="118" column="14" selection-start-line="118" selection-start-column="14" selection-end-line="118" selection-end-column="14" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/quizerpw/yii2-app-basic/vendor/dektrium/yii2-user/models/Account.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="178" column="32" selection-start-line="178" selection-start-column="32" selection-end-line="178" selection-end-column="32" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/quizerpw/yii2-app-basic/vendor/dektrium/yii2-user/views/settings/profile.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="95" column="221" selection-start-line="95" selection-start-column="28" selection-end-line="95" selection-end-column="221" />
+          <folding>
+            <element signature="e#250#271#0#PHP" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/quizerpw/yii2-app-basic/vendor/dektrium/yii2-user/controllers/ProfileController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="80" column="9" selection-start-line="80" selection-start-column="9" selection-end-line="80" selection-end-column="9" />
+          <folding>
+            <element signature="e#286#311#0#PHP" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/quizerpw/yii2-app-basic/controllers/QuestController.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="7.516077">
-          <caret line="362" column="112" selection-start-line="362" selection-start-column="112" selection-end-line="362" selection-end-column="112" />
-          <folding>
-            <element signature="e#35#62#0#PHP" expanded="true" />
-            <marker date="1441201821261" expanded="true" signature="-1:-1" placeholder="DELETE FROM ..." />
-            <marker date="1441201821261" expanded="true" signature="-1:-1" placeholder="DELETE FROM ..." />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/quizerpw/yii2-app-basic/vendor/dektrium/yii2-user/widgets/Login.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        <state vertical-scroll-proportion="-6.269231">
+          <caret line="657" column="58" selection-start-line="657" selection-start-column="58" selection-end-line="657" selection-end-column="58" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/quizerpw/yii2-app-basic/vendor/dektrium/yii2-user/widgets/Connect.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-0.7491961">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/quizerpw/yii2-app-basic/vendor/composer/installed.json">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.2">
-          <caret line="1078" column="17" selection-start-line="1078" selection-start-column="17" selection-end-line="1078" selection-end-column="17" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/quizerpw/yii2-app-basic/vendor/grigorieff/yii2-yandex-money/LICENSE">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-      <provider editor-type-id="com.intellij.database.editor.CsvTableFileEditorProvider">
+    <entry file="file://$PROJECT_DIR$/quizerpw/yii2-app-basic/web/images/highscores.png">
+      <provider selected="true" editor-type-id="images">
         <state />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/quizerpw/yii2-app-basic/composer.json">
+    <entry file="file://$PROJECT_DIR$/quizerpw/yii2-app-basic/views/quest/passed.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-7.8461537">
-          <caret line="18" column="38" selection-start-line="18" selection-start-column="38" selection-end-line="18" selection-end-column="38" />
+        <state vertical-scroll-proportion="0.9453376">
+          <caret line="68" column="13" selection-start-line="68" selection-start-column="13" selection-end-line="68" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/quizerpw/yii2-app-basic/models/ARUser.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.8231511">
+          <caret line="95" column="7" selection-start-line="95" selection-start-column="7" selection-end-line="95" selection-end-column="7" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/quizerpw/yii2-app-basic/vendor/grigorieff/yii2-yandex-money/lib/api.php">
+    <entry file="file://$PROJECT_DIR$/quizerpw/yii2-app-basic/models/User.php">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
@@ -1079,44 +860,127 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/quizerpw/yii2-app-basic/vendor/grigorieff/yii2-yandex-money/lib/base.php">
+    <entry file="file://$PROJECT_DIR$/quizerpw/yii2-app-basic/models/QuestRun.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.31993568">
+          <caret line="57" column="4" selection-start-line="57" selection-start-column="4" selection-end-line="59" selection-end-column="5" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/quizerpw/yii2-app-basic/models/UserAchievement.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.7540193">
+          <caret line="83" column="95" selection-start-line="83" selection-start-column="95" selection-end-line="83" selection-end-column="95" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/quizerpw/yii2-app-basic/views/quest/index.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="1.4228296">
+          <caret line="223" column="12" selection-start-line="223" selection-start-column="12" selection-end-line="223" selection-end-column="12" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/quizerpw/yii2-app-basic/models/Achievement.php">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
+          <caret line="64" column="27" selection-start-line="64" selection-start-column="27" selection-end-line="64" selection-end-column="27" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/quizerpw/yii2-app-basic/views/achievement/received.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.09807074">
+          <caret line="10" column="39" selection-start-line="10" selection-start-column="39" selection-end-line="10" selection-end-column="39" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/quizerpw/yii2-app-basic/vendor/dektrium/yii2-user/views/admin/index.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-14.115385">
+          <caret line="68" column="39" selection-start-line="68" selection-start-column="28" selection-end-line="68" selection-end-column="39" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/quizerpw/yii2-app-basic/vendor/dektrium/yii2-user/messages/ru/user.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-19.346153">
+          <caret line="170" column="33" selection-start-line="170" selection-start-column="33" selection-end-line="170" selection-end-column="33" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/quizerpw/yii2-app-basic/vendor/dektrium/yii2-user/views/admin/_account.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-0.14790997">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/quizerpw/yii2-app-basic/vendor/grigorieff/yii2-yandex-money/lib/exceptions.php">
+    <entry file="file://$PROJECT_DIR$/quizerpw/yii2-app-basic/vendor/dektrium/yii2-user/views/admin/update.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        <state vertical-scroll-proportion="-14.769231">
+          <caret line="45" column="53" selection-start-line="45" selection-start-column="53" selection-end-line="45" selection-end-column="53" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/quizerpw/yii2-app-basic/vendor/grigorieff/yii2-yandex-money/lib/external_payment.php">
+    <entry file="file://$PROJECT_DIR$/quizerpw/yii2-app-basic/vendor/dektrium/yii2-user/views/admin/_user.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        <state vertical-scroll-proportion="-9.153846">
+          <caret line="21" column="53" selection-start-line="21" selection-start-column="53" selection-end-line="21" selection-end-column="53" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/quizerpw/yii2-app-basic/vendor/grigorieff/yii2-yandex-money/YMComponent.php">
+    <entry file="file://$PROJECT_DIR$/quizerpw/yii2-app-basic/vendor/dektrium/yii2-user/models/Profile.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-3.9230769">
-          <caret line="6" column="36" selection-start-line="6" selection-start-column="36" selection-end-line="6" selection-end-column="36" />
+        <state vertical-scroll-proportion="-10.192307">
+          <caret line="201" column="25" selection-start-line="201" selection-start-column="25" selection-end-line="201" selection-end-column="25" />
           <folding>
-            <element signature="e#33#54#0#PHP" expanded="true" />
+            <element signature="e#281#305#0#PHP" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/quizerpw/yii2-app-basic/config/web.php">
+    <entry file="file://$PROJECT_DIR$/quizerpw/yii2-app-basic/vendor/dektrium/yii2-user/views/profile/show.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.7379421">
-          <caret line="144" column="10" selection-start-line="144" selection-start-column="10" selection-end-line="144" selection-end-column="10" />
+        <state vertical-scroll-proportion="-34.0">
+          <caret line="59" column="35" selection-start-line="59" selection-start-column="35" selection-end-line="59" selection-end-column="35" />
+          <folding>
+            <element signature="n#style#0;n#div#0;n#div#0;n#div#0;n#div#0;n#div#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#div#0;n#div#1;n#div#0;n#div#0;n#div#0;n#!!top" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/quizerpw/yii2-app-basic/controllers/AchievementController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-13.730769">
+          <caret line="54" column="72" selection-start-line="54" selection-start-column="62" selection-end-line="54" selection-end-column="72" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/quizerpw/yii2-app-basic/vendor/dektrium/yii2-user/models/User.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-6.423077">
+          <caret line="104" column="59" selection-start-line="104" selection-start-column="59" selection-end-line="104" selection-end-column="59" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/quizerpw/yii2-app-basic/vendor/dektrium/yii2-user/Module.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.355">
+          <caret line="69" column="55" selection-start-line="69" selection-start-column="55" selection-end-line="69" selection-end-column="55" />
           <folding />
         </state>
       </provider>
