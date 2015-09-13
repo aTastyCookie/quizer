@@ -20,6 +20,10 @@ use Yii;
  */
 class Quest extends \yii\db\ActiveRecord {
 
+    const HINT_COST = 0.1;
+    const HINT_COST_COMMISSION_YM = 0.005;
+    const HINT_COST_COMMISSION_CARD = 0.02;
+
     public $logoFile;
     public $cssFile;
     public $jsFile;

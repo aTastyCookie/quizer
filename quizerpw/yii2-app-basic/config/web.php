@@ -138,10 +138,10 @@ $config = [
         'db' => require(__DIR__ . '/db.php'),
         'ym' => [
             'class' => 'grigorieff\ym\YMComponent',
-            'client_id' => '......',
-            'code' => '......',
-            'redirect_uri' => '......',
-            'client_secret' => '......'
+            'client_id' => 'E43EE5FE9F53CA6A2C45847F6FC2472E0619A50F53EECC3574DD62CF9F89253B',
+            'code' => '',
+            'redirect_uri' => urlencode('https://quizer.pw/quest/showhint'),
+            'client_secret' => '0548342FA33DECE04952532E2C3028DD47AF96DA199B99A65CB5C28E5938DA0EFFBA9AECFED64A810F746325E4B17DBF20E052D0E5896B151E545E55DE811512'
         ],
     ],
 

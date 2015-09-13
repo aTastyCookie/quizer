@@ -45,5 +45,6 @@ return [
     'Quest Highscores' => 'Рейтинги',
     'Check Code' => 'Код проверки',
     'Node Hints' => 'Подсказки',
-    'View Quest Tree' => 'Просмотр дерева квеста'
+    'View Quest Tree' => 'Просмотр дерева квеста',
+    'Show Hint' => 'Просмотр подсказки'
 ];

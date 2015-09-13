@@ -19,6 +19,7 @@
         "yiisoft/yii2-bootstrap": "*",
         "yiisoft/yii2-swiftmailer": "*",
         "dektrium/yii2-user": "0.9.*@dev",
+        "grigorieff/yii2-yandex-money": "*",
         "katanyoo/yii2-mailgun-mailer": "dev-master",
         "sjaakp/yii2-illustrated-behavior": "dev-master",
         "yurkinx/yii2-image": "dev-master",
@@ -29,8 +30,7 @@
         "yiisoft/yii2-codeception": "*",
         "yiisoft/yii2-debug": "*",
         "yiisoft/yii2-gii": "*",
-        "yiisoft/yii2-faker": "*",
-        "grigorieff/yii2-yandex-money": "*"
+        "yiisoft/yii2-faker": "*"
     },
     "config": {
         "process-timeout": 1800

@@ -27,6 +27,9 @@ use app\models\NodeSearch;
 use yii\base\ErrorException;
 use app\models\UserAchievement;
 use app\models\NodeHint;
+use app\models\NodeHintPayment;
+use app\models\NodeHintPaymentData;
+use dektrium\user\Mailer;
 
 /**
  * QuestController implements the CRUD actions for Quest model.
@@ -44,7 +47,9 @@ class QuestController extends Controller
                     [
                         'allow' => true,
                         'actions' => [
-                            'passed'
+                            'passed',
+                            'checkpayment',
+                            'showhint'
                         ],
                         'roles' => ['?', '@']
                     ],
@@ -57,7 +62,8 @@ class QuestController extends Controller
                             'choose',
                             'highscores',
                             'conformity',
-                            'visual'
+                            'visual',
+                            'requestpayment'
                         ],
                         'roles' => ['@']
                     ],
@@ -539,6 +545,107 @@ class QuestController extends Controller
         $current_run->save(false);
 
         $this->redirect(['run', 'id' => $quest_id]);
+    }
+
+    /**
+     * This work if user send request for buying the hint
+     *
+     * @throws BadRequestHttpException
+     * @throws NotFoundHttpException
+     *
+     * @return void
+     */
+    public function actionRequestpayment() {
+        if(!($hint_id = Yii::$app->request->post('hint_id')) || !is_numeric(Yii::$app->request->post('hint_id')))
+            throw new BadRequestHttpException('Неверный запрос');
+
+        if(!$hint = NodeHint::findOne(intval($hint_id)))
+            throw new NotFoundHttpException();
+
+        $payment = new NodeHintPayment();
+        $payment->user_id = Yii::$app->getUser()->getId();
+        $payment->hint_id = $hint->hint_id;
+        $payment->hint_message = $hint->message;
+        $payment->save(false);
+
+        Yii::$app->end();
+    }
+
+    /**
+     * It works by listening Yandex Money HTTP response for check payment after buying hint by user
+     * and send hint to user email
+     *
+     * @return void
+     */
+    public function actionCheckpayment() {
+        if(!empty($_POST['email'])) {
+            if(!empty($_POST['operation_id']) && !empty($_POST['notification_type']) && (!empty($_POST['amount']) || !empty($_POST['withdraw_amount']))) {
+                $data = new NodeHintPaymentData();
+                $data->operation_id = $_POST['operation_id'];
+                $data->operation_md5 = md5($_POST['operation_id'].$_POST['notification_type']);
+                $data->amount = !empty($_POST['amount']) ? $_POST['amount'] : null;
+                $data->withdraw_amount = !empty($_POST['withdraw_amount']) ? $_POST['withdraw_amount'] : null;
+                $data->notification_type = $_POST['notification_type'];
+                $data->datetime = !empty($_POST['datetime']) ? $_POST['datetime'] : null;
+                $data->email = $_POST['email'];
+                $data->save(false);
+            }
+
+            $mailer = $mailer = Yii::$app->mailer;
+            $mailer->viewPath = '@dektrium/user/views/mail';
+            $mailer->getView()->theme = Yii::$app->view->theme;
+
+            $mailer->compose(['html' => 'payment', 'text' => 'payment'], [])
+                ->setTo($_POST['email'])
+                ->setFrom('no-reply@quizer.pw')
+                ->setSubject('Подсказка от Quizer')
+                ->send();
+        }
+    }
+
+    public function actionShowhint() {
+        $message = '';
+
+        if(!Yii::$app->getUser()->getIsGuest()) {
+            if (!($code = Yii::$app->request->get('code')) || (strlen(Yii::$app->request->get('code')) != 32))
+                throw new BadRequestHttpException('Неверный запрос');
+
+            if(!$payment = NodeHintPayment::find()->where(['operation_md5' => Html::encode($code)])->one()) {
+                if($data = NodeHintPaymentData::find()->where(['operation_md5' => Html::encode($code)])->one()) {
+                    if($payment = NodeHintPayment::find()->where([
+                        'user_id' => Yii::$app->getUser()->getId(),
+                        'operation_md5' => null
+                    ])->orderBy('payment_id DESC')->limit(1)->one()) {
+                        $payment->data_id = $data->data_id;
+                        $payment->operation_md5 = Html::encode($code);
+                        $payment->save(false);
+                        $message = 'Ваша подсказка: <b>"'.$payment->hint_message.'"</b>';
+                    } else
+                        $message = 'Подсказка не найдена. С вопросами обращайтесь к администрации сайта.';
+                } else
+                    throw new NotFoundHttpException();
+            } else
+                $message = 'Ваша подсказка: <b>"'.$payment->hint_message.'"</b>';
+
+            if($payment) {
+                NodeHintPayment::deleteAll([
+                    'user_id' => Yii::$app->getUser()->getId(),
+                    'hint_id' => $payment->hint_id,
+                    'operation_md5' => null
+                ]);
+            }
+
+            $new_payment = new NodeHintPayment();
+            $new_payment->user_id = Yii::$app->getUser()->getId();
+            $new_payment->hint_id = $payment->hint_id;
+            $new_payment->hint_message = $payment->hint_message;
+            $new_payment->save(false);
+        } else
+            $message = 'Для того, чтобы прочитать подсказку вам необходимо войти в систему.';
+
+        return $this->render('show-hint', [
+            'message' => $message
+        ]);
     }
 
     public function actionHighscores() {
